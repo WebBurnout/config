@@ -1,0 +1,65 @@
+priority 1
+
+
+snippet rc "React Component" b
+import React from 'react'
+// import styled from 'styled-components'
+// import { } from '../api'
+
+interface $1Props {
+	//
+}
+
+export default function ${1:`!p snip.rv = ''.join(word.title() for word in snip.basename.split('_')) `}(props: $1Props): React.ReactElement  {
+	return (
+		<$2>
+			$1
+		</$2>
+	)
+}
+
+endsnippet
+
+
+snippet ia "import api" b
+import { $1 } from '../api.js'
+endsnippet
+
+snippet is "import " b
+import styled from 'styled-components'
+endsnippet
+
+snippet ir "import React" b
+import React from 'react'
+endsnippet
+
+
+snippet rt "React Test" b
+import { render, act, cleanup } from '@testing-library/react'
+import { wait } from '@testing-library/dom'
+import ${1:`!v expand('%:t:r')[:-6]`} from './$1.jsx'
+
+afterEach(cleanup)
+
+endsnippet
+
+
+snippet tc "Test case" b
+test.skip('$1', async () => {
+	//
+})
+
+endsnippet
+
+snippet tb "React Test Boilerplate" b
+	api.get.mockReturnValueOnce([Promise.resolve()])
+	await act(async () => {
+		const { getByText } = render(
+			<${1:`!v expand('%:t:r')[:-6]`} />,
+			{ wrapper: MemoryRouter },
+		)
+		await wait(() => expect(getByText('$2')).toBeInTheDocument())
+		expect(api.get).toHaveBeenCalledWith('$3')
+	})
+endsnippet
+
