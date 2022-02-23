@@ -1,5 +1,0 @@
-{
-  "eslint.autoFixOnSave": true,
-  "eslint.options": { "baseConfig": {} },
-  "snippets.userSnippetsDirectory": "/Users/omar/.vim/tim-snippets"
-}
