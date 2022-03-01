@@ -15,9 +15,15 @@ call plug#begin()
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/cmp-path'
   Plug 'hrsh7th/cmp-cmdline'
+  Plug 'quangnguyen30192/cmp-nvim-ultisnips'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'onsails/lspkind-nvim'
   Plug 'tami5/lspsaga.nvim'
+
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
+  Plug 'epilande/vim-es2015-snippets'
+  Plug 'epilande/vim-react-snippets'
 
   Plug 'max397574/better-escape.nvim' " improve jk typing to exit insert mode
   Plug 'kyazdani42/nvim-web-devicons' " icons everywhere
@@ -31,6 +37,8 @@ call plug#begin()
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
+  Plug 'tami5/sqlite.lua'
+  Plug 'nvim-telescope/telescope-smart-history.nvim'
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'tomtom/tcomment_vim'
   Plug 'rizzatti/dash.vim'
@@ -51,8 +59,7 @@ let g:nvim_tree_icons = {
 
 lua << EOF
 
-
-require'marks'.setup {
+require('marks').setup {
   sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
 }
 
@@ -156,13 +163,30 @@ require('better_escape').setup {
 vim.g.solarized_termtrans = 1
 
 local actions = require("telescope.actions")
+local trouble = require("trouble.providers.telescope")
+
 require('telescope').setup{
   defaults = {
+    prompt_prefix = '>',
+    color_devicons = true,
     mappings = {
       i = {
-        ["<esc>"] = actions.close
+        ["<esc>"] = actions.close,
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+        ["<C-h>"] = actions.which_key,
+        ["<C-n>"] = actions.cycle_history_next,
+        ["<C-p>"] = actions.cycle_history_prev,
+        ["<c-t>"] = trouble.open_with_trouble,
+      },
+      n = {
+        ["<c-t>"] = trouble.open_with_trouble
       },
     },
+    history = {
+      path = '~/.local/share/nvim/databases/telescope_history.sqlite3',
+      limit = 100,
+    }
   },
   pickers = {
     git_files = {
@@ -174,10 +198,16 @@ require('telescope').setup{
       prompt_prefix = " ",
     }
   },
-  extensions = { }
+  extensions = {
+    fzy_native = {
+      override_generic_sorter = true,
+      override_file_sorter = true,
+    },
+  },
 }
 
 require('telescope').load_extension('fzy_native')
+require('telescope').load_extension('smart_history')
 
 project_files = function()
   local opts = {} -- define here if you want to define something
@@ -222,7 +252,7 @@ require('gitsigns').setup {
 }
 
 vim.diagnostic.config({
-  virtual_text = true,
+  virtual_text = { prefix = '●', },
   signs = true,
   underline = true,
   update_in_insert = false,
@@ -236,11 +266,6 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
--- change the sign in front of the diagnostic text
-vim.diagnostic.config({
-  virtual_text = { prefix = '●', }
-})
-
 
 -- LSP
 
@@ -250,8 +275,8 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local custom_lsp_attach = function(client)
-  vim.api.nvim_buf_set_keymap(0, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true})
-  vim.api.nvim_buf_set_keymap(0, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', {noremap = true})
+  -- vim.api.nvim_buf_set_keymap(0, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true})
+  -- vim.api.nvim_buf_set_keymap(0, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', {noremap = true})
   vim.api.nvim_buf_set_keymap(0, "n", "<Leader>r", "<cmd>Lspsaga rename<cr>", {silent = true, noremap = true})
   vim.api.nvim_buf_set_keymap(0, "n", "<Leader>x", "<cmd>Lspsaga code_action<cr>", {silent = true, noremap = true})
   vim.api.nvim_buf_set_keymap(0, "x", "<Leader>x", ":<c-u>Lspsaga range_code_action<cr>", {silent = true, noremap = true})
@@ -283,29 +308,38 @@ end
 
 
 local cmp = require'cmp'
-local lspkind = require('lspkind')
+local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
 
 cmp.setup({
   snippet = {
-    -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-      -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-      -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      vim.fn["UltiSnips#Anon"](args.body)
     end,
   },
   mapping = {
+    ['<C-j>'] = cmp.mapping(
+      function(fallback)
+        cmp_ultisnips_mappings.compose { "jump_forwards", "select_next_item" }(fallback)
+      end,
+      { 'i' }
+    ),
+    ['<C-k>'] = cmp.mapping(
+      function(fallback)
+        cmp_ultisnips_mappings.jump_backwards(fallback)
+      end,
+      { 'i' }
+    ),
+    ['<C-n>'] = cmp.config.disable,
+    ['<C-p>'] = cmp.config.disable,
     ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     ['<C-e>'] = cmp.mapping({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     }),
   },
   formatting = {
-    format = lspkind.cmp_format({
+    format = require('lspkind').cmp_format({
       -- mode = 'symbol', -- show only symbol annotations
       -- maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
       --
@@ -318,15 +352,29 @@ cmp.setup({
   },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    -- { name = 'vsnip' }, -- For vsnip users.
-    -- { name = 'luasnip' }, -- For luasnip users.
-    -- { name = 'ultisnips' }, -- For ultisnips users.
-    -- { name = 'snippy' }, -- For snippy users.
+    { name = 'path' },
+    { name = 'ultisnips' },
   }, {
     { name = 'buffer' },
   })
 })
 
+-- Set configuration for specific filetype.
+cmp.setup.filetype('markdown', {
+  completion = { autocomplete = false },
+})
+
+cmp.setup.cmdline(':', {
+  sources = {
+    { name = 'cmdline' }
+  }
+})
+
+cmp.setup.cmdline('/', {
+  sources = {
+    { name = 'buffer' }
+  }
+})
 
 require('trouble').setup {}
 
@@ -337,7 +385,7 @@ require'nvim-web-devicons'.setup {
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
-    additional_vim_regex_highlighting = false,
+    -- additional_vim_regex_highlighting = false,
   },
 }
 
@@ -352,17 +400,63 @@ EOF
 " line numbers (plugin will switch to relative numbers in normal mode)
 set number
 
+" ignore case in search unless there's a capital letter
+set ignorecase
+set smartcase
+
+" sets update tim for plugins
+set updatetime=300
+
 " eslint on save
 autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx EslintFixAll
 
 " solarized color scheme
+set cursorline
 set termguicolors
 colorscheme solarized
 " change colors of omnifunc
 highlight Pmenu guifg='#93a1a1' guibg='#002b36'
 " with the transparency setting solarized doesnt set this color
 highlight CursorLine guibg='#073642'
-set cursorline
+
+" fix  colors on CMP menu
+highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#839496
+" blue      #268bd2
+highlight! CmpItemAbbrMatch guibg=NONE guifg=#268bd2
+highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#268bd2
+" yellow    #b58900
+highlight! CmpItemKindVariable guibg=NONE guifg=#b58900
+highlight! CmpItemKindInterface guibg=NONE guifg=#b58900
+highlight! CmpItemKindText guibg=NONE guifg=#b58900
+" orange    #cb4b16
+highlight! CmpItemKindFunction guibg=NONE guifg=#cb4b16
+highlight! CmpItemKindMethod guibg=NONE guifg=#cb4b16
+" red       #dc322f
+highlight! CmpItemKindClass  guibg=NONE guifg=#dc322f
+highlight! CmpItemKindModule  guibg=NONE guifg=#dc322f
+" magenta   #d33682
+" violet    #6c71c4
+" cyan      #2aa198
+highlight! CmpItemKindKeyword guibg=NONE guifg=#2aa198
+highlight! CmpItemKindProperty guibg=NONE guifg=#2aa198
+highlight! CmpItemKindUnit guibg=NONE guifg=#2aa198
+" green     #859900
+highlight! CmpItemKindFile  guibg=NONE guifg=#859900
+highlight! CmpItemKindFolder  guibg=NONE guifg=#859900
+
+" highlight! CmpItemKindValue  guibg=NONE guifg=
+" highlight! CmpItemKindSnippet  guibg=NONE guifg=
+" highlight! CmpItemKindColor  guibg=NONE guifg=
+" highlight! CmpItemKindReference  guibg=NONE guifg=
+" highlight! CmpItemKindEnumMember  guibg=NONE guifg=
+" highlight! CmpItemKindStruct  guibg=NONE guifg=
+" highlight! CmpItemKindEvent  guibg=NONE guifg=
+" highlight! CmpItemKindConstant  guibg=NONE guifg=
+" highlight! CmpItemKindTypeParameter  guibg=NONE guifg=
+" highlight! CmpItemKindOperator  guibg=NONE guifg=
+" highlight! CmpItemKindEnum  guibg=NONE guifg=
+" highlight! CmpItemKindConstructor  guibg=NONE guifg=
+" highlight! CmpItemKindField  guibg=NONE guifg=
 
 
 " so that aliases will work with !
@@ -380,9 +474,6 @@ set expandtab
 set tabstop=2
 set shiftwidth=2
 set title
-
-" disable use Ex mode
-map Q <Nop>
 
 " highlight 80 characters mark
 set cc=80
@@ -413,13 +504,38 @@ set showcmd		" display incomplete commands
 " Keys
 "
 
+" disable use Ex mode
+map Q <Nop>
+
+"  ctrl-j  in insert mode does Enter for some reason
+inoremap <C-j> <Nop>
+
+let g:UltiSnipsExpandTrigger="<Tab>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+let g:UltiSnipsSnippetsDir = "~/.config/nvim"
+let g:UltiSnipsSnippetDirectories=["tim-snippets"]
+
+
+" you know 64 key keyboard
+inoremap <esc> `
+set ttimeoutlen=50 " improves timeliness of escape
+
 " leader is space bar
 let mapleader = "\<Space>"
+
+nnoremap <silent> <Leader>l :EslintFixAll<cr>
+
+nnoremap <leader>xx <cmd>TroubleToggle<cr>
+nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
+nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
+" nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+" nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+" nnoremap gR <cmd>TroubleToggle lsp_references<cr>
 
 " floating terminal
 nnoremap <silent> <Leader>t :Lspsaga open_floaterm<CR>
 tnoremap <silent> <C-c> <C-\><C-n>:Lspsaga close_floaterm<CR>
-tnoremap <silent> <C-d> <C-\><C-n>:Lspsaga close_floaterm<CR>
 
 " symbols outline
 nnoremap <silent> <Leader>s :SymbolsOutline<CR>
@@ -427,9 +543,12 @@ nnoremap <silent> <Leader>s :SymbolsOutline<CR>
 " Find files using Telescope command-line sugar.
 nnoremap <C-p> <cmd>lua project_files()<cr>
 nnoremap <Leader>g <cmd>Telescope live_grep<cr>
+nnoremap <Leader>/ <cmd>Telescope lsp_document_symbols<cr>
+nnoremap <Leader>d <cmd>Telescope lsp_definitions<cr>
+nnoremap <Leader>i <cmd>Telescope lsp_implementations<cr>
 
 " clear search highlighting
-nnoremap <Leader><space> :noh<cr>
+nnoremap <silent> <Leader><space> :noh<cr>
 
 " save with space w
 nnoremap <Leader>w :w<CR>
@@ -447,11 +566,15 @@ vmap v <Plug>(expand_region_expand)
 vmap V <Plug>(expand_region_shrink)
 
 " move through buffers
-nmap <silent> <C-j> :update<CR>:bn<CR>
-nmap <silent> <C-k> :update<CR>:bp<CR>
+nmap <silent> <C-j> :update<CR><Plug>(cokeline-focus-next)
+nmap <silent> <C-k> :update<CR><Plug>(cokeline-focus-prev)
 nmap <silent> <C-h> :update<CR>:bd<CR>
 
-nmap <silent> <leader>d <Plug>DashSearch
+" removes omnifunc commands since we have nvm-cmp
+inoremap <silent> <C-n> <Nop>
+inoremap <silent> <C-p> <Nop>
+
+nmap <silent> <Leader>k <Plug>DashSearch
 
 set noshowmode " hide vim's mode status which is duplicate of lualine
 
@@ -465,10 +588,6 @@ autocmd VimEnter * inoremap <expr> <C-F> "\<Lt>Right>"
 
 " do all syntax highlighting when the file opens
 autocmd BufEnter * :syntax sync fromstart
-
-" fold with treesitter and unfold when the file opens
-set foldmethod=syntax
-set foldlevel=99
 
 " following will work when Telescope issue is fixed: https://github.com/nvim-telescope/telescope.nvim/issues/699
 " Use Treesitter for folding
