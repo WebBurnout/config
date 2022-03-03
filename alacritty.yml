@@ -161,7 +161,7 @@ font:
   # If `true`, Alacritty will use a custom built-in font for box drawing
   # characters (Unicode points 2500 - 259f).
   #
-  #builtin_box_drawing: true
+  builtin_box_drawing: true
 
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false
@@ -343,9 +343,8 @@ colors:
     magenta: '#6c71c4' # violet
     cyan:    '#93a1a1' # base1
     white:   '#fdf6e3' # base3
+ 
 # Bell
-#
-# The bell is rung every time the BEL control character is received.
 bell:
   # Visual Bell Animation
   #

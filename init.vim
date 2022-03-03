@@ -44,6 +44,7 @@ call plug#begin()
   Plug 'rizzatti/dash.vim'
   Plug 'styled-components/vim-styled-components'
   Plug 'terryma/vim-expand-region'
+  Plug 'takac/vim-hardtime'
 call plug#end()
 
 
@@ -167,7 +168,7 @@ local trouble = require("trouble.providers.telescope")
 
 require('telescope').setup{
   defaults = {
-    prompt_prefix = '>',
+    prompt_prefix = '> ',
     color_devicons = true,
     mappings = {
       i = {
@@ -410,6 +411,9 @@ set updatetime=300
 " eslint on save
 autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx EslintFixAll
 
+autocmd FileType typescript UltiSnipsAddFiletypes javascript
+autocmd FileType typescriptreact UltiSnipsAddFiletypes javascript typescript
+
 " solarized color scheme
 set cursorline
 set termguicolors
@@ -516,7 +520,6 @@ let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 let g:UltiSnipsSnippetsDir = "~/.config/nvim"
 let g:UltiSnipsSnippetDirectories=["tim-snippets"]
 
-
 " you know 64 key keyboard
 inoremap <esc> `
 set ttimeoutlen=50 " improves timeliness of escape
@@ -524,11 +527,19 @@ set ttimeoutlen=50 " improves timeliness of escape
 " leader is space bar
 let mapleader = "\<Space>"
 
+" Hardmode by default
+let g:hardtime_default_on = 1
+let g:hardtime_allow_different_key = 1
+let g:list_of_normal_keys = ["w", "b", "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+let g:list_of_visual_keys = ["w", "b", "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+
+nnoremap <silent> <Leader>j :w <bar> silent ! tmux respawn-pane -k -t 0.0 jest --no-coverage --watch "%" <enter>
+
 nnoremap <silent> <Leader>l :EslintFixAll<cr>
 
-nnoremap <leader>xx <cmd>TroubleToggle<cr>
-nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
-nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
+nnoremap <Leader>xx <cmd>TroubleToggle<cr>
+nnoremap <Leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
+nnoremap <Leader>xd <cmd>TroubleToggle document_diagnostics<cr>
 " nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
 " nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
 " nnoremap gR <cmd>TroubleToggle lsp_references<cr>

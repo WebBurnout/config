@@ -39,13 +39,14 @@ ctrl-t to transpose letters
 
 ## Tmux handyness
 
+c-space for escape
 tmux a # -- attach to last created session 
 
 tmux new -s [name of session]
 tmux a -t [name of session]
 
-ctrl+b " -- split horizontally
-ctrl+b % -- split vertically
+ctrl+space " -- split horizontally
+ctrl+space % -- split vertically
 
 
 ## Vim handyness

@@ -22,7 +22,7 @@ chruby 2.6.5
 ssh-add --apple-use-keychain
 
 export EDITOR=vi
-export PAGER=less
+export PAGER=most
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
