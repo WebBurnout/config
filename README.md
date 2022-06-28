@@ -36,8 +36,12 @@ ctrl-shift-space for vi mode in Alacritty
 
 ctrl-t to transpose letters
 
+## Vimium handiness
 
-## Tmux handyness
+T search through tabs
+
+
+## Tmux handiness
 
 c-space for escape
 tmux a # -- attach to last created session 
@@ -49,7 +53,7 @@ ctrl+space " -- split horizontally
 ctrl+space % -- split vertically
 
 
-## Vim handyness
+## Vim handiness
 
 I -- insert at the start of the line
 to make the search case sensitive can do "set noic" or just use \c at the end

@@ -1,4 +1,16 @@
 
+split_tmux_jest() {
+  p=$(tmux list-panes -t 0 -F '#D #{pane_current_command}' | grep -E "node|jest")
+  if [ -z "$p" ]
+  then
+    tmux split-window -t 0 -hbd jest --no-coverage "$1"
+  else
+    id=($p)
+    tmux clear-history -t $id
+    tmux respawn-pane -k -t $id jest --no-coverage "$1"
+  fi
+}
+
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }

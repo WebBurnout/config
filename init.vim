@@ -9,26 +9,28 @@ call plug#begin()
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'kyazdani42/nvim-tree.lua' " file browser
 
+  " completion
   Plug 'simrat39/symbols-outline.nvim'
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/cmp-path'
-  Plug 'hrsh7th/cmp-cmdline'
+  " Plug 'hrsh7th/cmp-cmdline'
   Plug 'quangnguyen30192/cmp-nvim-ultisnips'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'onsails/lspkind-nvim'
   Plug 'tami5/lspsaga.nvim'
 
+  " snippets
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
   Plug 'epilande/vim-es2015-snippets'
   Plug 'epilande/vim-react-snippets'
 
-  Plug 'max397574/better-escape.nvim' " improve jk typing to exit insert mode
   Plug 'kyazdani42/nvim-web-devicons' " icons everywhere
   Plug 'folke/trouble.nvim' " shows errors in a window
 
+  " Plug 'github/copilot.vim'
   Plug 'chentau/marks.nvim'
   Plug 'nvim-lualine/lualine.nvim' " statusline
   Plug 'noib3/nvim-cokeline'
@@ -42,9 +44,9 @@ call plug#begin()
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'tomtom/tcomment_vim'
   Plug 'rizzatti/dash.vim'
-  Plug 'styled-components/vim-styled-components'
+  " Plug 'styled-components/vim-styled-components'
   Plug 'terryma/vim-expand-region'
-  Plug 'takac/vim-hardtime'
+  " Plug 'takac/vim-hardtime'
 call plug#end()
 
 
@@ -68,8 +70,8 @@ local get_hex = require('cokeline/utils').get_hex
 require('cokeline').setup({
   default_hl = {
     focused = {
-      fg = '#073642',
-      bg = '#93a1a1',
+      fg = '#073642', -- solarized base02
+      bg = '#93a1a1', -- solarized base1
     },
     unfocused = {
       fg = '#93a1a1',
@@ -87,7 +89,7 @@ require('cokeline').setup({
     {
       text = function(buffer) return buffer.unique_prefix end,
       hl = {
-        fg = get_hex('Comment', 'fg'),
+        fg = '#586e75', -- solarized base01
         style = 'italic',
       },
     },
@@ -153,11 +155,6 @@ require('nvim-tree').setup {
   filters = {
     custom = { ".git" },
   },
-}
-
--- used to improve typing of jk to exit insert mode
-require('better_escape').setup {
-  mapping = {'jk'},
 }
 
 -- preserves transparency
@@ -297,15 +294,41 @@ local custom_lsp_attach = function(client)
 
 end
 
-
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'tsserver', 'eslint' }
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    capabilities = capabilities,
-    on_attach = custom_lsp_attach
+lspconfig['tsserver'].setup {
+  capabilities = capabilities,
+  on_attach = custom_lsp_attach
+}
+
+lspconfig['eslint'].setup {
+  capabilities = capabilities,
+  on_attach = custom_lsp_attach,
+  codeAction = {
+    disableRuleComment = {
+      enable = true,
+      location = "separateLine"
+    },
+    showDocumentation = {
+      enable = true
+    }
+  },
+  codeActionOnSave = {
+    enable = false,
+    mode = "all"
+  },
+  format = true,
+  nodePath = "",
+  onIgnoredFiles = "off",
+  packageManager = "npm",
+  quiet = false,
+  rulesCustomizations = {},
+  run = "onType",
+  useESLintClass = false,
+  validate = "on",
+  workingDirectory = {
+    mode = "location"
   }
-end
+}
 
 
 local cmp = require'cmp'
@@ -401,6 +424,13 @@ EOF
 " line numbers (plugin will switch to relative numbers in normal mode)
 set number
 
+set nohidden
+
+set autowrite
+
+set undodir=~/.vim/undo-dir
+set undofile
+
 " ignore case in search unless there's a capital letter
 set ignorecase
 set smartcase
@@ -412,7 +442,8 @@ set updatetime=300
 autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx EslintFixAll
 
 autocmd FileType typescript UltiSnipsAddFiletypes javascript
-autocmd FileType typescriptreact UltiSnipsAddFiletypes javascript typescript
+autocmd FileType typescriptreact UltiSnipsAddFiletypes typescript
+autocmd FileType typescriptreact UltiSnipsAddFiletypes javascript
 
 " solarized color scheme
 set cursorline
@@ -472,7 +503,8 @@ set backupdir=~/tmp
 set dir=~/tmp
 
 " always display the sign column
-set signcolumn=auto:1-2
+" set signcolumn=auto:1-2
+set signcolumn=yes:2
 
 set expandtab
 set tabstop=2
@@ -508,6 +540,8 @@ set showcmd		" display incomplete commands
 " Keys
 "
 
+inoremap jk <Esc>
+
 " disable use Ex mode
 map Q <Nop>
 
@@ -528,14 +562,15 @@ set ttimeoutlen=50 " improves timeliness of escape
 let mapleader = "\<Space>"
 
 " Hardmode by default
-let g:hardtime_default_on = 1
-let g:hardtime_allow_different_key = 1
-let g:list_of_normal_keys = ["w", "b", "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
-let g:list_of_visual_keys = ["w", "b", "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+" let g:hardtime_default_on = 1
+" let g:hardtime_maxcount = 2
+" let g:hardtime_allow_different_key = 1
+" let g:list_of_normal_keys = ["x", "w", "b", "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+" let g:list_of_visual_keys = ["w", "b", "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
 
-nnoremap <silent> <Leader>j :w <bar> silent ! tmux respawn-pane -k -t 0.0 jest --no-coverage --watch "%" <enter>
+nnoremap <silent> <Leader>j :w <bar> silent ! split_tmux_jest "%" <enter>
 
-nnoremap <silent> <Leader>l :EslintFixAll<cr>
+nnoremap <Leader>l :EslintFixAll<cr>
 
 nnoremap <Leader>xx <cmd>TroubleToggle<cr>
 nnoremap <Leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
@@ -544,16 +579,12 @@ nnoremap <Leader>xd <cmd>TroubleToggle document_diagnostics<cr>
 " nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
 " nnoremap gR <cmd>TroubleToggle lsp_references<cr>
 
-" floating terminal
-nnoremap <silent> <Leader>t :Lspsaga open_floaterm<CR>
-tnoremap <silent> <C-c> <C-\><C-n>:Lspsaga close_floaterm<CR>
-
 " symbols outline
 nnoremap <silent> <Leader>s :SymbolsOutline<CR>
 
 " Find files using Telescope command-line sugar.
-nnoremap <C-p> <cmd>lua project_files()<cr>
-nnoremap <Leader>g <cmd>Telescope live_grep<cr>
+nnoremap <C-p> :update<CR><cmd>lua project_files()<cr>
+nnoremap <leader>g <cmd>lua require('telescope.builtin').live_grep{ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] }<cr>
 nnoremap <Leader>/ <cmd>Telescope lsp_document_symbols<cr>
 nnoremap <Leader>d <cmd>Telescope lsp_definitions<cr>
 nnoremap <Leader>i <cmd>Telescope lsp_implementations<cr>
@@ -577,8 +608,8 @@ vmap v <Plug>(expand_region_expand)
 vmap V <Plug>(expand_region_shrink)
 
 " move through buffers
-nmap <silent> <C-j> :update<CR><Plug>(cokeline-focus-next)
-nmap <silent> <C-k> :update<CR><Plug>(cokeline-focus-prev)
+nmap <silent> <C-j> <Plug>(cokeline-focus-next)
+nmap <silent> <C-k> <Plug>(cokeline-focus-prev)
 nmap <silent> <C-h> :update<CR>:bd<CR>
 
 " removes omnifunc commands since we have nvm-cmp
@@ -593,9 +624,12 @@ set noshowmode " hide vim's mode status which is duplicate of lualine
 " movement to wrap lines
 autocmd VimEnter * inoremap <expr> <C-D> "\<Lt>Del>"
 autocmd VimEnter * cnoremap <expr> <C-D> "\<Lt>Del>"
-autocmd VimEnter * inoremap <expr> <C-E> "\<Lt>End>"
 autocmd VimEnter * inoremap <expr> <C-F> "\<Lt>Right>"
 autocmd VimEnter * inoremap <expr> <C-F> "\<Lt>Right>"
+" instead of ctrl-p/n for autocompletion i use j/k so p/n can be used for
+" cursor movement
+inoremap <C-p> <Up>
+inoremap <C-n> <Down>
 
 " do all syntax highlighting when the file opens
 autocmd BufEnter * :syntax sync fromstart
@@ -604,4 +638,3 @@ autocmd BufEnter * :syntax sync fromstart
 " Use Treesitter for folding
 " set foldmethod=expr
 " set foldexpr=nvim_treesitter#foldexpr()
-

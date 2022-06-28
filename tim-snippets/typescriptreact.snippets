@@ -20,6 +20,10 @@ export default function ${1:`!p snip.rv = ''.join(word.title() for word in snip.
 
 endsnippet
 
+snippet us "useState" w
+const [$1, set${1/\w+\s*/\u$0/g}] = React.useState<${2:string}>(${3:''})
+endsnippet
+
 
 snippet ia "import api" b
 import { $1 } from '../api.js'
