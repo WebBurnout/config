@@ -1,4 +1,3 @@
-
 # Tim config
 
 ## Install
@@ -15,15 +14,14 @@ ln -s ~/code/config/alacritty.yml ~/.alacritty.yml
 ln -s ~/code/config/tmux.conf ~/.tmux.conf
 ```
 
-For NeoVim you will need to do a `:PlugInstal` and for Tmux you will need to install the themepack with:
+For NeoVim you will need to do a `:PlugInstall` and for Tmux you will need to install the themepack with:
 
 ```
 git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack
 
 ```
 
-To get true colors in tmux you must follow (these instructions)[https://gist.github.com/bbqtd/a4ac060d6f6b9ea6fe3aabe735aa9d95].
-
+To get the correct colors in tmux you must follow [these instructions](https://gist.github.com/bbqtd/a4ac060d6f6b9ea6fe3aabe735aa9d95).
 
 ## Helpful Information
 

@@ -31,7 +31,7 @@ call plug#begin()
   Plug 'folke/trouble.nvim' " shows errors in a window
 
   " Plug 'github/copilot.vim'
-  Plug 'chentau/marks.nvim'
+  Plug 'chentoast/marks.nvim'
   Plug 'nvim-lualine/lualine.nvim' " statusline
   Plug 'noib3/nvim-cokeline'
   Plug 'jeffkreeftmeijer/vim-numbertoggle' " turns to relative in normal mode
@@ -50,16 +50,6 @@ call plug#begin()
 call plug#end()
 
 
-" these must go above nvim-tree.setup in lua
-let g:nvim_tree_git_hl = 1
-let g:nvim_tree_indent_markers = 1
-let g:nvim_tree_special_files = { }
-let g:nvim_tree_icons = {
-    \  'default': '',
-    \  'symlink': '',
-    \}
-
-
 lua << EOF
 
 require('marks').setup {
@@ -68,17 +58,6 @@ require('marks').setup {
 
 local get_hex = require('cokeline/utils').get_hex
 require('cokeline').setup({
-  default_hl = {
-    focused = {
-      fg = '#073642', -- solarized base02
-      bg = '#93a1a1', -- solarized base1
-    },
-    unfocused = {
-      fg = '#93a1a1',
-      bg = '#073642',
-    },
-  },
-
   components = {
     {
       text = function(buffer) return ' ' .. buffer.devicon.icon end,
@@ -101,20 +80,18 @@ require('cokeline').setup({
     }
   },
 
-  rendering = {
-    left_sidebar = {
-      filetype = 'NvimTree',
-      components = {
-        {
-          text = '  Files',
-          hl = {
-            fg = yellow,
-            bg = get_hex('NvimTreeNormal', 'bg'),
-            style = 'italic'
-          }
-        },
-      }
-    },
+  sidebar = {
+    filetype = 'NvimTree',
+    components = {
+      {
+        text = '  Files',
+        hl = {
+          fg = yellow,
+          bg = get_hex('NvimTreeNormal', 'bg'),
+          style = 'italic'
+        }
+      },
+    }
   },
 })
 
@@ -148,7 +125,13 @@ require('lualine').setup {
 }
 
 require('nvim-tree').setup {
-  auto_close = true,
+  renderer = {
+    highlight_git = true,
+    special_files = { },
+    indent_markers = {
+      enable = true,
+    },
+  },
   git = {
     enable = true, -- not working :(
   },
