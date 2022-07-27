@@ -268,7 +268,6 @@ local custom_lsp_attach = function(client)
   vim.api.nvim_buf_set_keymap(0, "n", "<C-f>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-f>')<cr>", {})
   vim.api.nvim_buf_set_keymap(0, "n", "<C-b>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-b>')<cr>", {})
 
-
   -- Use LSP as the handler for omnifunc.
   vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -347,14 +346,8 @@ cmp.setup({
   },
   formatting = {
     format = require('lspkind').cmp_format({
-      -- mode = 'symbol', -- show only symbol annotations
-      -- maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-      --
-      -- -- The function below will be called before any actual modifications from lspkind
-      -- -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-      -- before = function (entry, vim_item)
-      --   return vim_item
-      -- end
+      mode = 'symbol', -- show only symbol annotations
+      maxwidth = 40, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
     })
   },
   sources = cmp.config.sources({
@@ -501,7 +494,7 @@ set cc=80
 set autochdir
 
 " use system clipboard yank / put
-set clipboard=unnamed
+" set clipboard=unnamed
 
 " moves cursor to previous line when hitting back/forward movement
 set whichwrap+=<,>,h,l,[,]

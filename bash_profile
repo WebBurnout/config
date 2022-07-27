@@ -3,8 +3,6 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 source ~/.bash_aliases
 source ~/.env_secret
 
-source /usr/local/etc/profile.d/z.sh
-
 export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
 export ANDROID_HOME=$ANDROID_SDK_ROOT
 export PATH=$PATH:$ANDROID_SDK_ROOT/tools:/usr/local/opt/postgresql\@10/bin:/Users/omar/code/flutter/bin
@@ -17,7 +15,6 @@ export PROMPT_COMMAND='echo -ne "\033]0;$PWD\007"'
 parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
-# export PS1="\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
 export PS1="\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
 
 ssh-add --apple-use-keychain

@@ -23,6 +23,7 @@ git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack
 
 To get the correct colors in tmux you must follow [these instructions](https://gist.github.com/bbqtd/a4ac060d6f6b9ea6fe3aabe735aa9d95).
 
+
 ## Helpful Information
 
 To reload `init.vim` without exiting Neovim run
@@ -34,9 +35,32 @@ ctrl-shift-space for vi mode in Alacritty
 
 ctrl-t to transpose letters
 
+
 ## Vimium handiness
 
 T search through tabs
+
+
+## custom key mappings
+
+f5 -- keyboard brightness down
+f6 -- keyboard brightness up
+
+hyper-f -- left in mission control
+hyper-b -- right in mission control
+
+hyper-n -- next app in witch
+hyper-p -- previous app in witch
+
+### tmux
+hyper-j -- down pane
+hyper-k -- up pane
+hyper-h -- left pane
+hyper-l -- right pane
+hyper-; -- split window vertically
+hyper-' -- split window horizontally
+hyper-x -- close pane
+hyper-c -- create window
 
 
 ## Tmux handiness
