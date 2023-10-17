@@ -2,6 +2,9 @@
 
 ## Install
 
+For iTerm you will need to open settings and set it to load the preferences
+from this directory.
+
 To use the config files, create symbolick links to the correct location (you
 probably need to remove the ones that are there).
 
@@ -10,19 +13,30 @@ ln -s ~/code/config/bash_profile ~/.bash_profile
 ln -s ~/code/config/bash_aliases ~/.bash_aliases
 ln -s ~/code/config/init.vim ~/.config/nvim/init.vim
 ln -s ~/code/config/tim-snippets/ ~/.config/nvim
-ln -s ~/code/config/alacritty.yml ~/.alacritty.yml
 ln -s ~/code/config/tmux.conf ~/.tmux.conf
+ln -s ~/code/config/karabiner.json ~/.config/karabiner/karabiner.json
+ln -s ~/code/config/witch.plist ~/Library/Application\ Support/Witch/Settings.plist
 ```
 
-For NeoVim you will need to do a `:PlugInstall` and for Tmux you will need to install the themepack with:
+For NeoVim you will need to install the pyhton provider with:
+```
+python3 -m pip install --user --upgrade pynvim
+```
 
+Also install VimPlug with something like:
+```
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+```
+Then do a `:PlugInstall` inside nvim
+
+For Tmux you will need to install the themepack with:
 ```
 git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack
-
 ```
 
-To get the correct colors in tmux you must follow [these instructions](https://gist.github.com/bbqtd/a4ac060d6f6b9ea6fe3aabe735aa9d95).
+For Rectangle, install the app and then import the preferences json using the GUI
 
+For Karabiner to work with tmux, you will need to change the hotkey for changing input sources (input language) from control space to alt space. You can do so in System Preferences > Keyboard > Input > Shortcuts
 
 ## Helpful Information
 
@@ -30,8 +44,6 @@ To reload `init.vim` without exiting Neovim run
 ```
 :source $MYVIMRC
 ```
-
-ctrl-shift-space for vi mode in Alacritty 
 
 ctrl-t to transpose letters
 

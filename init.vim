@@ -56,7 +56,8 @@ require('marks').setup {
   sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
 }
 
-local get_hex = require('cokeline/utils').get_hex
+
+local hlgroups = require("cokeline.hlgroups")
 require('cokeline').setup({
   components = {
     {
@@ -87,7 +88,7 @@ require('cokeline').setup({
         text = '  Files',
         hl = {
           fg = yellow,
-          bg = get_hex('NvimTreeNormal', 'bg'),
+          bg = hlgroups.get_hl_attr("NvimTreeNormal", "bg"),
           style = 'italic'
         }
       },
@@ -165,7 +166,7 @@ require('telescope').setup{
       },
     },
     history = {
-      path = '~/.local/share/nvim/databases/telescope_history.sqlite3',
+      path = '~/.local/share/nvim/telescope_history.sqlite3',
       limit = 100,
     }
   },
@@ -253,7 +254,7 @@ end
 local lspconfig = require('lspconfig')
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local custom_lsp_attach = function(client)
   -- vim.api.nvim_buf_set_keymap(0, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true})
