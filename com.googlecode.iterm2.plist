@@ -14,6 +14,10 @@
 	<true/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
+	<key>NeverWarnAboutShortLivedSessions_028D316D-5148-4253-9549-5EBE7D7261EC</key>
+	<true/>
+	<key>NeverWarnAboutShortLivedSessions_028D316D-5148-4253-9549-5EBE7D7261EC_selection</key>
+	<integer>0</integer>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -23,14 +27,16 @@
 			<false/>
 			<key>Ansi 0 Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.25882352941176473</real>
+				<real>0.21176470588235294</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.21176470588235294</real>
+				<real>0.16862745098039217</real>
 				<key>Red Component</key>
-				<real>0.027450980392156862</real>
+				<real>0.0</real>
 			</dict>
 			<key>Ansi 1 Color</key>
 			<dict>
@@ -177,14 +183,16 @@
 			</dict>
 			<key>Ansi 8 Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.21176470588235294</real>
+				<real>0.371307373046875</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.16862745098039217</real>
+				<real>0.2991843310856161</real>
 				<key>Red Component</key>
-				<real>0.0</real>
+				<real>0.016702486202120781</real>
 			</dict>
 			<key>Ansi 9 Color</key>
 			<dict>
@@ -618,6 +626,8 @@
 				<real>0.0</real>
 			</dict>
 			<key>Mouse Reporting</key>
+			<false/>
+			<key>Mouse Reporting allow clicks and drags</key>
 			<true/>
 			<key>Name</key>
 			<string>Default</string>
@@ -697,6 +707,8 @@
 			<string>/Users/tim</string>
 		</dict>
 	</array>
+	<key>Print In Black And White</key>
+	<true/>
 	<key>SoundForEsc</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
@@ -710,6 +722,10 @@
 	<key>VisualIndicatorForEsc</key>
 	<false/>
 	<key>WindowNumber</key>
+	<false/>
+	<key>kCPKSelectionViewPreferredModeKey</key>
+	<integer>0</integer>
+	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
 	<false/>
 </dict>
 </plist>

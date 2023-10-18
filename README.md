@@ -12,11 +12,13 @@ probably need to remove the ones that are there).
 ln -s ~/code/config/bash_profile ~/.bash_profile
 ln -s ~/code/config/bash_aliases ~/.bash_aliases
 ln -s ~/code/config/init.vim ~/.config/nvim/init.vim
-ln -s ~/code/config/tim-snippets/ ~/.config/nvim
+ln -s ~/code/config/tim-snippets/ ~/.config/nvim/tim-snippets
 ln -s ~/code/config/tmux.conf ~/.tmux.conf
 ln -s ~/code/config/karabiner.json ~/.config/karabiner/karabiner.json
 ln -s ~/code/config/witch.plist ~/Library/Application\ Support/Witch/Settings.plist
 ln -s ~/code/config/gitconfig ~/.gitconfig
+ln -s ~/code/config/gitignore ~/.gitignore
+ln -s ~/code/config/env_secret ~/.env_secret
 ```
 
 For NeoVim you will need to install the pyhton provider with:

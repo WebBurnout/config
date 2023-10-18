@@ -1,4 +1,21 @@
 [user]
-name = Tim Farnam
-email = twfarnam@gmail.com
+  name = Tim Farnam
+  email = twfarnam@gmail.com
 
+[core]
+	excludesfile = /Users/tim/.gitignore
+
+[alias]
+    a = add
+    c = commit
+    ca = commit -a
+    cm = commit -m
+    cam = commit -a -m
+ 
+    d = diff
+    ds = diff --stat
+    dc = diff --cached
+
+    s = status
+    co = checkout
+    cob = checkout -b

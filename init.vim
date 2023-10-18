@@ -208,7 +208,7 @@ require('gitsigns').setup {
     },
     change = {
       hl = 'GitSignsChange',
-      text = '卑',
+      text = '󰔶',
       numhl='GitSignsChangeNr',
       linehl='GitSignsChangeLn'
     },
@@ -226,7 +226,7 @@ require('gitsigns').setup {
     },
     changedelete = {
       hl = 'GitSignsChange',
-      text = '卑',
+      text = '󰔶',
       numhl='GitSignsChangeNr',
       linehl='GitSignsChangeLn'
     },

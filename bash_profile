@@ -1,6 +1,7 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 source ~/.bash_aliases
+source ~/.env_secret
 
 export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
 export ANDROID_HOME=$ANDROID_SDK_ROOT
