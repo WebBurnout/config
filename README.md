@@ -19,6 +19,7 @@ ln -s ~/code/config/witch.plist ~/Library/Application\ Support/Witch/Settings.pl
 ln -s ~/code/config/gitconfig ~/.gitconfig
 ln -s ~/code/config/gitignore ~/.gitignore
 ln -s ~/code/config/env_secret ~/.env_secret
+ln -s ~/code/config/ssh_config ~/.ssh/config
 ```
 
 For NeoVim you will need to install the pyhton provider with:
