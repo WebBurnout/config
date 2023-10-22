@@ -173,7 +173,7 @@ require('telescope').setup{
   pickers = {
     git_files = {
       theme = "dropdown",
-      prompt_prefix = " ",
+      prompt_prefix = " ",
     },
     find_files = {
       theme = "dropdown",
@@ -242,7 +242,7 @@ vim.diagnostic.config({
 })
 
 -- change diagnostic signs in sign column
-local signs = { Error = "", Warn = "", Hint = "", Info = "" }
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })

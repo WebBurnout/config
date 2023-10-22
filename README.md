@@ -20,6 +20,7 @@ ln -s ~/code/config/gitconfig ~/.gitconfig
 ln -s ~/code/config/gitignore ~/.gitignore
 ln -s ~/code/config/env_secret ~/.env_secret
 ln -s ~/code/config/ssh_config ~/.ssh/config
+sudo ln -f ~/code/config/hosts /etc/hosts
 ```
 
 For NeoVim you will need to install the pyhton provider with:
