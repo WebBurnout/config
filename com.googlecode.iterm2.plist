@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AllowClipboardAccess</key>
+	<true/>
 	<key>Default Bookmark Guid</key>
 	<string>028D316D-5148-4253-9549-5EBE7D7261EC</string>
 	<key>DimBackgroundWindows</key>
@@ -51,6 +53,8 @@
 			</dict>
 			<key>Ansi 10 Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
 				<real>0.45882352941176469</real>
 				<key>Color Space</key>
@@ -186,13 +190,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.371307373046875</real>
+				<real>0.57110595703125</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.2991843310856161</real>
+				<real>0.46375237621057164</real>
 				<key>Red Component</key>
-				<real>0.016702486202120781</real>
+				<real>0.04328435193747282</real>
 			</dict>
 			<key>Ansi 9 Color</key>
 			<dict>

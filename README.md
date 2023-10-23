@@ -14,12 +14,16 @@ ln -s ~/code/config/bash_aliases ~/.bash_aliases
 ln -s ~/code/config/init.vim ~/.config/nvim/init.vim
 ln -s ~/code/config/tim-snippets/ ~/.config/nvim/tim-snippets
 ln -s ~/code/config/tmux.conf ~/.tmux.conf
-ln -s ~/code/config/karabiner.json ~/.config/karabiner/karabiner.json
 ln -s ~/code/config/witch.plist ~/Library/Application\ Support/Witch/Settings.plist
 ln -s ~/code/config/gitconfig ~/.gitconfig
 ln -s ~/code/config/gitignore ~/.gitignore
 ln -s ~/code/config/env_secret ~/.env_secret
 ln -s ~/code/config/ssh_config ~/.ssh/config
+```
+
+And some hard links:
+```
+ln -f ~/code/config/karabiner.json ~/.config/karabiner/karabiner.json
 sudo ln -f ~/code/config/hosts /etc/hosts
 ```
 
@@ -69,7 +73,9 @@ hyper-b -- right in mission control
 hyper-n -- next app in witch
 hyper-p -- previous app in witch
 
+
 ### tmux
+hyper-q -- clear screen and scrollback
 hyper-j -- down pane
 hyper-k -- up pane
 hyper-h -- left pane
@@ -87,9 +93,6 @@ tmux a # -- attach to last created session
 
 tmux new -s [name of session]
 tmux a -t [name of session]
-
-ctrl+space " -- split horizontally
-ctrl+space % -- split vertically
 
 
 ## Vim handiness
