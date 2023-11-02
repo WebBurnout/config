@@ -20,16 +20,21 @@ export default function ${1:`!p snip.rv = ''.join(word.title() for word in snip.
 
 endsnippet
 
-snippet us "useState" w
-const [$1, set${1/\w+\s*/\u$0/g}] = React.useState<${2:string}>(${3:''})
+snippet sc "styled component" b
+const $1 = styled.div`
+	$2
+`
 endsnippet
 
+snippet st "styled-components theme value" b
+${(props) => props.theme.$1}
+endsnippet
 
 snippet ia "import api" b
 import { $1 } from '../api.js'
 endsnippet
 
-snippet is "import " b
+snippet is "import styled" b
 import styled from 'styled-components'
 endsnippet
 
@@ -39,11 +44,8 @@ endsnippet
 
 
 snippet rt "React Test" b
-import { render, act, cleanup } from '@testing-library/react'
-import { wait } from '@testing-library/dom'
+import { render } from '@testing-library/react'
 import ${1:`!v expand('%:t:r')[:-6]`} from './$1.jsx'
-
-afterEach(cleanup)
 
 endsnippet
 

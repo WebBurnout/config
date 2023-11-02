@@ -30,6 +30,7 @@ call plug#begin()
   Plug 'kyazdani42/nvim-web-devicons' " icons everywhere
   Plug 'folke/trouble.nvim' " shows errors in a window
 
+  Plug 'tpope/vim-eunuch'
   " Plug 'github/copilot.vim'
   Plug 'chentoast/marks.nvim'
   Plug 'nvim-lualine/lualine.nvim' " statusline
@@ -44,9 +45,7 @@ call plug#begin()
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'tomtom/tcomment_vim'
   Plug 'rizzatti/dash.vim'
-  " Plug 'styled-components/vim-styled-components'
   Plug 'terryma/vim-expand-region'
-  " Plug 'takac/vim-hardtime'
 call plug#end()
 
 
@@ -174,6 +173,7 @@ require('telescope').setup{
     git_files = {
       theme = "dropdown",
       prompt_prefix = " ",
+      show_untracked = true,
     },
     find_files = {
       theme = "dropdown",

@@ -65,7 +65,7 @@
       "float" : 0.3
     },
     "footprintAnimationDurationMultiplier" : {
-      "float" : 0
+      "float" : 0.75
     },
     "footprintBorderWidth" : {
       "float" : 2
@@ -83,7 +83,7 @@
       "float" : 0
     },
     "hideMenubarIcon" : {
-      "bool" : false
+      "bool" : true
     },
     "ignoreDragSnapToo" : {
       "int" : 0
@@ -92,7 +92,7 @@
       "int" : 0
     },
     "landscapeSnapAreas" : {
-
+      "string" : "[4,{\"compound\":-2},1,{\"action\":15},2,{\"action\":2},3,{\"action\":16},5,{\"compound\":-3},7,{\"compound\":-4},8,{\"action\":14},6,{\"action\":13}]"
     },
     "launchOnLogin" : {
       "bool" : true
@@ -185,7 +185,7 @@
       "float" : 190
     },
     "subsequentExecutionMode" : {
-      "int" : 3
+      "int" : 4
     },
     "SUEnableAutomaticChecks" : {
       "bool" : false
@@ -215,12 +215,12 @@
       "int" : 0
     },
     "windowSnapping" : {
-      "int" : 2
+      "int" : 1
     }
   },
   "shortcuts" : {
     "bottomLeft" : {
-      "keyCode" : 31,
+      "keyCode" : 34,
       "modifierFlags" : 786432
     },
     "bottomRight" : {
@@ -259,6 +259,22 @@
       "keyCode" : 46,
       "modifierFlags" : 786432
     },
+    "moveDown" : {
+      "keyCode" : 1,
+      "modifierFlags" : 786432
+    },
+    "moveLeft" : {
+      "keyCode" : 0,
+      "modifierFlags" : 786432
+    },
+    "moveRight" : {
+      "keyCode" : 2,
+      "modifierFlags" : 786432
+    },
+    "moveUp" : {
+      "keyCode" : 13,
+      "modifierFlags" : 786432
+    },
     "reflowTodo" : {
       "keyCode" : 45,
       "modifierFlags" : 786432
@@ -280,7 +296,7 @@
       "modifierFlags" : 786432
     },
     "topRight" : {
-      "keyCode" : 34,
+      "keyCode" : 31,
       "modifierFlags" : 786432
     }
   },
