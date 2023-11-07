@@ -10,21 +10,23 @@
 			<key>Hot Key: Reverse</key>
 			<dict>
 				<key>Key Code</key>
-				<integer>48</integer>
+				<integer>35</integer>
 				<key>Modifiers</key>
-				<integer>655650</integer>
+				<integer>1966379</integer>
 				<key>Visual Representation</key>
-				<string>⌥⇧⇥</string>
+				<string>⌃⌥⇧⌘P</string>
 			</dict>
 			<key>Hot Key: Standard</key>
 			<dict>
 				<key>Key Code</key>
-				<integer>48</integer>
+				<integer>45</integer>
 				<key>Modifiers</key>
-				<integer>524288</integer>
+				<integer>1966379</integer>
 				<key>Visual Representation</key>
-				<string>⌥⇥</string>
+				<string>⌃⌥⇧⌘N</string>
 			</dict>
+			<key>Menu</key>
+			<false/>
 			<key>Orientation</key>
 			<integer>0</integer>
 			<key>Placeholder</key>
@@ -49,6 +51,8 @@
 	<true/>
 	<key>Activate On No Modifiers</key>
 	<true/>
+	<key>After-Close Selection</key>
+	<integer>3</integer>
 	<key>Application Name Color</key>
 	<data>
 	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMDhAJm
@@ -67,6 +71,8 @@
 	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMDhAJm
 	ZoNmZmY/g83MTD+G
 	</data>
+	<key>Icon Mode</key>
+	<integer>2</integer>
 	<key>Icon Mode: Superimpose Application Icon</key>
 	<true/>
 	<key>Ignore Non-Standard Windows</key>
@@ -86,13 +92,15 @@
 	ewmlnkjo0KEcyxxNkkkeC6TmC6g=
 	</data>
 	<key>Last Selected Tab</key>
-	<string>license</string>
+	<string>other</string>
 	<key>Maximum Width</key>
 	<real>0.4951875</real>
 	<key>Panel Delay</key>
 	<integer>0</integer>
 	<key>Panel Shadow</key>
 	<false/>
+	<key>Preview Delay</key>
+	<integer>956</integer>
 	<key>Run Badge Script</key>
 	<true/>
 	<key>Selection Border Color</key>
@@ -115,8 +123,10 @@
 	<true/>
 	<key>Show Minimized Bevels</key>
 	<true/>
+	<key>Show Previews</key>
+	<false/>
 	<key>Show Search Field</key>
-	<true/>
+	<false/>
 	<key>Space Indicator Color</key>
 	<data>
 	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMDhAJm
