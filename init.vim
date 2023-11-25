@@ -416,7 +416,7 @@ set smartcase
 set updatetime=300
 
 " eslint on save
-autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx EslintFixAll
+autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx if exists(":EslintFixAll") | execute 'EslintFixAll' | endif
 
 autocmd FileType typescript UltiSnipsAddFiletypes javascript
 autocmd FileType typescriptreact UltiSnipsAddFiletypes typescript
