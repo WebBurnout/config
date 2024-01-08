@@ -77,6 +77,15 @@ For Rectangle, install the app and then import the preferences json using the GU
 
 For Karabiner to work with tmux, you will need to change the hotkey for changing input sources (input language) from control space to alt space. You can do so in System Preferences > Keyboard > Input > Shortcuts
 
+Install Colima to run containers with
+```
+brew install docker colima
+```
+
+Then start Colima on startup with
+```
+brew services start colima
+```
 
 ## Helpful Information
 

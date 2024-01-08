@@ -1,3 +1,8 @@
+Include /Users/tim/.colima/ssh_config
+
 Host hot
     HostName hot.page
     User ubuntu
+
+Host hal
+    User omar
