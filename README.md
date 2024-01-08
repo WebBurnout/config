@@ -2,26 +2,52 @@
 
 ## Install
 
+Install homebrew with instructions from the web page, then run:
+```
+brew install bash iterm2 tmux nvm
+```
+
+Add to /etc/shells:
+```
+/opt/homebrew/bin/bash
+```
+
+Change to bash:
+```
+chsh -s /opt/homebrew/bin/bash
+```
+
 For iTerm you will need to open settings and set it to load the preferences
 from this directory.
 
+For Tmux you will need to install the themepack with:
+```
+git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack
+```
+
 To use the config files, create symbolick links to the correct location (you
-probably need to remove the ones that are there).
+may need to remove the ones that are there).
 
 ```
 ln -s ~/code/config/bash_profile ~/.bash_profile
 ln -s ~/code/config/bash_aliases ~/.bash_aliases
-ln -s ~/code/config/init.vim ~/.config/nvim/init.vim
-ln -s ~/code/config/tim-snippets/ ~/.config/nvim/tim-snippets
 ln -s ~/code/config/tmux.conf ~/.tmux.conf
 ln -s ~/code/config/witch.plist ~/Library/Application\ Support/Witch/Settings.plist
 ln -s ~/code/config/gitconfig ~/.gitconfig
 ln -s ~/code/config/gitignore ~/.gitignore
-ln -s ~/code/config/env_secret ~/.env_secret
 ln -s ~/code/config/ssh_config ~/.ssh/config
+mkdir -p ~/.config/nvim
+ln -s ~/code/config/init.vim ~/.config/nvim/init.vim
+ln -s ~/code/config/tim-snippets/ ~/.config/nvim/tim-snippets
 ```
 
-And some hard links:
+The `env_secret` file is a template so copy it from another machine or like this:
+```
+cp ~/code/config/env_secret ~/.env_secret
+```
+Then fill in the data
+
+Also some configs require hard links:
 ```
 ln -f ~/code/config/karabiner.json ~/.config/karabiner/karabiner.json
 sudo ln -f ~/code/config/hosts /etc/hosts
@@ -32,20 +58,25 @@ For NeoVim you will need to install the pyhton provider with:
 python3 -m pip install --user --upgrade pynvim
 ```
 
-Also install VimPlug with something like:
+Also, install VimPlug with something like:
 ```
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 ```
 Then do a `:PlugInstall` inside nvim
 
-For Tmux you will need to install the themepack with:
+Also the language servers:
 ```
-git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack
+npm install -g typescript typescript-language-server vscode-langservers-extracted
 ```
+
+Install some GUI programs by downloading them and adding the license files if
+needed: Transmit, Litle Snitch, iStat Menus, Witch, Karibiner Elements,
+Rectangle, Dash, Colima.
 
 For Rectangle, install the app and then import the preferences json using the GUI
 
 For Karabiner to work with tmux, you will need to change the hotkey for changing input sources (input language) from control space to alt space. You can do so in System Preferences > Keyboard > Input > Shortcuts
+
 
 ## Helpful Information
 
