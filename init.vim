@@ -29,7 +29,6 @@ call plug#begin()
 
   Plug 'kyazdani42/nvim-web-devicons' " icons everywhere
   Plug 'folke/trouble.nvim' " shows errors in a window
-
   Plug 'tpope/vim-eunuch'
   " Plug 'github/copilot.vim'
   Plug 'chentoast/marks.nvim'
@@ -56,8 +55,22 @@ require('marks').setup {
 }
 
 
-local hlgroups = require("cokeline.hlgroups")
+local get_hex = require('cokeline.hlgroups').get_hl_attr
 require('cokeline').setup({
+  default_hl = {
+    fg = function(buffer)
+      return
+        buffer.is_focused
+        and get_hex('ColorColumn', 'bg')
+         or get_hex('Normal', 'fg')
+    end,
+    bg = function(buffer)
+      return
+        buffer.is_focused
+        and get_hex('Normal', 'fg')
+         or get_hex('ColorColumn', 'bg')
+    end,
+  },
   components = {
     {
       text = function(buffer) return ' ' .. buffer.devicon.icon end,
@@ -87,7 +100,7 @@ require('cokeline').setup({
         text = '  Files',
         hl = {
           fg = yellow,
-          bg = hlgroups.get_hl_attr("NvimTreeNormal", "bg"),
+          bg = get_hex("NvimTreeNormal", "bg"),
           style = 'italic'
         }
       },
