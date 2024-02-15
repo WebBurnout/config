@@ -41,12 +41,6 @@ ln -s ~/code/config/init.vim ~/.config/nvim/init.vim
 ln -s ~/code/config/tim-snippets/ ~/.config/nvim/tim-snippets
 ```
 
-The `env_secret` file is a template so copy it from another machine or like this:
-```
-cp ~/code/config/env_secret ~/.env_secret
-```
-Then fill in the data
-
 Also some configs require hard links:
 ```
 ln -f ~/code/config/karabiner.json ~/.config/karabiner/karabiner.json
@@ -62,7 +56,7 @@ Also, install VimPlug with something like:
 ```
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 ```
-Then do a `:PlugInstall` inside nvim
+Then do a `:PlugInstall` inside nvim and install treesitter languages `:TSInstall lua vim typescript html css`
 
 Also the language servers:
 ```

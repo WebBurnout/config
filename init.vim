@@ -27,6 +27,7 @@ call plug#begin()
   Plug 'epilande/vim-es2015-snippets'
   Plug 'epilande/vim-react-snippets'
 
+  Plug 'hashivim/vim-terraform'
   Plug 'kyazdani42/nvim-web-devicons' " icons everywhere
   Plug 'folke/trouble.nvim' " shows errors in a window
   Plug 'tpope/vim-eunuch'
