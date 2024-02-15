@@ -30,13 +30,13 @@ call plug#begin()
   Plug 'hashivim/vim-terraform'
   Plug 'kyazdani42/nvim-web-devicons' " icons everywhere
   Plug 'folke/trouble.nvim' " shows errors in a window
-  Plug 'tpope/vim-eunuch'
+  Plug 'tpope/vim-eunuch' " unix shell commands Remove, Delete, etc
   " Plug 'github/copilot.vim'
   Plug 'chentoast/marks.nvim'
   Plug 'nvim-lualine/lualine.nvim' " statusline
   Plug 'noib3/nvim-cokeline'
   Plug 'jeffkreeftmeijer/vim-numbertoggle' " turns to relative in normal mode
-  Plug 'tpope/vim-rsi'
+  Plug 'tpope/vim-rsi' " readline style insertion
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
@@ -46,10 +46,14 @@ call plug#begin()
   Plug 'tomtom/tcomment_vim'
   Plug 'rizzatti/dash.vim'
   Plug 'terryma/vim-expand-region'
+  Plug 'folke/which-key.nvim'
 call plug#end()
 
 
 lua << EOF
+
+local wk = require("which-key")
+wk.register(mappings, opts)
 
 require('marks').setup {
   sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
