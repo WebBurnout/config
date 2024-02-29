@@ -95,6 +95,7 @@ ctrl-t to transpose letters
 
 T search through tabs
 
+leader-h -- for local history of a file
 
 ## custom key mappings
 

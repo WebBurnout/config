@@ -34,3 +34,4 @@ alias serve='browser-sync start -s -f . --port 4500'
 alias resize='sips -Z 1200 *.JPG'
 alias squids-proxy='ssh -D 8123 -f -C -q -N squids'
 alias ch='clear; tmux clear-history'
+alias tailscale=/Applications/Tailscale.app/Contents/MacOS/Tailscale

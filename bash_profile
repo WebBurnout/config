@@ -6,6 +6,7 @@ export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
 export ANDROID_HOME=$ANDROID_SDK_ROOT
 export PATH=$PATH:$ANDROID_SDK_ROOT/tools:/usr/local/opt/postgresql\@10/bin:/Users/omar/code/flutter/bin
 export BASH_SILENCE_DEPRECATION_WARNING=1
+export DOCKER_HOST="unix://$HOME/.colima/docker.sock"
 
 # terminal window title
 export PROMPT_COMMAND='echo -ne "\033]0;$PWD\007"'

@@ -27,6 +27,7 @@ call plug#begin()
   Plug 'epilande/vim-es2015-snippets'
   Plug 'epilande/vim-react-snippets'
 
+  Plug 'dinhhuy258/vim-local-history'
   Plug 'hashivim/vim-terraform'
   Plug 'kyazdani42/nvim-web-devicons' " icons everywhere
   Plug 'folke/trouble.nvim' " shows errors in a window
@@ -566,6 +567,8 @@ let mapleader = "\<Space>"
 nnoremap <silent> <Leader>j :w <bar> silent ! split_tmux_jest "%" <enter>
 
 nnoremap <Leader>l :EslintFixAll<cr>
+
+nnoremap <Leader>h :LocalHistoryToggle<CR>
 
 nnoremap <Leader>xx <cmd>TroubleToggle<cr>
 nnoremap <Leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
