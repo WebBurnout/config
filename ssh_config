@@ -1,12 +1,12 @@
 Include /Users/tim/.colima/ssh_config
 
-Host hot
-    HostName hot.page
-    User ubuntu
-
-Host staging
-    HostName staging.hot.page
-    User ubuntu
-
 Host hal
-    User omar
+  HostName halibut
+  User omar
+ 
+Host betta
+  User tim
+
+Host squids
+  HostName squids.online
+  User tim
