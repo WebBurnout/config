@@ -65,9 +65,16 @@ npm install -g typescript typescript-language-server vscode-langservers-extracte
 
 Install some GUI programs by downloading them and adding the license files if
 needed: Transmit, Litle Snitch, iStat Menus, Witch, Karibiner Elements,
-Rectangle, Dash, Colima.
+Moom, Dash, Colima.
 
-For Rectangle, install the app and then import the preferences json using the GUI
+For Moom, you will need to import settings like this:
+```
+defaults import com.manytricks.Moom moom.plist
+```
+And when you change them, remember to export like this:
+```
+defaults export com.manytricks.Moom moom.plist
+```
 
 For Karabiner to work with tmux, you will need to change the hotkey for changing input sources (input language) from control space to alt space. You can do so in System Preferences > Keyboard > Input > Shortcuts
 
@@ -99,14 +106,22 @@ leader-h -- for local history of a file
 
 ## custom key mappings
 
-f5 -- keyboard brightness down
-f6 -- keyboard brightness up
-
-hyper-f -- left in mission control
-hyper-b -- right in mission control
+hyper-tab -- moom
+hyper-q -- previous desktop
+hyper-w -- next desktop
+hyper-e -- see apps
+hyper-r -- see windows
 
 hyper-n -- next app in witch
 hyper-p -- previous app in witch
+
+f5 -- keyboard brightness down
+f6 -- keyboard brightness up
+
+hyper-a -- play/pause
+hyper-s -- next track
+hyper-d -- volume down
+hyper-f -- volume up
 
 
 ### tmux

@@ -1,6 +1,17 @@
 priority 1
 
 
+snippet rs "React Component" b
+const [${1}, set${1/\w+/\u$0/g}] = React.useState<$2>($3)
+endsnippet
+
+snippet re "React Effect" b
+	React.useEffect(() => {
+		$2
+		return () => 
+	},[$1])
+endsnippet
+
 snippet rc "React Component" b
 import React from 'react'
 // import styled from 'styled-components'

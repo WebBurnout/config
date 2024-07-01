@@ -497,6 +497,7 @@ let $BASH_ENV = "$HOME/.bash_aliases"
 set backup
 set backupdir=~/tmp
 set dir=~/tmp
+let g:local_history_path = '/Users/tim/tmp'
 
 " always display the sign column
 " set signcolumn=auto:1-2
