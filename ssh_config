@@ -10,3 +10,23 @@ Host betta
 Host squids
   HostName squids.online
   User tim
+
+host staging
+  HostName staging.hotpage.dev
+  User ubuntu
+
+host app
+  HostName app-server-0.hotpage.dev
+  User ubuntu
+
+host app1 
+  HostName app-server-1.hotpage.dev
+  User ubuntu
+
+host sweet
+  HostName sweet-0.hotpage.dev
+  User ubuntu
+
+host lb
+  HostName load-balancer.hotpage.dev
+  User ubuntu

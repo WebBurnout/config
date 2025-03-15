@@ -1,0 +1,25 @@
+tabs {
+  counter-reset: tab-counter;
+}
+
+tab:nth-child(1) .tab-content::before,
+tab:nth-child(2) .tab-content::before,
+tab:nth-child(3) .tab-content::before,
+tab:nth-child(4) .tab-content::before,
+tab:nth-child(5) .tab-content::before,
+tab:nth-child(6) .tab-content::before,
+tab:nth-child(7) .tab-content::before,
+tab:nth-child(8) .tab-content::before {
+  counter-increment: tab-counter;
+  content: counter(tab-counter) "";
+  padding: 0px 4px;
+  margin-right: 5px;
+  border-radius: 7px;
+  color: black;
+  background: #ff0c;
+}
+
+/* show vertical lines between tabs */
+tab:not(:first-child) {
+  border-left: 1px solid #0004 !important;
+}

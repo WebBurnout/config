@@ -39,6 +39,7 @@ ln -s ~/code/config/ssh_config ~/.ssh/config
 mkdir -p ~/.config/nvim
 ln -s ~/code/config/init.vim ~/.config/nvim/init.vim
 ln -s ~/code/config/tim-snippets/ ~/.config/nvim/tim-snippets
+ln -s ~/code/config/firefox-user-chrome.css ~/Library/Application\ Support/Firefox/Profiles/nhn7zq27.default-release/chrome/userChrome.css
 ```
 
 Also some configs require hard links:
@@ -95,7 +96,18 @@ To reload `init.vim` without exiting Neovim run
 :source $MYVIMRC
 ```
 
-ctrl-t to transpose letters
+
+## helpful commands
+
+find and replace content in all .ts or .tsx files in a directory with sed:
+```
+find . -type f '(' -name '*.ts' -o -name '*.tsx' ')' | xargs sed -i '' 's/foo/bar/g'
+```
+
+To preview the changes run:
+```
+find . -type f '(' -name '*.ts' -o -name '*.tsx' ')' | xargs sed 's/\${(props) => props.theme.textColor}/var(--text-color)/g' | less
+```
 
 
 ## Vimium handiness
@@ -104,7 +116,15 @@ T search through tabs
 
 leader-h -- for local history of a file
 
+Find and replace in a directory:
+```
+:args spec/javascripts/**/*.* 
+:argdo %s/foo/bar/g
+```
+
 ## custom key mappings
+
+s and S mappings are ripe for changing because i don't use them and they have a two character one that's directly equivalent
 
 hyper-tab -- moom
 hyper-q -- previous desktop
@@ -147,15 +167,22 @@ tmux a -t [name of session]
 
 ## Vim handiness
 
+za - toggle fold at cursor
+zR - open all folds
+zM - close all open folds
+
+ctrl-t to transpose letters
+
+
 I -- insert at the start of the line
 to make the search case sensitive can do "set noic" or just use \c at the end
 ; repeat f-type motions
 { and } for moving cursor to blocks
+% - move to other side of parens
 zz to center cursor in screen
 leader-/ Telescope lsp_document_symbols
-c-v for visual block mode, I to insert, x to delete
-v to expand selection, V to shrink it
-zc close fold, zo open fold
+c-v for visual block mode, I to insert, x to delete, v to expand selection, V to shrink it
+zc close fold, zo open fold, or just za to toggle fold
 leader-k - show dash
 leader-w -- save file
 C replaces the rest of the line (starting at cursor position) with your edit.

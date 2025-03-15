@@ -1,6 +1,26 @@
 priority 1
 
 
+snippet hc "HotFX Component" b
+
+class HotFX$1 extends HTMLElement {
+
+	static observedAttributes = ['',]
+
+	constructor() {
+		super()
+		this.attachShadow({ mode: 'open' })
+	}
+
+	attributeChangedCallback() {
+	}
+
+}
+
+customElements.define('hotfx-$2', HotFX$1)
+
+endsnippet
+
 snippet cl "console.log" b
 console.log('--> $1', $1)
 endsnippet

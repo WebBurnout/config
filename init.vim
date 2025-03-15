@@ -19,7 +19,7 @@ call plug#begin()
   Plug 'quangnguyen30192/cmp-nvim-ultisnips'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'onsails/lspkind-nvim'
-  Plug 'tami5/lspsaga.nvim'
+  Plug 'nvimdev/lspsaga.nvim'
 
   " snippets
   Plug 'SirVer/ultisnips'
@@ -32,7 +32,7 @@ call plug#begin()
   Plug 'kyazdani42/nvim-web-devicons' " icons everywhere
   Plug 'folke/trouble.nvim' " shows errors in a window
   Plug 'tpope/vim-eunuch' " unix shell commands Remove, Delete, etc
-  " Plug 'github/copilot.vim'
+  Plug 'github/copilot.vim'
   Plug 'chentoast/marks.nvim'
   Plug 'nvim-lualine/lualine.nvim' " statusline
   Plug 'noib3/nvim-cokeline'
@@ -45,16 +45,270 @@ call plug#begin()
   Plug 'nvim-telescope/telescope-smart-history.nvim'
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'tomtom/tcomment_vim'
-  Plug 'rizzatti/dash.vim'
   Plug 'terryma/vim-expand-region'
   Plug 'folke/which-key.nvim'
+  Plug 'kevinhwang91/nvim-ufo' " code folding
+  Plug 'kevinhwang91/promise-async' " dependency for UFO
+
+  Plug 'olimorris/codecompanion.nvim'
 call plug#end()
 
 
+" "
+" " Keys
+" "
+"
+" inoremap jk <Esc>
+"
+" " disable use Ex mode
+" map Q <Nop>
+" map q: <Nop>
+"
+" "  ctrl-j  in insert mode does Enter for some reason
+" inoremap <C-j> <Nop>
+"
+" let g:UltiSnipsJumpForwardTrigger="<C-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+" let g:UltiSnipsSnippetsDir = "~/.config/nvim"
+" let g:UltiSnipsSnippetDirectories=["tim-snippets"]
+"
+" " you know 64 key keyboard
+" inoremap <esc> `
+" set ttimeoutlen=50 " improves timeliness of escape
+"
+" " leader is space bar
+" let mapleader = "\<Space>"
+"
+" " Hardmode by default
+" " let g:hardtime_default_on = 1
+" " let g:hardtime_maxcount = 2
+" " let g:hardtime_allow_different_key = 1
+" " let g:list_of_normal_keys = ["x", "w", "b", "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+" " let g:list_of_visual_keys = ["w", "b", "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+"
+" nnoremap <Leader>l :EslintFixAll<cr>
+"
+" nnoremap <Leader>h :LocalHistoryToggle<CR>
+"
+" nnoremap <Leader>xx <cmd>TroubleToggle<cr>
+" nnoremap <Leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
+" nnoremap <Leader>xd <cmd>TroubleToggle document_diagnostics<cr>
+" " nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+" " nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+" " nnoremap gR <cmd>TroubleToggle lsp_references<cr>
+"
+" " symbols outline
+" nnoremap <silent> <Leader>s :SymbolsOutline<CR>
+"
+" " Find files using Telescope command-line sugar.
+" nnoremap <C-p> :update<CR><cmd>lua project_files()<cr>
+" nnoremap <leader>g <cmd>lua require('telescope.builtin').live_grep{ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] }<cr>
+" nnoremap <Leader>/ <cmd>Telescope lsp_document_symbols<cr>
+" nnoremap <Leader>d <cmd>Telescope lsp_definitions<cr>
+" nnoremap <Leader>i <cmd>Telescope lsp_implementations<cr>
+"
+" " clear search highlighting
+" nnoremap <silent> <Leader><space> :noh<cr>
+"
+" " save with space w
+" nnoremap <Leader>w :w<CR>
+"
+" " git signs commands
+" nmap <silent> <Leader>n <cmd>Gitsigns next_hunk<CR>
+" nmap <silent> <Leader>N <cmd>Gitsigns prev_hunk<CR>
+" nmap <silent> <Leader>u <cmd>Gitsigns reset_hunk<CR>
+"
+" " toggle tree with
+" nnoremap <silent> <Leader>j :NvimTreeFindFileToggle<CR>
+"
+" " region expanding
+" vmap v <Plug>(expand_region_expand)
+" vmap V <Plug>(expand_region_shrink)
+"
+" " move through buffers
+" nmap <silent> <C-j> <Plug>(cokeline-focus-next)
+" nmap <silent> <C-k> <Plug>(cokeline-focus-prev)
+" nmap <silent> <C-h> :update<CR>:bd<CR>
+"
+" " removes omnifunc commands since we have nvm-cmp
+" inoremap <silent> <C-n> <Nop>
+" inoremap <silent> <C-p> <Nop>
+"
+" set noshowmode " hide vim's mode status which is duplicate of lualine
+"
+" " vim-rsi gives us readline commands in insert mode. Here we reconfigure their
+" " movement to wrap lines
+" autocmd VimEnter * inoremap <expr> <C-D> "\<Lt>Del>"
+" autocmd VimEnter * cnoremap <expr> <C-D> "\<Lt>Del>"
+" autocmd VimEnter * inoremap <expr> <C-F> "\<Lt>Right>"
+" autocmd VimEnter * inoremap <expr> <C-F> "\<Lt>Right>"
+" " instead of ctrl-p/n for autocompletion i use j/k so p/n can be used for
+" " cursor movement
+" inoremap <C-p> <Up>
+" inoremap <C-n> <Down>
+"
+" " do all syntax highlighting when the file opens
+" autocmd BufEnter * :syntax sync fromstart
+"
 lua << EOF
 
+--
+-- Keys
+--
+
+-- Key mappings
+vim.keymap.set('i', 'jk', '<Esc>')
+-- disable Ex mode
+vim.keymap.set('n', 'Q', '<Nop>')
+vim.keymap.set('n', 'q:', '<Nop>')
+-- ctrl-j in insert mode does Enter for some reason
+vim.keymap.set('i', '<C-j>', '<Nop>')
+
+-- UltiSnips configuration
+vim.g.UltiSnipsJumpForwardTrigger = "<C-j>"
+vim.g.UltiSnipsJumpBackwardTrigger = "<C-k>"
+vim.g.UltiSnipsSnippetsDir = "~/.config/nvim"
+vim.g.UltiSnipsSnippetDirectories = {"tim-snippets"}
+
+-- You know 64 key keyboard
+vim.keymap.set('i', '<esc>', '`')
+vim.opt.ttimeoutlen = 50 -- improves timeliness of escape
+
+-- Leader is space bar
+vim.g.mapleader = " "
+
+-- Hardmode by default (commented out in original)
+-- vim.g.hardtime_default_on = 1
+-- vim.g.hardtime_maxcount = 2
+-- vim.g.hardtime_allow_different_key = 1
+-- vim.g.list_of_normal_keys = {"x", "w", "b", "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"}
+-- vim.g.list_of_visual_keys = {"w", "b", "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"}
+
+-- Leader mappings
+vim.keymap.set('n', '<Leader>l', ':EslintFixAll<cr>')
+vim.keymap.set('n', '<Leader>h', ':LocalHistoryToggle<CR>')
+vim.keymap.set('n', '<Leader>xx', '<cmd>TroubleToggle<cr>')
+vim.keymap.set('n', '<Leader>xw', '<cmd>TroubleToggle workspace_diagnostics<cr>')
+vim.keymap.set('n', '<Leader>xd', '<cmd>TroubleToggle document_diagnostics<cr>')
+-- vim.keymap.set('n', '<Leader>xq', '<cmd>TroubleToggle quickfix<cr>')
+-- vim.keymap.set('n', '<Leader>xl', '<cmd>TroubleToggle loclist<cr>')
+-- vim.keymap.set('n', 'gR', '<cmd>TroubleToggle lsp_references<cr>')
+
+-- Symbols outline
+vim.keymap.set('n', '<Leader>s', ':SymbolsOutline<CR>', { silent = true })
+
+-- Telescope mappings
+vim.keymap.set('n', '<C-p>', ':update<CR><cmd>lua project_files()<cr>')
+vim.keymap.set('n', '<Leader>g', '<cmd>lua require("telescope.builtin").live_grep{ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] }<cr>')
+vim.keymap.set('n', '<Leader>/', '<cmd>Telescope lsp_document_symbols<cr>')
+vim.keymap.set('n', '<Leader>d', '<cmd>Telescope lsp_definitions<cr>')
+vim.keymap.set('n', '<Leader>i', '<cmd>Telescope lsp_implementations<cr>')
+
+-- Clear search highlighting
+vim.keymap.set('n', '<Leader><space>', ':noh<cr>', { silent = true })
+
+-- Save with space w
+vim.keymap.set('n', '<Leader>w', ':w<CR>')
+
+-- Gitsigns commands
+vim.keymap.set('n', '<Leader>n', '<cmd>Gitsigns next_hunk<CR>', { silent = true })
+vim.keymap.set('n', '<Leader>N', '<cmd>Gitsigns prev_hunk<CR>', { silent = true })
+vim.keymap.set('n', '<Leader>u', '<cmd>Gitsigns reset_hunk<CR>', { silent = true })
+
+-- Toggle tree
+vim.keymap.set('n', '<Leader>j', ':NvimTreeFindFileToggle<CR>', { silent = true })
+
+-- Region expanding
+vim.keymap.set('v', 'v', '<Plug>(expand_region_expand)')
+vim.keymap.set('v', 'V', '<Plug>(expand_region_shrink)')
+
+-- Move through buffers
+vim.keymap.set('n', '<C-j>', '<Plug>(cokeline-focus-next)', { silent = true })
+vim.keymap.set('n', '<C-k>', '<Plug>(cokeline-focus-prev)', { silent = true })
+vim.keymap.set('n', '<C-h>', ':update<CR>:bd<CR>', { silent = true })
+
+-- Remove omnifunc commands since we have nvim-cmp
+vim.keymap.set('i', '<C-n>', '<Nop>', { silent = true })
+vim.keymap.set('i', '<C-p>', '<Nop>', { silent = true })
+
+-- Hide vim's mode status which is duplicate of lualine
+vim.opt.showmode = false
+
+-- Autocommands
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    vim.keymap.set('i', '<C-D>', '<Del>', { expr = true })
+    vim.keymap.set('c', '<C-D>', '<Del>', { expr = true })
+    vim.keymap.set('i', '<C-F>', '<Right>', { expr = true })
+  end
+})
+
+-- Instead of ctrl-p/n for autocompletion, use j/k so p/n can be used for cursor movement
+vim.keymap.set('i', '<C-p>', '<Up>')
+vim.keymap.set('i', '<C-n>', '<Down>')
+
+-- Do all syntax highlighting when the file opens
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*",
+  command = ":syntax sync fromstart"
+})
+
+-- Function needed for the project_files keybinding
+function _G.project_files()
+  local opts = {}
+  local ok = pcall(require('telescope.builtin').git_files, opts)
+  if not ok then
+    require('telescope.builtin').find_files(opts)
+  end
+end
+
+
+
+
+
+
+
+
+
+
+
+--
+-- Plugins
+--
+
+
+require("codecompanion").setup({
+  strategies = {
+    chat = {
+      adapter = "anthropic",
+    },
+    inline = {
+      adapter = "anthropic",
+    },
+  },
+})
+
+vim.keymap.set("n", "<Leader>a", "<cmd>CodeCompanionChat Toggle<cr>", {silent = true, noremap = true})
+
+
+
+
+-- Copilot will be disabled in favor of CodeCompanion
+
+vim.g.copilot_filetypes = {
+  ["*"] = false,
+  ["javascript"] = true,
+  ["typescript"] = true,
+  ["typescriptreact"] = true,
+  ["javascriptreact"] = true,
+  ["css"] = true,
+  ["html"] = true,
+}
+-- vim.g.copilot_no_tab_map = true
+-- vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+
 local wk = require("which-key")
-wk.register(mappings, opts)
+-- wk.register(mappings, opts)
 
 require('marks').setup {
   sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
@@ -152,7 +406,7 @@ require('nvim-tree').setup {
     },
   },
   git = {
-    enable = true, -- not working :(
+    enable = true,
   },
   filters = {
     custom = { ".git" },
@@ -163,7 +417,7 @@ require('nvim-tree').setup {
 vim.g.solarized_termtrans = 1
 
 local actions = require("telescope.actions")
-local trouble = require("trouble.providers.telescope")
+local trouble = require("trouble.sources.telescope")
 
 require('telescope').setup{
   defaults = {
@@ -177,10 +431,10 @@ require('telescope').setup{
         ["<C-h>"] = actions.which_key,
         ["<C-n>"] = actions.cycle_history_next,
         ["<C-p>"] = actions.cycle_history_prev,
-        ["<c-t>"] = trouble.open_with_trouble,
+        ["<C-t>"] = trouble.open,
       },
       n = {
-        ["<c-t>"] = trouble.open_with_trouble
+        ["<C-t>"] = trouble.open
       },
     },
     history = {
@@ -219,36 +473,12 @@ end
 
 require('gitsigns').setup {
   signs = {
-    add = {
-      hl = 'GitSignsAdd',
-      text = '',
-      numhl='GitSignsAddNr',
-      linehl='GitSignsAddLn'
-    },
-    change = {
-      hl = 'GitSignsChange',
-      text = '󰔶',
-      numhl='GitSignsChangeNr',
-      linehl='GitSignsChangeLn'
-    },
-    delete = {
-      hl = 'GitSignsDelete',
-      text = '',
-      numhl='GitSignsDeleteNr',
-      linehl='GitSignsDeleteLn'
-    },
-    topdelete = {
-      hl = 'GitSignsDelete',
-      text = '',
-      numhl='GitSignsDeleteNr',
-      linehl='GitSignsDeleteLn'
-    },
-    changedelete = {
-      hl = 'GitSignsChange',
-      text = '󰔶',
-      numhl='GitSignsChangeNr',
-      linehl='GitSignsChangeLn'
-    },
+    add          = { text = '' },
+    change       = { text = '󰔶' },
+    delete       = { text = '' },
+    topdelete    = { text = '' },
+    changedelete = { text = '~' },
+    untracked    = { text = '┆' },
   },
 }
 
@@ -269,6 +499,11 @@ end
 
 
 -- LSP
+require('lspsaga').setup({
+  lightbulb = {
+    enable = false
+  }
+})
 
 local lspconfig = require('lspconfig')
 -- Add additional capabilities supported by nvim-cmp
@@ -285,8 +520,6 @@ local custom_lsp_attach = function(client)
   vim.api.nvim_buf_set_keymap(0, "n", "<Leader>e", "<cmd>Lspsaga show_line_diagnostics<cr>", {silent = true, noremap = true})
   vim.api.nvim_buf_set_keymap(0, "n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>", {silent = true, noremap = true})
   vim.api.nvim_buf_set_keymap(0, "n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", {silent = true, noremap = true})
-  vim.api.nvim_buf_set_keymap(0, "n", "<C-f>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-f>')<cr>", {})
-  vim.api.nvim_buf_set_keymap(0, "n", "<C-b>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-b>')<cr>", {})
 
   -- Use LSP as the handler for omnifunc.
   vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -297,7 +530,7 @@ local custom_lsp_attach = function(client)
 end
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-lspconfig['tsserver'].setup {
+lspconfig['ts_ls'].setup {
   capabilities = capabilities,
   on_attach = custom_lsp_attach
 }
@@ -343,6 +576,7 @@ cmp.setup({
     end,
   },
   mapping = {
+    ['<C-l>'] = cmp.mapping.confirm({ select = true }),
     ['<C-j>'] = cmp.mapping(
       function(fallback)
         cmp_ultisnips_mappings.compose { "jump_forwards", "select_next_item" }(fallback)
@@ -409,6 +643,19 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
+-- Nvim UFO is for folding
+-- use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+vim.o.foldcolumn = '1'
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+require('ufo').setup({
+    provider_selector = function(bufnr, filetype, buftype)
+        return {'treesitter', 'indent'}
+    end
+})
 EOF
 
 
@@ -416,6 +663,14 @@ EOF
 "
 " Config
 "
+
+
+" reloads the buffer if its changed on dis
+set autoread
+autocmd VimResume,FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+" notification after file change
+  autocmd FileChangedShellPost *
+    \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
 " line numbers (plugin will switch to relative numbers in normal mode)
 set number
@@ -532,108 +787,3 @@ set showcmd		" display incomplete commands
 
 
 
-
-"
-" Keys
-"
-
-inoremap jk <Esc>
-
-" disable use Ex mode
-map Q <Nop>
-
-"  ctrl-j  in insert mode does Enter for some reason
-inoremap <C-j> <Nop>
-
-let g:UltiSnipsExpandTrigger="<Tab>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
-let g:UltiSnipsSnippetsDir = "~/.config/nvim"
-let g:UltiSnipsSnippetDirectories=["tim-snippets"]
-
-" you know 64 key keyboard
-inoremap <esc> `
-set ttimeoutlen=50 " improves timeliness of escape
-
-" leader is space bar
-let mapleader = "\<Space>"
-
-" Hardmode by default
-" let g:hardtime_default_on = 1
-" let g:hardtime_maxcount = 2
-" let g:hardtime_allow_different_key = 1
-" let g:list_of_normal_keys = ["x", "w", "b", "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
-" let g:list_of_visual_keys = ["w", "b", "h", "j", "k", "l", "-", "+", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
-
-nnoremap <silent> <Leader>j :w <bar> silent ! split_tmux_jest "%" <enter>
-
-nnoremap <Leader>l :EslintFixAll<cr>
-
-nnoremap <Leader>h :LocalHistoryToggle<CR>
-
-nnoremap <Leader>xx <cmd>TroubleToggle<cr>
-nnoremap <Leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
-nnoremap <Leader>xd <cmd>TroubleToggle document_diagnostics<cr>
-" nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
-" nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
-" nnoremap gR <cmd>TroubleToggle lsp_references<cr>
-
-" symbols outline
-nnoremap <silent> <Leader>s :SymbolsOutline<CR>
-
-" Find files using Telescope command-line sugar.
-nnoremap <C-p> :update<CR><cmd>lua project_files()<cr>
-nnoremap <leader>g <cmd>lua require('telescope.builtin').live_grep{ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] }<cr>
-nnoremap <Leader>/ <cmd>Telescope lsp_document_symbols<cr>
-nnoremap <Leader>d <cmd>Telescope lsp_definitions<cr>
-nnoremap <Leader>i <cmd>Telescope lsp_implementations<cr>
-
-" clear search highlighting
-nnoremap <silent> <Leader><space> :noh<cr>
-
-" save with space w
-nnoremap <Leader>w :w<CR>
-
-" git signs commands
-nmap <silent> <Leader>n <cmd>Gitsigns next_hunk<CR>
-nmap <silent> <Leader>N <cmd>Gitsigns prev_hunk<CR>
-nmap <silent> <Leader>u <cmd>Gitsigns reset_hunk<CR>
-
-" toggle tree with q
-nnoremap <silent> q :NvimTreeToggle<CR>
-
-" region expanding
-vmap v <Plug>(expand_region_expand)
-vmap V <Plug>(expand_region_shrink)
-
-" move through buffers
-nmap <silent> <C-j> <Plug>(cokeline-focus-next)
-nmap <silent> <C-k> <Plug>(cokeline-focus-prev)
-nmap <silent> <C-h> :update<CR>:bd<CR>
-
-" removes omnifunc commands since we have nvm-cmp
-inoremap <silent> <C-n> <Nop>
-inoremap <silent> <C-p> <Nop>
-
-nmap <silent> <Leader>k <Plug>DashSearch
-
-set noshowmode " hide vim's mode status which is duplicate of lualine
-
-" vim-rsi gives us readline commands in insert mode. Here we reconfigure their
-" movement to wrap lines
-autocmd VimEnter * inoremap <expr> <C-D> "\<Lt>Del>"
-autocmd VimEnter * cnoremap <expr> <C-D> "\<Lt>Del>"
-autocmd VimEnter * inoremap <expr> <C-F> "\<Lt>Right>"
-autocmd VimEnter * inoremap <expr> <C-F> "\<Lt>Right>"
-" instead of ctrl-p/n for autocompletion i use j/k so p/n can be used for
-" cursor movement
-inoremap <C-p> <Up>
-inoremap <C-n> <Down>
-
-" do all syntax highlighting when the file opens
-autocmd BufEnter * :syntax sync fromstart
-
-" following will work when Telescope issue is fixed: https://github.com/nvim-telescope/telescope.nvim/issues/699
-" Use Treesitter for folding
-" set foldmethod=expr
-" set foldexpr=nvim_treesitter#foldexpr()

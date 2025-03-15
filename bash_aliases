@@ -35,3 +35,5 @@ alias resize='sips -Z 1200 *.JPG'
 alias squids-proxy='ssh -D 8123 -f -C -q -N squids'
 alias ch='clear; tmux clear-history'
 alias tailscale=/Applications/Tailscale.app/Contents/MacOS/Tailscale
+alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
+alias caf='caffeinate -d'
