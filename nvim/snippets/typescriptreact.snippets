@@ -1,0 +1,73 @@
+
+
+snippet rs "React State" b
+	const [${1}, set${1/\w+/\u$0/g}] = React.useState<$2>($3)
+
+
+snippet re "React Effect" b
+	React.useEffect(() => {
+		$2
+		return () => 
+	},[$1])
+
+
+snippet rc "React Component" b
+	import React from 'react'
+	// import styled from 'styled-components'
+	// import { } from '../api'
+
+	interface $1Props {
+		//
+	}
+
+	export default function ${1}(props: $1Props): React.ReactElement  {
+		return (
+			<$2>
+				$1
+			</$2>
+		)
+	}
+
+
+
+snippet sc "styled component" b
+	const $1 = styled.div`
+		$2
+	`
+
+
+snippet st "styled-components theme value" b
+	${(props) => props.theme.$1}
+
+
+snippet ia "import api" b
+	import { $1 } from '../api.js'
+
+
+snippet is "import styled" b
+	import styled from 'styled-components'
+
+
+snippet ir "import React" b
+	import React from 'react'
+
+
+
+snippet rt "React Test" b
+	import { render } from '@testing-library/react'
+	import ${1:`!v expand('%:t:r')[:-6]`} from './$1.jsx'
+
+
+
+snippet tb "React Test Boilerplate" b
+	api.get.mockReturnValueOnce([Promise.resolve()])
+	await act(async () => {
+		const { getByText } = render(
+			<${1:`!v expand('%:t:r')[:-6]`} />,
+			{ wrapper: MemoryRouter },
+		)
+		await wait(() => expect(getByText('$2')).toBeInTheDocument())
+		expect(api.get).toHaveBeenCalledWith('$3')
+	})
+
+

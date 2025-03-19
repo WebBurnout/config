@@ -30,34 +30,24 @@ may need to remove the ones that are there).
 
 ```
 ln -s ~/code/config/bash_profile ~/.bash_profile
-ln -s ~/code/config/bash_aliases ~/.bash_aliases
 ln -s ~/code/config/tmux.conf ~/.tmux.conf
 ln -s ~/code/config/witch.plist ~/Library/Application\ Support/Witch/Settings.plist
 ln -s ~/code/config/gitconfig ~/.gitconfig
 ln -s ~/code/config/gitignore ~/.gitignore
 ln -s ~/code/config/ssh_config ~/.ssh/config
-mkdir -p ~/.config/nvim
-ln -s ~/code/config/init.vim ~/.config/nvim/init.vim
-ln -s ~/code/config/tim-snippets/ ~/.config/nvim/tim-snippets
+ln -s ~/code/config/nvim ~/.config/nvim
 ln -s ~/code/config/firefox-user-chrome.css ~/Library/Application\ Support/Firefox/Profiles/nhn7zq27.default-release/chrome/userChrome.css
 ```
 
 Also some configs require hard links:
 ```
 ln -f ~/code/config/karabiner.json ~/.config/karabiner/karabiner.json
-sudo ln -f ~/code/config/hosts /etc/hosts
 ```
 
-For NeoVim you will need to install the pyhton provider with:
+For NeoVim you will need to install the python provider with:
 ```
 python3 -m pip install --user --upgrade pynvim
 ```
-
-Also, install VimPlug with something like:
-```
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-```
-Then do a `:PlugInstall` inside nvim and install treesitter languages `:TSInstall lua vim typescript html css`
 
 Also the language servers:
 ```
@@ -94,19 +84,6 @@ brew services start colima
 To reload `init.vim` without exiting Neovim run
 ```
 :source $MYVIMRC
-```
-
-
-## helpful commands
-
-find and replace content in all .ts or .tsx files in a directory with sed:
-```
-find . -type f '(' -name '*.ts' -o -name '*.tsx' ')' | xargs sed -i '' 's/foo/bar/g'
-```
-
-To preview the changes run:
-```
-find . -type f '(' -name '*.ts' -o -name '*.tsx' ')' | xargs sed 's/\${(props) => props.theme.textColor}/var(--text-color)/g' | less
 ```
 
 
@@ -167,12 +144,14 @@ tmux a -t [name of session]
 
 ## Vim handiness
 
+[d / ]d is next/previous diagnostic
+<c-[> go to definition
+
 za - toggle fold at cursor
 zR - open all folds
 zM - close all open folds
 
 ctrl-t to transpose letters
-
 
 I -- insert at the start of the line
 to make the search case sensitive can do "set noic" or just use \c at the end
