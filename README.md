@@ -20,9 +20,14 @@ chsh -s /opt/homebrew/bin/bash
 For iTerm you will need to open settings and set it to load the preferences
 from this directory.
 
-For Tmux you will need to install the themepack with:
+For Tmux you will need to install the catpuccin with:
 ```
-git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack
+mkdir -p ~/.config/tmux/plugins/catppuccin
+git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux
+```
+And the minimal-status-line:
+```
+git clone git@github.com:niksingh710/minimal-tmux-status.git ~/.config/tmux/plugins/minimal-status-line
 ```
 
 To use the config files, create symbolick links to the correct location (you
@@ -52,6 +57,11 @@ python3 -m pip install --user --upgrade pynvim
 Also the language servers:
 ```
 npm install -g typescript typescript-language-server vscode-langservers-extracted
+```
+
+Install ripgrep for use in nvim
+```
+brew install ripgrep
 ```
 
 Install some GUI programs by downloading them and adding the license files if

@@ -16,8 +16,6 @@ return {
   ---@type blink.cmp.Config
   opts = {
     -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept, C-n/C-p for up/down)
-    -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys for up/down)
-    -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
     --
     -- All presets have the following mappings:
     -- C-space: Open menu or open docs if already open
@@ -25,7 +23,10 @@ return {
     -- C-k: Toggle signature help
     --
     -- See the full "keymap" documentation for information on defining your own keymap.
-    keymap = { preset = 'default' },
+    keymap = {
+      preset = 'default',
+      ['<C-h>'] = { 'accept', 'fallback' },
+    },
 
     enabled = function()
       return not vim.tbl_contains({ "markdown" }, vim.bo.filetype)

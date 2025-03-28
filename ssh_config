@@ -15,11 +15,11 @@ host staging
   HostName staging.hotpage.dev
   User ubuntu
 
-host app
+host app0
   HostName app-server-0.hotpage.dev
   User ubuntu
 
-host app1 
+host app1
   HostName app-server-1.hotpage.dev
   User ubuntu
 

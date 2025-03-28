@@ -96,7 +96,9 @@ vim.opt.whichwrap:append {
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
-
+-- set colors
+vim.opt.termguicolors = true
+vim.opt.background = 'dark'
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
