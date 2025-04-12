@@ -22,10 +22,11 @@ return {
 
         -- Code actions and refactoring
         vim.keymap.set({ 'n', 'v' }, '<leader>c', vim.lsp.buf.code_action, { desc = 'Code Action', buffer = opts.buffer })
-        vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, { desc = 'Rename', buffer = opts.buffer })
+        -- vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, { desc = 'Rename', buffer = opts.buffer })
 
         -- Diagnostics
         vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open Diagnostics List', buffer = opts.buffer })
+        vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open diagnostic float' })
 
         -- Formatting
         vim.keymap.set('n', '<leader>l', function()

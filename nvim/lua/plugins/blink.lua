@@ -3,7 +3,10 @@
 return {
   'saghen/blink.cmp',
 
-  dependencies = { 'L3MON4D3/LuaSnip', version = 'v2.*' },
+  dependencies = {
+    { 'L3MON4D3/LuaSnip', version = 'v2.*' },
+    { "giuxtaposition/blink-cmp-copilot" },
+  },
 
   -- use a release tag to download pre-built binaries
   version = '*',
@@ -25,11 +28,11 @@ return {
     -- See the full "keymap" documentation for information on defining your own keymap.
     keymap = {
       preset = 'default',
-      ['<C-h>'] = { 'accept', 'fallback' },
+      ['<C-l>'] = { 'accept', 'fallback' },
     },
 
     enabled = function()
-      return not vim.tbl_contains({ "markdown" }, vim.bo.filetype)
+      return not vim.tbl_contains({ "markdown" }, vim.bo.filetype) and not vim.tbl_contains({ "copilot-chat" }, vim.bo.filetype)
     end,
 
     appearance = {
@@ -39,7 +42,16 @@ return {
       use_nvim_cmp_as_default = true,
       -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
       -- Adjusts spacing to ensure icons are aligned
-      nerd_font_variant = 'mono'
+      nerd_font_variant = 'mono',
+    },
+
+    completion = {
+      ghost_text = {
+        enabled = true,
+        show_without_selection = true,
+        show_with_menu = true,
+        show_without_menu = true,
+      },
     },
 
     snippets = { preset = 'luasnip' },
@@ -48,7 +60,22 @@ return {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer' },
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'copilot' },
+      providers = {
+        copilot = {
+          name = "copilot",
+          module = "blink-cmp-copilot",
+          score_offset = 100,
+          async = true,
+          transform_items = function(ctx, items)
+            for _, item in ipairs(items) do
+              item.kind_icon = ''
+              item.kind_name = 'Copilot'
+            end
+            return items
+          end
+        },
+      },
     },
 
     -- Blink.cmp uses a Rust fuzzy matcher by default for typo resistance and significantly better performance

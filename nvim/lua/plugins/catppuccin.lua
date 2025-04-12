@@ -6,7 +6,7 @@ return {
   config = function()
     require('catppuccin').setup({
       flavor = 'mocha',
-
+    transparent_background = true,
       custom_highlights = function(colors)
         return {
           LineNr = { fg = colors.overlay1 },

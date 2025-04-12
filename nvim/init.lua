@@ -25,7 +25,6 @@ vim.opt.autowrite = true
 -- reloads the buffer if its changed on disk
 vim.opt.autoread = true
 
-
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 

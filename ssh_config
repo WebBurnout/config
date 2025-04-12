@@ -30,3 +30,7 @@ host sweet
 host lb
   HostName load-balancer.hotpage.dev
   User ubuntu
+
+host redis
+  HostName redis.hotpage.dev
+  User ubuntu

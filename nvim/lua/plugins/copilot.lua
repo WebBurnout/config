@@ -3,6 +3,20 @@ return {
   "zbirenbaum/copilot.lua",
   lazy = false,
   config = function()
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "BlinkCmpMenuOpen",
+      callback = function()
+          vim.b.copilot_suggestion_hidden = true
+        end,
+    })
+
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "BlinkCmpMenuClose",
+      callback = function()
+          vim.b.copilot_suggestion_hidden = false
+        end,
+    })
+
     require('copilot').setup {
       panel = {
         enabled = true,
@@ -14,15 +28,6 @@ return {
           accept = "<C-l>",
         },
       },
-      -- server_opts_overrides = {
-      --   -- trace = "verbose",
-      --   settings = {
-      --     advanced = {
-      --       -- listCount = 10, -- #completions for panel
-      --       inlineSuggestCount = 3, -- #completions for getCompletions
-      --     },
-      --   },
-      -- },
       filetypes = {
         markdown = false,
         typescript = true,

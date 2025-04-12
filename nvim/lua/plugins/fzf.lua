@@ -12,10 +12,15 @@ return {
         ['--history'] = vim.fn.stdpath('data') .. '/fzf-lua-history'
       },
 
+      files = {
+        rg_opts = [[--color=never --hidden --no-ignore-vcs --files -g "!{.git,node_modules}"]],
+      },
+
       git = {
         files = {
-          prompt        = '❯ ',
-          cmd           = 'git ls-files --cached --others --exclude-standard',
+          silent = true,
+          prompt = '❯ ',
+          cmd    = 'git ls-files --cached --others --exclude-standard',
         },
       },
 
@@ -31,8 +36,31 @@ return {
     -- it will use this for copilot chat with this setting
     require('fzf-lua').register_ui_select()
 
+    function files_root_dir()
+      local root = vim.fn.system("git rev-parse --show-toplevel")
+      root = root:gsub("\n$", "")
+      if vim.v.shell_error == 0 then
+        print('root: ' .. root)
+        require('fzf-lua').files({ cwd = root })
+      else 
+        print('not in git repo')
+        require('fzf-lua').files()
+      end
+
+    end
+
+    function live_grep_root_dir()
+      local root = vim.fn.system("git rev-parse --show-toplevel")
+      root = root:gsub("\n$", "")
+      if vim.v.shell_error == 0 then
+        require('fzf-lua').live_grep_glob({ cwd = root })
+      else 
+        require('fzf-lua').live_grep_glob()
+      end
+    end
+
     function project_files()
-      local is_repo = vim.fn.system("git rev-parse --is-inside-work-tree")
+      vim.fn.system("git rev-parse --is-inside-work-tree")
       if vim.v.shell_error == 0 then
         require('fzf-lua').git_files()
       else
@@ -44,7 +72,8 @@ return {
 
   keys = {
     { "<c-p>", ":update<cr><cmd>lua project_files()<cr>", desc = "Find Files (Root Dir)" },
-    { "<Leader>g", ':update<cr><cmd>lua require"fzf-lua".live_grep_glob()<cr>', desc = "Grep" },
+    { "<Leader>s", ":update<cr><cmd>lua files_root_dir()<cr>", desc = "Find Files (Root Dir)" },
+    { "<Leader>g", ':update<cr><cmd>lua live_grep_root_dir()<cr>', desc = "Grep (Root Dir)" },
 
     -- { "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent" },
 

@@ -6,7 +6,7 @@ return {
   branch = "master",
   build = ":UpdateRemotePlugins",
   keys = {
-    { '<Leader>h', ':LocalHistoryToggle<CR>', { desc = 'Toggle local history' } },
+    { '<Leader>y', ':LocalHistoryToggle<CR>', { desc = 'Toggle local history' } },
   },
   config = function()
     vim.g.local_history_path = '/Users/tim/tmp'
