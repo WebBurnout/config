@@ -18,8 +18,29 @@ tab:nth-child(8) .tab-content::before {
   color: black;
   background: #ff0c;
 }
-
-/* show vertical lines between tabs */
-tab:not(:first-child) {
-  border-left: 1px solid #0004 !important;
+/* dont count for collapsed group  */
+tab-group[collapsed] .tab-content::before {
+  counter-increment: not-a-counter;
 }
+
+
+/* vertical lines between tabs */
+tab-group > vbox {
+  padding-left: 3px;
+  border-left: var(--tabstrip-inner-border) !important;
+}
+tab {
+  border-left: var(--tabstrip-inner-border) !important;
+}
+/* remove the border on the whole thing or there will be two */
+tabs {
+  border-inline-start: none !important;
+}
+/* don't show it on the first tab in a group or the collapsed group */
+tab-group tab:first-of-type {
+  border-left: none !important;
+}
+tab-group[collapsed] tab {
+  border-left: none !important;
+}
+

@@ -6,21 +6,20 @@ return {
     vim.api.nvim_create_autocmd("User", {
       pattern = "BlinkCmpMenuOpen",
       callback = function()
-          vim.b.copilot_suggestion_hidden = true
-        end,
+        vim.b.copilot_suggestion_hidden = true
+      end,
     })
 
     vim.api.nvim_create_autocmd("User", {
       pattern = "BlinkCmpMenuClose",
       callback = function()
-          vim.b.copilot_suggestion_hidden = false
-        end,
+        vim.b.copilot_suggestion_hidden = false
+        vim.keymap.set("n", "<C-l>", function() require("copilot.panel").accept() end, { expr = true, desc = "Accept Copilot suggestion" })
+      end,
     })
 
     require('copilot').setup {
-      panel = {
-        enabled = true,
-      },
+      panel = { enabled = false },
       suggestion = {
         enabled = true,
         auto_trigger = true,
@@ -30,7 +29,6 @@ return {
       },
       filetypes = {
         markdown = false,
-        typescript = true,
         ["*"] = true,
       },
     }

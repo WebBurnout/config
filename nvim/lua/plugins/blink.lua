@@ -1,11 +1,26 @@
-
 -- Blink is the autocompletion plugin
 return {
   'saghen/blink.cmp',
 
   dependencies = {
     { 'L3MON4D3/LuaSnip', version = 'v2.*' },
-    { "giuxtaposition/blink-cmp-copilot" },
+    { 'giuxtaposition/blink-cmp-copilot' },
+  },
+
+  keys = {
+    {
+      '<leader>w', 
+      function()
+        vim.b.completion = not (vim.b.completion ~= false)
+              
+        if not vim.b.completion then
+          vim.cmd('Copilot disable')
+        else
+          vim.cmd('Copilot enable')
+        end
+      end, 
+      desc = 'Toggle Completion' 
+    },
   },
 
   -- use a release tag to download pre-built binaries
@@ -27,12 +42,14 @@ return {
     --
     -- See the full "keymap" documentation for information on defining your own keymap.
     keymap = {
-      preset = 'default',
+      preset = 'none',
       ['<C-l>'] = { 'accept', 'fallback' },
+      ['<C-n>'] = { 'select_next', 'fallback' },
+      ['<C-p>'] = { 'select_prev', 'fallback' },
     },
 
     enabled = function()
-      return not vim.tbl_contains({ "markdown" }, vim.bo.filetype) and not vim.tbl_contains({ "copilot-chat" }, vim.bo.filetype)
+      return not vim.tbl_contains({ "codecompanion", "copilot-chat", "markdown" }, vim.bo.filetype) and vim.b.completion ~= false
     end,
 
     appearance = {

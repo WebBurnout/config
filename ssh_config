@@ -23,14 +23,14 @@ host app1
   HostName app-server-1.hotpage.dev
   User ubuntu
 
-host sweet
-  HostName sweet-0.hotpage.dev
-  User ubuntu
-
 host lb
   HostName load-balancer.hotpage.dev
   User ubuntu
 
 host redis
   HostName redis.hotpage.dev
+  User ubuntu
+
+host clickhouse
+  HostName clickhouse.hotpage.dev
   User ubuntu

@@ -8,6 +8,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 export DOCKER_HOST="unix://$HOME/.colima/docker.sock"
 
 
+
 # ruby
 source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh
 source $(brew --prefix)/opt/chruby/share/chruby/auto.sh

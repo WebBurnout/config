@@ -6,7 +6,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
   },
   keys = {
-    { '<leader>ac', ':CodeCompanionChat<CR>', mode = 'n', desc = 'Open AI Chat' },
+    { '<leader>ac', ':CodeCompanionChat Toggle<CR>', mode = 'n', desc = 'Open AI Chat' },
   },
   config = {
     strategies = {

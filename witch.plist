@@ -53,6 +53,10 @@
 	<true/>
 	<key>After-Close Selection</key>
 	<integer>3</integer>
+	<key>Application Exceptions</key>
+	<array>
+		<string>MonitorControl</string>
+	</array>
 	<key>Application Name Color</key>
 	<data>
 	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMDhAJm
@@ -62,6 +66,11 @@
 	<false/>
 	<key>Auto-Enabled Once</key>
 	<true/>
+	<key>Background Color</key>
+	<data>
+	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMDhAJm
+	ZgCDAAAAP4Y=
+	</data>
 	<key>Confirm Deletions</key>
 	<false/>
 	<key>Cycle Apps &gt; Windows: Ignore Parent Orientation</key>
@@ -72,7 +81,7 @@
 	ZoNmZmY/g83MTD+G
 	</data>
 	<key>Icon Mode</key>
-	<integer>2</integer>
+	<integer>1</integer>
 	<key>Icon Mode: Superimpose Application Icon</key>
 	<true/>
 	<key>Ignore Non-Standard Windows</key>
@@ -80,7 +89,7 @@
 	<key>Initial Selection: Sorted By Activity: Skip Active Entry</key>
 	<true/>
 	<key>Item Height</key>
-	<real>49</real>
+	<real>61</real>
 	<key>Key Badge Color</key>
 	<data>
 	BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMGhANA
@@ -89,18 +98,18 @@
 	</data>
 	<key>Last Daemon Hash</key>
 	<data>
-	ewmlnkjo0KEcyxxNkkkeC6TmC6g=
+	K6CkXtDoUy6q8L0EiNFR3pGBsaY=
 	</data>
 	<key>Last Selected Tab</key>
 	<string>other</string>
 	<key>Maximum Width</key>
-	<real>0.4951875</real>
+	<real>0.75792500000000007</real>
 	<key>Panel Delay</key>
 	<integer>0</integer>
 	<key>Panel Shadow</key>
-	<false/>
+	<true/>
 	<key>Preview Delay</key>
-	<integer>956</integer>
+	<integer>504</integer>
 	<key>Run Badge Script</key>
 	<true/>
 	<key>Selection Border Color</key>
@@ -123,8 +132,10 @@
 	<true/>
 	<key>Show Minimized Bevels</key>
 	<true/>
+	<key>Show Panel On Mouse Screen</key>
+	<integer>2</integer>
 	<key>Show Previews</key>
-	<false/>
+	<true/>
 	<key>Show Search Field</key>
 	<false/>
 	<key>Space Indicator Color</key>

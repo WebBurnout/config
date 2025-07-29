@@ -111,6 +111,8 @@ Find and replace in a directory:
 
 ## custom key mappings
 
+not custom but dont forget: readline by word in macos is ctrl-option-f/b
+
 s and S mappings are ripe for changing because i don't use them and they have a two character one that's directly equivalent
 
 hyper-tab -- moom
