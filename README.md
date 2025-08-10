@@ -41,12 +41,13 @@ ln -s ~/code/config/gitconfig ~/.gitconfig
 ln -s ~/code/config/gitignore ~/.gitignore
 ln -s ~/code/config/ssh_config ~/.ssh/config
 ln -s ~/code/config/nvim ~/.config/nvim
+ln -s ~/code/config/opencode ~/.config/opencode
 ln -s ~/code/config/firefox-user-chrome.css ~/Library/Application\ Support/Firefox/Profiles/nhn7zq27.default-release/chrome/userChrome.css
 ```
 
-Also some configs require hard links:
+Karabiner was not working with a symlink so just copy it when you make changes
 ```
-ln -f ~/code/config/karabiner.json ~/.config/karabiner/karabiner.json
+cp ~/.config/karabiner/karabiner.json .
 ```
 
 For NeoVim you will need to install the python provider with:
@@ -62,6 +63,11 @@ npm install -g typescript typescript-language-server vscode-langservers-extracte
 Install ripgrep for use in nvim
 ```
 brew install ripgrep
+```
+
+Install SwitchAudioSource
+```
+brew install switchaudio-osx
 ```
 
 Install some GUI programs by downloading them and adding the license files if

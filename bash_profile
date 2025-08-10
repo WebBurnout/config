@@ -86,3 +86,4 @@ alias ch='clear; tmux clear-history'
 alias tailscale=/Applications/Tailscale.app/Contents/MacOS/Tailscale
 alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias caf='caffeinate -d'
+alias oc=opencode
