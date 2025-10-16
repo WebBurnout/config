@@ -5,9 +5,5 @@
       "bash": "ask",
       "edit": "ask"
   },
-  "model": "github-copilot/gemini-2.5-pro",
-  "keybinds": {
-    "messages_page_up": "ctrl+b",
-    "messages_page_down": "ctrl+f",
-  },
+  "model": "github-copilot/gemini-2.5-pro"
 }

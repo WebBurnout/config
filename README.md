@@ -4,7 +4,7 @@
 
 Install homebrew with instructions from the web page, then run:
 ```
-brew install bash iterm2 tmux nvm
+brew install bash alacritty tmux nvm weechat
 ```
 
 Add to /etc/shells:
@@ -16,9 +16,6 @@ Change to bash:
 ```
 chsh -s /opt/homebrew/bin/bash
 ```
-
-For iTerm you will need to open settings and set it to load the preferences
-from this directory.
 
 For Tmux you will need to install the catpuccin with:
 ```
@@ -42,7 +39,9 @@ ln -s ~/code/config/gitignore ~/.gitignore
 ln -s ~/code/config/ssh_config ~/.ssh/config
 ln -s ~/code/config/nvim ~/.config/nvim
 ln -s ~/code/config/opencode ~/.config/opencode
+ln -s ~/code/config/alacritty ~/.config/
 ln -s ~/code/config/firefox-user-chrome.css ~/Library/Application\ Support/Firefox/Profiles/nhn7zq27.default-release/chrome/userChrome.css
+ln -s ~/code/config/weechat-irc.conf ~/.config/weechat/irc.conf
 ```
 
 Karabiner was not working with a symlink so just copy it when you make changes
@@ -57,7 +56,7 @@ python3 -m pip install --user --upgrade pynvim
 
 Also the language servers:
 ```
-npm install -g typescript typescript-language-server vscode-langservers-extracted
+npm install -g typescript typescript-language-server vscode-langservers-extracted @olrtg/emmet-language-server
 ```
 
 Install ripgrep for use in nvim
@@ -104,6 +103,7 @@ To reload `init.vim` without exiting Neovim run
 
 
 ## Vimium handiness
+
 
 T search through tabs
 
@@ -162,6 +162,18 @@ tmux a -t [name of session]
 
 ## Vim handiness
 
+Ctrl-o and forward with Ctrl-i to move through history of jumplist in vim
+:undolist to see all branches, g- and g+ to move through time-based changes, or :earlier and :later with time specifications like :earlier 5m to go back 5 minutes
+q opens the command-line window, search, edit, and run with enter
+:global to run command on on multiple lines
+ciw is change word, ci" change inside quotes, yi) yank inside parens
+view all registers with :reg
+marks include `` ```` (last jump position), '. (last change), '" (last position before exiting), and '[/'] (start/end of last change).
+The & character in replacements refers to the entire match, while \1, \2, etc. refer to capture groups (combine with :global
+ gn text object selects the next search match, enabling workflows like /pattern followed by cgn to change the next occurrence.
+In insert mode, Ctrl-r= followed by an expression like 2+3<Enter> inserts "5"
+
+
 [d / ]d is next/previous diagnostic
 <c-[> go to definition
 
@@ -218,3 +230,8 @@ gk -- previous diagnostic
 leader-g - live grep
 c-t open a Telescope search in Trouble (put it in a window)
 
+
+### Weechat
+todo:
+change scroll buffer to alt-j/k and few lines alt-shift-j/k
+could change ctrl-n/p to move up down one line and change buffers to alt-n/p
