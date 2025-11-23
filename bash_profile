@@ -2,12 +2,17 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 source ~/.secret_env
 
-export PATH=/opt/homebrew/opt/gnu-sed/libexec/gnubin/:/Users/tim/.local/bin:/Users/tim/code/flutter/bin:$PATH:
+export PATH=/opt/homebrew/opt/openjdk/bin:/Users/tim/.cargo/bin:/opt/homebrew/opt/gnu-sed/libexec/gnubin/:/Users/tim/.local/bin:/Users/tim/code/flutter/bin:$PATH:
+
+
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export DOCKER_HOST="unix://$HOME/.colima/docker.sock"
 
-
+# pyenv
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+pyenv global 3.13
 
 # ruby
 source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh

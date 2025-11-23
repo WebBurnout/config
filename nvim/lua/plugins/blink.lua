@@ -5,6 +5,7 @@ return {
   dependencies = {
     { 'L3MON4D3/LuaSnip', version = 'v2.*' },
     { 'giuxtaposition/blink-cmp-copilot' },
+    'saghen/blink.compat',
   },
 
   keys = {
@@ -43,13 +44,13 @@ return {
     -- See the full "keymap" documentation for information on defining your own keymap.
     keymap = {
       preset = 'none',
-      ['<C-l>'] = { 'accept', 'fallback' },
+      ['<C-l>'] = { 'select_and_accept', 'fallback' },
       ['<C-n>'] = { 'select_next', 'fallback' },
       ['<C-p>'] = { 'select_prev', 'fallback' },
     },
 
     enabled = function()
-      return not vim.tbl_contains({ "codecompanion", "copilot-chat", "markdown" }, vim.bo.filetype) and vim.b.completion ~= false
+      return not vim.tbl_contains({ "markdown" }, vim.bo.filetype) and vim.b.completion ~= false
     end,
 
     appearance = {
@@ -77,7 +78,17 @@ return {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'copilot' },
+      default = {
+        'lsp',
+        'path',
+        'snippets',
+        'buffer',
+        'copilot',
+        'avante_commands',
+        'avante_mentions',
+        'avante_shortcuts',
+        'avante_files',
+      },
       providers = {
         copilot = {
           name = "copilot",
@@ -92,6 +103,30 @@ return {
             return items
           end
         },
+        avante_commands = {
+          name = "avante_commands",
+          module = "blink.compat.source",
+          score_offset = 90, -- show at a higher priority than lsp
+          opts = {},
+        },
+        avante_files = {
+          name = "avante_files",
+          module = "blink.compat.source",
+          score_offset = 100, -- show at a higher priority than lsp
+          opts = {},
+        },
+        avante_mentions = {
+          name = "avante_mentions",
+          module = "blink.compat.source",
+          score_offset = 1000, -- show at a higher priority than lsp
+          opts = {},
+        },
+        avante_shortcuts = {
+          name = "avante_shortcuts",
+          module = "blink.compat.source",
+          score_offset = 1000, -- show at a higher priority than lsp
+          opts = {},
+        }
       },
     },
 

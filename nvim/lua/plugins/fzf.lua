@@ -23,6 +23,11 @@ return {
           cmd    = 'git ls-files --cached --others --exclude-standard',
         },
       },
+      avante = {
+        files = {
+          prompt = '❯ ',
+        },
+      },
 
       winopts = {
         preview = {

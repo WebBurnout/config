@@ -44,19 +44,23 @@ mods = "Shift"
 key = "U"
 mods = "Control|Shift"
 
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001b[13;2u"
 
-[keyboard]
-bindings = [
-  { key = "J", mods = "Control|Option|Shift|Command", chars = "\u001b[25~" }, # F13
-  { key = "K", mods = "Control|Option|Shift|Command", chars = "\u001b[26~" }, # F14
-  # { key = "D", mods = "Control|Option|Shift|Command", chars = "\u001b[28~" }, # F15
-  # { key = "F", mods = "Control|Option|Shift|Command", chars = "\u001b[29~" }, # F16
-  # { key = "G", mods = "Control|Option|Shift|Command", chars = "\u001b[31~" }, # F17
-  # { key = "H", mods = "Control|Option|Shift|Command", chars = "\u001b[32~" }, # F18
-  # { key = "J", mods = "Control|Option|Shift|Command", chars = "\u001b[33~" }, # F19
-  # { key = "K", mods = "Control|Option|Shift|Command", chars = "\u001b[34~" }, # F20
-  # { key = "L", mods = "Control|Option|Shift|Command", chars = "\u001b[42~" }, # F21
-  # { key = "Q", mods = "Control|Option|Shift|Command", chars = "\u001b[43~" }, # F22
-  # { key = "W", mods = "Control|Option|Shift|Command", chars = "\u001b[44~" }, # F23
-  # { key = "E", mods = "Control|Option|Shift|Command", chars = "\u001b[45~" }  # F24
-]
+# [keyboard]
+# bindings = [
+#   { key = "J", mods = "Control|Option|Shift|Command", chars = "\u001b[25~" }, # F13
+#   { key = "K", mods = "Control|Option|Shift|Command", chars = "\u001b[26~" }, # F14
+#   # { key = "D", mods = "Control|Option|Shift|Command", chars = "\u001b[28~" }, # F15
+#   # { key = "F", mods = "Control|Option|Shift|Command", chars = "\u001b[29~" }, # F16
+#   # { key = "G", mods = "Control|Option|Shift|Command", chars = "\u001b[31~" }, # F17
+#   # { key = "H", mods = "Control|Option|Shift|Command", chars = "\u001b[32~" }, # F18
+#   # { key = "J", mods = "Control|Option|Shift|Command", chars = "\u001b[33~" }, # F19
+#   # { key = "K", mods = "Control|Option|Shift|Command", chars = "\u001b[34~" }, # F20
+#   # { key = "L", mods = "Control|Option|Shift|Command", chars = "\u001b[42~" }, # F21
+#   # { key = "Q", mods = "Control|Option|Shift|Command", chars = "\u001b[43~" }, # F22
+#   # { key = "W", mods = "Control|Option|Shift|Command", chars = "\u001b[44~" }, # F23
+#   # { key = "E", mods = "Control|Option|Shift|Command", chars = "\u001b[45~" }  # F24
+# ]

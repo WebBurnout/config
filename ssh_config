@@ -1,14 +1,6 @@
 Include /Users/tim/.colima/ssh_config
-
-Host hal
-  HostName halibut
-  User omar
  
 Host betta
-  User tim
-
-Host squids
-  HostName squids.online
   User tim
 
 host staging
@@ -34,3 +26,7 @@ host redis
 host clickhouse
   HostName clickhouse.hotpage.dev
   User ubuntu
+
+host squids
+  HostName squids.nube
+  User tim

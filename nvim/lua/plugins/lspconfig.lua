@@ -28,10 +28,6 @@ return {
         vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open Diagnostics List', buffer = opts.buffer })
         vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open diagnostic float' })
 
-        -- Formatting
-        vim.keymap.set('n', '<leader>l', function()
-          vim.lsp.buf.format { async = true }
-        end, { desc = 'Format Buffer', buffer = opts.buffer })
       end
     })
 
@@ -70,24 +66,33 @@ return {
 
     local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-    -- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/ts_ls.lua
-    require'lspconfig'.ts_ls.setup{
-      capabilities = capabilities,
-    }
+    vim.lsp.enable('ts_ls')
 
-    -- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/eslint.lua
-    require'lspconfig'.eslint.setup {
-      capabilities = capabilities,
+    vim.lsp.enable("eslint")
+    local base_on_attach = vim.lsp.config.eslint.on_attach
+    vim.lsp.config("eslint", {
       on_attach = function(client, bufnr)
+        if not base_on_attach then return end
+
+        base_on_attach(client, bufnr)
         vim.api.nvim_create_autocmd("BufWritePre", {
           buffer = bufnr,
-          command = "EslintFixAll",
+          command = "LspEslintFixAll",
         })
       end,
-    }
+    })
 
-    require'lspconfig'.emmet_language_server.setup {
-      capabilities = capabilities,
+    vim.lsp.enable('pyright')
+
+    vim.lsp.config('ruff', {
+      init_options = {
+        settings = {
+          -- Server settings should go here
+        }
+      }
+    })
+
+    vim.lsp.config('emmet_language_server', {
       filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "pug", "typescriptreact" },
       -- Read more about this options in the [vscode docs](https://code.visualstudio.com/docs/editor/emmet#_emmet-configuration).
       -- **Note:** only the options listed in the table are supported.
@@ -111,7 +116,7 @@ return {
         --- @type table<string, string> [Emmet Docs](https://docs.emmet.io/customization/snippets/#variables)
         variables = {},
       },
-    }
+    })
 
-      end,
-    }
+  end,
+}
