@@ -94,6 +94,16 @@ Then start Colima on startup with
 brew services start colima
 ```
 
+
+## Install on Debian
+
+mkdir ~/.config
+ln -s ~/config/nvim ~/.config/nvim
+rm ~/.bashrc
+ln -s ~/config/bashrc ~/.bashrc
+
+
+
 ## Helpful Information
 
 To reload `init.vim` without exiting Neovim run
