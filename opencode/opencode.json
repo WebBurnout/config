@@ -1,5 +1,10 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "bash": {
+      "git": "deny"
+    }
+  },
   "theme": "catppuccin",
   "model": "anthropic/claude-sonnet-4.5",
   "keybinds": {
