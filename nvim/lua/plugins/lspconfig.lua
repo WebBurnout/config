@@ -21,7 +21,7 @@ return {
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Hover Documentation', buffer = opts.buffer })
 
         -- Code actions and refactoring
-        vim.keymap.set({ 'n', 'v' }, '<leader>c', vim.lsp.buf.code_action, { desc = 'Code Action', buffer = opts.buffer })
+        vim.keymap.set({ 'n', 'v' }, '<leader>a', vim.lsp.buf.code_action, { desc = 'Code Action', buffer = opts.buffer })
         -- vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, { desc = 'Rename', buffer = opts.buffer })
 
         -- Diagnostics
@@ -72,12 +72,18 @@ return {
     local base_on_attach = vim.lsp.config.eslint.on_attach
     vim.lsp.config("eslint", {
       on_attach = function(client, bufnr)
-        if not base_on_attach then return end
-
-        base_on_attach(client, bufnr)
-        vim.api.nvim_create_autocmd("BufWritePre", {
+        if base_on_attach then
+          base_on_attach(client, bufnr)
+        end
+        
+        -- Async ESLint fix after save (non-blocking)
+        vim.api.nvim_create_autocmd("BufWritePost", {
           buffer = bufnr,
-          command = "LspEslintFixAll",
+          callback = function()
+            vim.defer_fn(function()
+              vim.cmd("silent! EslintFixAll")
+            end, 100)
+          end,
         })
       end,
     })

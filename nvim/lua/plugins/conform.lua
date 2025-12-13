@@ -30,6 +30,6 @@ return {
     -- Optional keymap for manual formatting
     vim.keymap.set({ "n", "v" }, "<leader>l", function()
       conform.format({ async = true, lsp_fallback = true })
-    end, { desc = "Format buffer with Ruff" })
+    end, { desc = "Format buffer" })
   end
 }
