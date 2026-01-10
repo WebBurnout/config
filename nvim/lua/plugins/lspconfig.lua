@@ -69,24 +69,6 @@ return {
     vim.lsp.enable('ts_ls')
 
     vim.lsp.enable("eslint")
-    local base_on_attach = vim.lsp.config.eslint.on_attach
-    vim.lsp.config("eslint", {
-      on_attach = function(client, bufnr)
-        if base_on_attach then
-          base_on_attach(client, bufnr)
-        end
-        
-        -- Async ESLint fix after save (non-blocking)
-        vim.api.nvim_create_autocmd("BufWritePost", {
-          buffer = bufnr,
-          callback = function()
-            vim.defer_fn(function()
-              vim.cmd("silent! EslintFixAll")
-            end, 100)
-          end,
-        })
-      end,
-    })
 
     vim.lsp.enable('pyright')
 

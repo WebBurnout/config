@@ -20,11 +20,27 @@ return {
     conform.setup({
       formatters_by_ft = {
         python = { "ruff_fix", "ruff_format" },
+        javascript = { "eslint_d" },
+        javascriptreact = { "eslint_d" },
+        typescript = { "eslint_d" },
+        typescriptreact = { "eslint_d" },
       },
-      format_on_save = {
-        lsp_fallback = true,
-        timeout_ms = 500,
-      },
+      format_on_save = function(bufnr)
+        -- Only use LSP fallback if the LSP client is actually attached and running
+        local lsp_clients = vim.lsp.get_clients({ bufnr = bufnr })
+        local has_valid_lsp = false
+        for _, client in ipairs(lsp_clients) do
+          if client.server_capabilities.documentFormattingProvider then
+            has_valid_lsp = true
+            break
+          end
+        end
+        
+        return {
+          timeout_ms = 500,
+          lsp_fallback = has_valid_lsp,
+        }
+      end,
     })
 
     -- Optional keymap for manual formatting

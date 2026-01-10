@@ -2,7 +2,8 @@
   "$schema": "https://opencode.ai/config.json",
   "permission": {
     "bash": {
-      "git": "ask"
+      "git": "ask",
+      "gcloud": "ask",
     }
   },
   "theme": "catppuccin",
@@ -11,5 +12,5 @@
     "history_previous": "ctrl+p",
     "history_next": "ctrl+n",
     "command_list": "none"
-  }
+  },
 }
