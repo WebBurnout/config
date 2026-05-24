@@ -34,20 +34,13 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
-    -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept, C-n/C-p for up/down)
-    --
-    -- All presets have the following mappings:
-    -- C-space: Open menu or open docs if already open
-    -- C-e: Hide menu
-    -- C-k: Toggle signature help
-    --
-    -- See the full "keymap" documentation for information on defining your own keymap.
     keymap = {
       preset = 'none',
       ['<C-l>'] = { 'select_and_accept', 'fallback' },
-      -- ['<C-l>'] = { 'accept', 'fallback' },
       ['<C-n>'] = { 'select_next', 'fallback' },
       ['<C-p>'] = { 'select_prev', 'fallback' },
+      ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+      ['<C-e>'] = { 'hide', 'fallback' },
     },
 
     enabled = function()
@@ -67,9 +60,6 @@ return {
     completion = {
       ghost_text = {
         enabled = true,
-        show_without_selection = true,
-        show_with_menu = true,
-        show_without_menu = true,
       },
     },
 

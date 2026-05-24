@@ -1,7 +1,6 @@
 ---
 description: Writes and updates technical specifications
 temperature: 0.3
-model: anthropic/claude-opus-4-5-20251101
 tools:
   write: true
   edit: true

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "bash": {
+      "git *": "ask",
+      "gcloud *": "ask",
+    }
+  },
+  "theme": "catppuccin",
+  "model": "github-copilot/claude-sonnet-4.5",
+  "keybinds": {
+    "history_previous": "ctrl+p",
+    "history_next": "ctrl+n",
+    "command_list": "none"
+  },
+}

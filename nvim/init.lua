@@ -1,5 +1,5 @@
 -- disable mouse
-vim.opt.mouse = ''
+vim.opt.mouse = 'a'
 
 -- tab is two spaces
 vim.opt.tabstop = 2
@@ -73,6 +73,14 @@ vim.opt.undofile = true
 -- ignore case in search unless there is a capital letter
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+
+-- don't auto-wrap text while typing (use autocmd so it runs after filetype plugins)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.formatoptions:remove("t")
+  end,
+})
 
 -- highlight 80 characters mark
 vim.opt.cc = '80'

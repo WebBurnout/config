@@ -2,15 +2,17 @@
   "$schema": "https://opencode.ai/config.json",
   "permission": {
     "bash": {
-      "git": "ask",
-      "gcloud": "ask",
+      "git *": "ask",
+      "gcloud *": "ask",
+      "tofu *": "ask",
     }
   },
-  "theme": "catppuccin",
-  "model": "anthropic/claude-sonnet-4.5",
-  "keybinds": {
-    "history_previous": "ctrl+p",
-    "history_next": "ctrl+n",
-    "command_list": "none"
-  },
+  "model": "github-copilot/claude-sonnet-4.6",
+  "mcp": {
+    "chrome-devtools": {
+      "type": "local",
+      "command": ["npx", "-y", "chrome-devtools-mcp@latest", "--no-usage-statistics"],
+      "enabled": true
+    }
+  }
 }

@@ -28,5 +28,21 @@ host clickhouse
   User ubuntu
 
 host squids
-  HostName squids.nube
+  HostName squids.online
   User tim
+
+host casanube
+  HostName 192.168.1.1
+  User root
+
+host axes-staging
+  HostName vpc-staging.axes.com
+  ForwardAgent yes
+
+host axes-production
+  HostName vpc-production.axes.com
+  ForwardAgent yes
+
+host axes-open
+  HostName vpc-open.axes.com
+  ForwardAgent yes
