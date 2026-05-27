@@ -5,6 +5,7 @@
 Install homebrew with instructions from the web page, then run:
 ```
 brew install bash alacritty tmux nvm weechat
+brew install --cask hammerspoon
 ```
 
 Add to /etc/shells:
@@ -27,22 +28,34 @@ And the minimal-status-line:
 git clone git@github.com:niksingh710/minimal-tmux-status.git ~/.config/tmux/plugins/minimal-status-line
 ```
 
-To use the config files, create symbolick links to the correct location (you
+To use the config files, create symbolic links to the correct location (you
 may need to remove the ones that are there).
 
-```
+```bash
 ln -s ~/code/config/bash_profile ~/.bash_profile
 ln -s ~/code/config/tmux.conf ~/.tmux.conf
 ln -s ~/code/config/witch.plist ~/Library/Application\ Support/Witch/Settings.plist
 ln -s ~/code/config/gitconfig ~/.gitconfig
 ln -s ~/code/config/gitignore ~/.gitignore
+ln -s ~/code/config/aerospace.toml ~/.aerospace.toml
 ln -s ~/code/config/ssh_config ~/.ssh/config
 ln -s ~/code/config/nvim ~/.config/nvim
 ln -s ~/code/config/opencode ~/.config/opencode
 ln -s ~/code/config/alacritty ~/.config/
+ln -s ~/code/config/hammerspoon.lua ~/.hammerspoon/init.lua
 ln -s ~/code/config/firefox-user-chrome.css ~/Library/Application\ Support/Firefox/Profiles/nhn7zq27.default-release/chrome/userChrome.css
 ln -s ~/code/config/weechat-irc.conf ~/.config/weechat/irc.conf
 ```
+
+For pi agent configuration, first backup your existing directory, then create a symlink:
+
+```bash
+# Create parent directory and symlink the entire agent directory
+mkdir -p ~/.pi
+ln -s ~/code/config/pi ~/.pi/agent
+```
+
+**Note:** The `bin/`, `git/`, and `sessions/` directories exist in the repo directory but are excluded from version control via `.gitignore`. They contain binaries, cloned repositories, and runtime data respectively.
 
 Karabiner was not working with a symlink so just copy it when you make changes
 ```
@@ -71,16 +84,10 @@ brew install switchaudio-osx
 
 Install some GUI programs by downloading them and adding the license files if
 needed: Transmit, Litle Snitch, iStat Menus, Witch, Karibiner Elements,
-Moom, Dash, Colima.
+AeroSpace, Hammerspoon, Dash, Colima.
 
-For Moom, you will need to import settings like this:
-```
-defaults import com.manytricks.Moom moom.plist
-```
-And when you change them, remember to export like this:
-```
-defaults export com.manytricks.Moom moom.plist
-```
+Hammerspoon replaces Moom for window management. It needs Accessibility
+permissions in System Settings > Privacy & Security > Accessibility.
 
 For Karabiner to work with tmux, you will need to change the hotkey for changing input sources (input language) from control space to alt space. You can do so in System Preferences > Keyboard > Input > Shortcuts
 
@@ -131,11 +138,13 @@ not custom but dont forget: readline by word in macos is ctrl-option-f/b
 
 s and S mappings are ripe for changing because i don't use them and they have a two character one that's directly equivalent
 
-hyper-tab -- moom
-hyper-q -- previous desktop
-hyper-w -- next desktop
-hyper-e -- see apps
-hyper-r -- see windows
+hyper-q -- Hammerspoon left 1/2
+hyper-w -- Hammerspoon left 2/3
+hyper-e -- Hammerspoon left 14/15
+hyper-r -- Hammerspoon right 14/15
+hyper-t -- Hammerspoon right 2/3
+hyper-y -- Hammerspoon right 1/2
+hyper-m -- Hammerspoon maximize
 
 hyper-n -- next app in witch
 hyper-p -- previous app in witch
@@ -150,10 +159,10 @@ hyper-f -- volume up
 
 
 ### tmux
-hyper-q -- clear screen and scrollback
+hyper-g -- previous tmux pane
+hyper-h -- next tmux pane
 hyper-j -- down pane
 hyper-k -- up pane
-hyper-h -- left pane
 hyper-l -- right pane
 hyper-; -- split window vertically
 hyper-' -- split window horizontally

@@ -49,6 +49,17 @@ key = "Return"
 mods = "Shift"
 chars = "\u001b[13;2u"
 
+# Make ctrl+; and ctrl+shift+; work for pi model cycling
+[[keyboard.bindings]]
+key = "Semicolon"
+mods = "Control"
+chars = "\u001b[59;5u"
+
+[[keyboard.bindings]]
+key = "Semicolon"
+mods = "Control|Shift"
+chars = "\u001b[59;6u"
+
 # [keyboard]
 # bindings = [
 #   { key = "J", mods = "Control|Option|Shift|Command", chars = "\u001b[25~" }, # F13

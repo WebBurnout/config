@@ -1,5 +1,7 @@
 {
-    "global": { "show_in_menu_bar": false },
+    "global": {
+        "show_in_menu_bar": false
+    },
     "profiles": [
         {
             "complex_modifications": {
@@ -10,9 +12,20 @@
                                 "description": "hyper + z to change audio source",
                                 "from": {
                                     "key_code": "z",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "shell_command": "/opt/homebrew/bin/SwitchAudioSource -n" }],
+                                "to": [
+                                    {
+                                        "shell_command": "/opt/homebrew/bin/SwitchAudioSource -n"
+                                    }
+                                ],
                                 "type": "basic"
                             }
                         ]
@@ -23,9 +36,20 @@
                                 "description": "hyper + x to next track",
                                 "from": {
                                     "key_code": "x",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "consumer_key_code": "fast_forward" }],
+                                "to": [
+                                    {
+                                        "consumer_key_code": "fast_forward"
+                                    }
+                                ],
                                 "type": "basic"
                             }
                         ]
@@ -36,49 +60,115 @@
                             {
                                 "from": {
                                     "key_code": "j",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "left_arrow" }],
+                                "to": [
+                                    {
+                                        "key_code": "left_arrow"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "k",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "down_arrow" }],
+                                "to": [
+                                    {
+                                        "key_code": "down_arrow"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "l",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "right_arrow" }],
+                                "to": [
+                                    {
+                                        "key_code": "right_arrow"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "i",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "up_arrow" }],
+                                "to": [
+                                    {
+                                        "key_code": "up_arrow"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "u",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "page_up" }],
+                                "to": [
+                                    {
+                                        "key_code": "page_up"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "o",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "key_code": "page_down" }],
+                                "to": [
+                                    {
+                                        "key_code": "page_down"
+                                    }
+                                ],
                                 "type": "basic"
                             }
                         ]
@@ -89,9 +179,20 @@
                                 "description": "hyper + a to play/pause",
                                 "from": {
                                     "key_code": "a",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "consumer_key_code": "play_or_pause" }],
+                                "to": [
+                                    {
+                                        "consumer_key_code": "play_or_pause"
+                                    }
+                                ],
                                 "type": "basic"
                             }
                         ]
@@ -102,9 +203,20 @@
                                 "description": "hyper + s to volumen down",
                                 "from": {
                                     "key_code": "s",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "consumer_key_code": "volume_decrement" }],
+                                "to": [
+                                    {
+                                        "consumer_key_code": "volume_decrement"
+                                    }
+                                ],
                                 "type": "basic"
                             }
                         ]
@@ -115,9 +227,20 @@
                                 "description": "hyper + d to volume up",
                                 "from": {
                                     "key_code": "d",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
-                                "to": [{ "consumer_key_code": "volume_increment" }],
+                                "to": [
+                                    {
+                                        "consumer_key_code": "volume_increment"
+                                    }
+                                ],
                                 "type": "basic"
                             }
                         ]
@@ -128,14 +251,25 @@
                                 "description": "hyper + x to ctrl+space, x",
                                 "from": {
                                     "key_code": "x",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
                                 "to": [
                                     {
                                         "key_code": "spacebar",
-                                        "modifiers": ["left_control"]
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
                                     },
-                                    { "key_code": "x" }
+                                    {
+                                        "key_code": "x"
+                                    }
                                 ],
                                 "type": "basic"
                             }
@@ -147,14 +281,25 @@
                                 "description": "hyper + c to ctrl+space, c",
                                 "from": {
                                     "key_code": "c",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
                                 "to": [
                                     {
                                         "key_code": "spacebar",
-                                        "modifiers": ["left_control"]
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
                                     },
-                                    { "key_code": "c" }
+                                    {
+                                        "key_code": "c"
+                                    }
                                 ],
                                 "type": "basic"
                             }
@@ -166,16 +311,27 @@
                                 "description": "Change caps lock + ' to ctrl+space, '",
                                 "from": {
                                     "key_code": "quote",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
                                 "to": [
                                     {
                                         "key_code": "spacebar",
-                                        "modifiers": ["left_control"]
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
                                     },
                                     {
                                         "key_code": "quote",
-                                        "modifiers": ["left_shift"]
+                                        "modifiers": [
+                                            "left_shift"
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -188,14 +344,25 @@
                                 "description": "Change caps lock + ; to ctrl+space, ;",
                                 "from": {
                                     "key_code": "semicolon",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
                                 "to": [
                                     {
                                         "key_code": "spacebar",
-                                        "modifiers": ["left_control"]
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
                                     },
-                                    { "key_code": "semicolon" }
+                                    {
+                                        "key_code": "semicolon"
+                                    }
                                 ],
                                 "type": "basic"
                             }
@@ -207,14 +374,54 @@
                                 "description": "Change caps lock + h to tmux cycle (ctrl+space, o)",
                                 "from": {
                                     "key_code": "h",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
                                 "to": [
                                     {
                                         "key_code": "spacebar",
-                                        "modifiers": ["left_control"]
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
                                     },
-                                    { "key_code": "o" }
+                                    {
+                                        "key_code": "o"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "Change caps lock + g to tmux reverse cycle (ctrl+space, O)",
+                                "from": {
+                                    "key_code": "g",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "spacebar",
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "o",
+                                        "modifiers": [
+                                            "left_shift"
+                                        ]
+                                    }
                                 ],
                                 "type": "basic"
                             }
@@ -226,14 +433,25 @@
                                 "description": "Change caps lock + 0 to ctrl+space, 0",
                                 "from": {
                                     "key_code": "0",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
                                 "to": [
                                     {
                                         "key_code": "spacebar",
-                                        "modifiers": ["left_control"]
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
                                     },
-                                    { "key_code": "0" }
+                                    {
+                                        "key_code": "0"
+                                    }
                                 ],
                                 "type": "basic"
                             }
@@ -245,14 +463,25 @@
                                 "description": "Change caps lock + 1 to ctrl+space, 1",
                                 "from": {
                                     "key_code": "1",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
                                 "to": [
                                     {
                                         "key_code": "spacebar",
-                                        "modifiers": ["left_control"]
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
                                     },
-                                    { "key_code": "1" }
+                                    {
+                                        "key_code": "1"
+                                    }
                                 ],
                                 "type": "basic"
                             }
@@ -264,14 +493,25 @@
                                 "description": "Change caps lock + 2 to ctrl+space, 2",
                                 "from": {
                                     "key_code": "2",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
                                 "to": [
                                     {
                                         "key_code": "spacebar",
-                                        "modifiers": ["left_control"]
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
                                     },
-                                    { "key_code": "2" }
+                                    {
+                                        "key_code": "2"
+                                    }
                                 ],
                                 "type": "basic"
                             }
@@ -283,14 +523,25 @@
                                 "description": "Change caps lock + 3 to ctrl+space, 3",
                                 "from": {
                                     "key_code": "3",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
                                 "to": [
                                     {
                                         "key_code": "spacebar",
-                                        "modifiers": ["left_control"]
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
                                     },
-                                    { "key_code": "3" }
+                                    {
+                                        "key_code": "3"
+                                    }
                                 ],
                                 "type": "basic"
                             }
@@ -302,14 +553,25 @@
                                 "description": "Change caps lock + 4 to ctrl+space, 4",
                                 "from": {
                                     "key_code": "4",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
                                 "to": [
                                     {
                                         "key_code": "spacebar",
-                                        "modifiers": ["left_control"]
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
                                     },
-                                    { "key_code": "4" }
+                                    {
+                                        "key_code": "4"
+                                    }
                                 ],
                                 "type": "basic"
                             }
@@ -321,14 +583,25 @@
                                 "description": "Change caps lock + 5 to ctrl+space, 5",
                                 "from": {
                                     "key_code": "5",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
                                 "to": [
                                     {
                                         "key_code": "spacebar",
-                                        "modifiers": ["left_control"]
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
                                     },
-                                    { "key_code": "5" }
+                                    {
+                                        "key_code": "5"
+                                    }
                                 ],
                                 "type": "basic"
                             }
@@ -340,14 +613,25 @@
                                 "description": "Change caps lock + 6 to ctrl+space, 6",
                                 "from": {
                                     "key_code": "6",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
                                 "to": [
                                     {
                                         "key_code": "spacebar",
-                                        "modifiers": ["left_control"]
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
                                     },
-                                    { "key_code": "6" }
+                                    {
+                                        "key_code": "6"
+                                    }
                                 ],
                                 "type": "basic"
                             }
@@ -359,14 +643,25 @@
                                 "description": "Change caps lock + 7 to ctrl+space, 7",
                                 "from": {
                                     "key_code": "7",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
                                 "to": [
                                     {
                                         "key_code": "spacebar",
-                                        "modifiers": ["left_control"]
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
                                     },
-                                    { "key_code": "7" }
+                                    {
+                                        "key_code": "7"
+                                    }
                                 ],
                                 "type": "basic"
                             }
@@ -378,14 +673,25 @@
                                 "description": "Change caps lock + 8 to ctrl+space, 8",
                                 "from": {
                                     "key_code": "8",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
                                 "to": [
                                     {
                                         "key_code": "spacebar",
-                                        "modifiers": ["left_control"]
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
                                     },
-                                    { "key_code": "8" }
+                                    {
+                                        "key_code": "8"
+                                    }
                                 ],
                                 "type": "basic"
                             }
@@ -397,14 +703,25 @@
                                 "description": "Change caps lock + 9 to ctrl+space, 9",
                                 "from": {
                                     "key_code": "9",
-                                    "modifiers": { "mandatory": ["command", "control", "option", "shift"] }
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "control",
+                                            "option",
+                                            "shift"
+                                        ]
+                                    }
                                 },
                                 "to": [
                                     {
                                         "key_code": "spacebar",
-                                        "modifiers": ["left_control"]
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
                                     },
-                                    { "key_code": "9" }
+                                    {
+                                        "key_code": "9"
+                                    }
                                 ],
                                 "type": "basic"
                             }
@@ -416,12 +733,20 @@
                                 "description": "Change caps_lock to command+control+option+shift.",
                                 "from": {
                                     "key_code": "caps_lock",
-                                    "modifiers": { "optional": ["any"] }
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
                                 },
                                 "to": [
                                     {
                                         "key_code": "left_shift",
-                                        "modifiers": ["left_command", "left_control", "left_option"]
+                                        "modifiers": [
+                                            "left_command",
+                                            "left_control",
+                                            "left_option"
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -452,17 +777,31 @@
             ],
             "fn_function_keys": [
                 {
-                    "from": { "key_code": "f5" },
-                    "to": [{ "apple_vendor_top_case_key_code": "illumination_down" }]
+                    "from": {
+                        "key_code": "f5"
+                    },
+                    "to": [
+                        {
+                            "apple_vendor_top_case_key_code": "illumination_down"
+                        }
+                    ]
                 },
                 {
-                    "from": { "key_code": "f6" },
-                    "to": [{ "apple_vendor_top_case_key_code": "illumination_up" }]
+                    "from": {
+                        "key_code": "f6"
+                    },
+                    "to": [
+                        {
+                            "apple_vendor_top_case_key_code": "illumination_up"
+                        }
+                    ]
                 }
             ],
             "name": "Default profile",
             "selected": true,
-            "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
+            "virtual_hid_keyboard": {
+                "keyboard_type_v2": "ansi"
+            }
         }
     ]
 }

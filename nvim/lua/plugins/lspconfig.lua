@@ -64,11 +64,14 @@ return {
       },
     }
 
-    local capabilities = require('blink.cmp').get_lsp_capabilities()
+    -- Pass `true` to include nvim's default capabilities (workspace.configuration=true etc.)
+    -- This overrides the mangled globals that blink picks up by merging all lsp/*.lua files
+    -- via vim.lsp.config['*'] resolution at startup (metals sets configuration=false,
+    -- omnisharp sets workspaceFolders=false, etc. and they bleed into every server).
+    local capabilities = require('blink.cmp').get_lsp_capabilities(nil, true)
+    vim.lsp.config('*', { capabilities = capabilities })
 
-    vim.lsp.enable('ts_ls')
-
-    vim.lsp.enable("eslint")
+    vim.lsp.enable('vtsls')
 
     vim.lsp.enable('pyright')
 

@@ -1,3 +1,12 @@
 
 bundle/
 
+# Pi config - exclude runtime and installed packages
+pi/npm/node_modules/
+pi/npm/package-lock.json
+pi/bin/
+pi/git/
+pi/sessions/
+pi/auth.json
+pi/extensions/pi-permission-system/logs
+

@@ -1,0 +1,20 @@
+{
+  "permission": {
+    "*": "allow",
+    "path": {
+      "*": "allow",
+      "*.env": "ask",
+      "*.env.*": "ask",
+      "*.env.example": "allow",
+      "*.env.template": "allow"
+    },
+    "bash": {
+      "sudo *": "ask",
+      "git checkout *": "deny",
+      "git stash *": "deny",
+      "gcloud *": "ask",
+      "tofu *": "ask"
+    },
+    "external_directory": "ask"
+  }
+}

@@ -16,14 +16,21 @@ return {
       stdin = true,
     }
 
+    -- Define oxfmt formatter
+    conform.formatters.oxfmt = {
+      command = "oxfmt",
+      args = { "--write", "$FILENAME" },
+      stdin = false,
+    }
+
     -- Setup Conform
     conform.setup({
       formatters_by_ft = {
         python = { "ruff_fix", "ruff_format" },
-        javascript = { "eslint_d" },
-        javascriptreact = { "eslint_d" },
-        typescript = { "eslint_d" },
-        typescriptreact = { "eslint_d" },
+        javascript = { "oxfmt" },
+        javascriptreact = { "oxfmt" },
+        typescript = { "oxfmt" },
+        typescriptreact = { "oxfmt" },
       },
       format_on_save = function(bufnr)
         -- Only use LSP fallback if the LSP client is actually attached and running
@@ -45,7 +52,7 @@ return {
 
     -- Optional keymap for manual formatting
     vim.keymap.set({ "n", "v" }, "<leader>l", function()
-      conform.format({ async = true, lsp_fallback = true })
+      conform.format({ async = true, lsp_fallback = false })
     end, { desc = "Format buffer" })
   end
 }

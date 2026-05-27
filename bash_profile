@@ -54,7 +54,6 @@ export LESS_TERMCAP_se=$'\e[0m'        # reset reverse video
 export LESS_TERMCAP_ue=$'\e[0m'        # reset underline
 
 export AXES_ENDPOINT=http://localhost:8000
-export AXES_TOKEN=24c91e90-df47-485b-a027-ab23ab7edc2d.agUGIw.sJgv-KQaQUATtWgFJesAbwsE9LA
 
 shopt -s expand_aliases
 alias vi='nvim'
