@@ -7,6 +7,55 @@
             "complex_modifications": {
                 "rules": [
                     {
+                        "description": "Option+F/B move by word (like Option+Arrow)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "f",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_arrow",
+                                        "modifiers": [
+                                            "option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "b",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_arrow",
+                                        "modifiers": [
+                                            "option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "manipulators": [
                             {
                                 "description": "hyper + z to change audio source",
@@ -369,6 +418,7 @@
                         ]
                     },
                     {
+                        "description": "tmux pane cycling: hyper-h next, hyper-g previous",
                         "manipulators": [
                             {
                                 "description": "Change caps lock + h to tmux cycle (ctrl+space, o)",
@@ -428,47 +478,16 @@
                         ]
                     },
                     {
+                        "description": "Alacritty: command+number switches tmux windows",
                         "manipulators": [
                             {
-                                "description": "Change caps lock + 0 to ctrl+space, 0",
-                                "from": {
-                                    "key_code": "0",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "command",
-                                            "control",
-                                            "option",
-                                            "shift"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "spacebar",
-                                        "modifiers": [
-                                            "left_control"
-                                        ]
-                                    },
-                                    {
-                                        "key_code": "0"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "manipulators": [
-                            {
-                                "description": "Change caps lock + 1 to ctrl+space, 1",
+                                "description": "Alacritty: command+1 to tmux window 1 (ctrl+space, 1)",
+                                "type": "basic",
                                 "from": {
                                     "key_code": "1",
                                     "modifiers": {
                                         "mandatory": [
-                                            "command",
-                                            "control",
-                                            "option",
-                                            "shift"
+                                            "command"
                                         ]
                                     }
                                 },
@@ -483,22 +502,23 @@
                                         "key_code": "1"
                                     }
                                 ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "manipulators": [
+                                "conditions": [
+                                    {
+                                        "type": "frontmost_application_if",
+                                        "bundle_identifiers": [
+                                            "^org\\.alacritty$"
+                                        ]
+                                    }
+                                ]
+                            },
                             {
-                                "description": "Change caps lock + 2 to ctrl+space, 2",
+                                "description": "Alacritty: command+2 to tmux window 2 (ctrl+space, 2)",
+                                "type": "basic",
                                 "from": {
                                     "key_code": "2",
                                     "modifiers": {
                                         "mandatory": [
-                                            "command",
-                                            "control",
-                                            "option",
-                                            "shift"
+                                            "command"
                                         ]
                                     }
                                 },
@@ -513,22 +533,23 @@
                                         "key_code": "2"
                                     }
                                 ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "manipulators": [
+                                "conditions": [
+                                    {
+                                        "type": "frontmost_application_if",
+                                        "bundle_identifiers": [
+                                            "^org\\.alacritty$"
+                                        ]
+                                    }
+                                ]
+                            },
                             {
-                                "description": "Change caps lock + 3 to ctrl+space, 3",
+                                "description": "Alacritty: command+3 to tmux window 3 (ctrl+space, 3)",
+                                "type": "basic",
                                 "from": {
                                     "key_code": "3",
                                     "modifiers": {
                                         "mandatory": [
-                                            "command",
-                                            "control",
-                                            "option",
-                                            "shift"
+                                            "command"
                                         ]
                                     }
                                 },
@@ -543,22 +564,23 @@
                                         "key_code": "3"
                                     }
                                 ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "manipulators": [
+                                "conditions": [
+                                    {
+                                        "type": "frontmost_application_if",
+                                        "bundle_identifiers": [
+                                            "^org\\.alacritty$"
+                                        ]
+                                    }
+                                ]
+                            },
                             {
-                                "description": "Change caps lock + 4 to ctrl+space, 4",
+                                "description": "Alacritty: command+4 to tmux window 4 (ctrl+space, 4)",
+                                "type": "basic",
                                 "from": {
                                     "key_code": "4",
                                     "modifiers": {
                                         "mandatory": [
-                                            "command",
-                                            "control",
-                                            "option",
-                                            "shift"
+                                            "command"
                                         ]
                                     }
                                 },
@@ -573,22 +595,23 @@
                                         "key_code": "4"
                                     }
                                 ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "manipulators": [
+                                "conditions": [
+                                    {
+                                        "type": "frontmost_application_if",
+                                        "bundle_identifiers": [
+                                            "^org\\.alacritty$"
+                                        ]
+                                    }
+                                ]
+                            },
                             {
-                                "description": "Change caps lock + 5 to ctrl+space, 5",
+                                "description": "Alacritty: command+5 to tmux window 5 (ctrl+space, 5)",
+                                "type": "basic",
                                 "from": {
                                     "key_code": "5",
                                     "modifiers": {
                                         "mandatory": [
-                                            "command",
-                                            "control",
-                                            "option",
-                                            "shift"
+                                            "command"
                                         ]
                                     }
                                 },
@@ -603,22 +626,23 @@
                                         "key_code": "5"
                                     }
                                 ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "manipulators": [
+                                "conditions": [
+                                    {
+                                        "type": "frontmost_application_if",
+                                        "bundle_identifiers": [
+                                            "^org\\.alacritty$"
+                                        ]
+                                    }
+                                ]
+                            },
                             {
-                                "description": "Change caps lock + 6 to ctrl+space, 6",
+                                "description": "Alacritty: command+6 to tmux window 6 (ctrl+space, 6)",
+                                "type": "basic",
                                 "from": {
                                     "key_code": "6",
                                     "modifiers": {
                                         "mandatory": [
-                                            "command",
-                                            "control",
-                                            "option",
-                                            "shift"
+                                            "command"
                                         ]
                                     }
                                 },
@@ -633,22 +657,23 @@
                                         "key_code": "6"
                                     }
                                 ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "manipulators": [
+                                "conditions": [
+                                    {
+                                        "type": "frontmost_application_if",
+                                        "bundle_identifiers": [
+                                            "^org\\.alacritty$"
+                                        ]
+                                    }
+                                ]
+                            },
                             {
-                                "description": "Change caps lock + 7 to ctrl+space, 7",
+                                "description": "Alacritty: command+7 to tmux window 7 (ctrl+space, 7)",
+                                "type": "basic",
                                 "from": {
                                     "key_code": "7",
                                     "modifiers": {
                                         "mandatory": [
-                                            "command",
-                                            "control",
-                                            "option",
-                                            "shift"
+                                            "command"
                                         ]
                                     }
                                 },
@@ -663,22 +688,23 @@
                                         "key_code": "7"
                                     }
                                 ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "manipulators": [
+                                "conditions": [
+                                    {
+                                        "type": "frontmost_application_if",
+                                        "bundle_identifiers": [
+                                            "^org\\.alacritty$"
+                                        ]
+                                    }
+                                ]
+                            },
                             {
-                                "description": "Change caps lock + 8 to ctrl+space, 8",
+                                "description": "Alacritty: command+8 to tmux window 8 (ctrl+space, 8)",
+                                "type": "basic",
                                 "from": {
                                     "key_code": "8",
                                     "modifiers": {
                                         "mandatory": [
-                                            "command",
-                                            "control",
-                                            "option",
-                                            "shift"
+                                            "command"
                                         ]
                                     }
                                 },
@@ -693,22 +719,23 @@
                                         "key_code": "8"
                                     }
                                 ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "manipulators": [
+                                "conditions": [
+                                    {
+                                        "type": "frontmost_application_if",
+                                        "bundle_identifiers": [
+                                            "^org\\.alacritty$"
+                                        ]
+                                    }
+                                ]
+                            },
                             {
-                                "description": "Change caps lock + 9 to ctrl+space, 9",
+                                "description": "Alacritty: command+9 to tmux window 9 (ctrl+space, 9)",
+                                "type": "basic",
                                 "from": {
                                     "key_code": "9",
                                     "modifiers": {
                                         "mandatory": [
-                                            "command",
-                                            "control",
-                                            "option",
-                                            "shift"
+                                            "command"
                                         ]
                                     }
                                 },
@@ -723,21 +750,54 @@
                                         "key_code": "9"
                                     }
                                 ],
-                                "type": "basic"
+                                "conditions": [
+                                    {
+                                        "type": "frontmost_application_if",
+                                        "bundle_identifiers": [
+                                            "^org\\.alacritty$"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "description": "Alacritty: command+0 to tmux window 0 (ctrl+space, 0)",
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "0",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "spacebar",
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "0"
+                                    }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "frontmost_application_if",
+                                        "bundle_identifiers": [
+                                            "^org\\.alacritty$"
+                                        ]
+                                    }
+                                ]
                             }
                         ]
                     },
                     {
+                        "description": "Caps Lock acts as Command+Option+Control+Shift, with proper key-up events",
                         "manipulators": [
                             {
-                                "description": "Change caps_lock to command+control+option+shift.",
                                 "from": {
-                                    "key_code": "caps_lock",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "key_code": "caps_lock"
                                 },
                                 "to": [
                                     {
@@ -747,6 +807,11 @@
                                             "left_control",
                                             "left_option"
                                         ]
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "vk_none"
                                     }
                                 ],
                                 "type": "basic"
