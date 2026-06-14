@@ -133,7 +133,7 @@ return {
         return
       end
 
-      local file = vim.fn.expand("%:.")
+      local file = vim.fn.expand("%:p")
       local start_line = start_pos[2]
       local end_line = end_pos[2]
       local ft = vim.bo.filetype

@@ -12,6 +12,7 @@
       "sudo *": "ask",
       "git checkout *": "deny",
       "git stash *": "deny",
+      "git add *": "deny",
       "gcloud *": "ask",
       "tofu *": "ask"
     },

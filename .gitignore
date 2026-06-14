@@ -9,4 +9,5 @@ pi/git/
 pi/sessions/
 pi/auth.json
 pi/extensions/pi-permission-system/logs
+pi/run-history.jsonl
 

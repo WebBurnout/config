@@ -27,10 +27,6 @@ host clickhouse
   HostName clickhouse.hotpage.dev
   User ubuntu
 
-host squids
-  HostName squids.online
-  User tim
-
 host casanube
   HostName 192.168.1.1
   User root
