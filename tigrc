@@ -1,0 +1,54 @@
+color default        default default
+color cursor         black   magenta bold
+color cursor-blur    white   black
+color status         magenta default
+color title-focus    black   magenta bold
+color title-blur     magenta default
+color delimiter      magenta default
+color header         magenta default bold
+color line-number    black   default
+color line-number:focus magenta default
+
+color file           blue    default
+color directory      cyan    default
+color date           magenta default
+color author         red     default
+color id             yellow  default
+color mode           magenta default
+color overflow       magenta default
+
+color graph-commit   magenta default
+color main-head      green   default
+color main-remote    yellow  default
+color main-tracked   red     default
+color main-tag       red     default
+color main-local-tag red     default
+color main-ref       cyan    default
+
+color diff-header    magenta default
+color diff-index     blue    default
+color diff-chunk     cyan    default bold
+color diff-add       green   default
+color diff-add2      green   default
+color diff-del       red     default
+color diff-del2      red     default
+color diff-stat      yellow  default
+
+color search-result  black   yellow  bold
+
+color status.header  magenta default bold
+color status.file    blue    default
+color status.directory cyan  default
+color status.cursor  black   magenta bold
+color status.cursor-blur white black
+color status.stat-none default default
+color status.stat-staged green default
+color status.stat-unstaged red default
+color status.stat-untracked yellow default
+
+color blame.line-number magenta default
+color blame.date        cyan    default
+
+color help.header    cyan    default bold
+color help-group     blue    default
+color help-action    magenta default

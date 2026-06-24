@@ -1,0 +1,64 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git diff:*)"
+    ],
+    "deny": [
+      "Bash(tofu)",
+      "Bash(tofu:*)",
+      "Bash(gcloud)",
+      "Bash(gcloud:*)",
+      "Bash(git stash)",
+      "Bash(git stash:*)",
+      "Bash(git add)",
+      "Bash(git add:*)",
+      "Bash(git checkout)",
+      "Bash(git checkout:*)",
+      "Bash(git reset)",
+      "Bash(git reset:*)",
+      "Bash(git clean)",
+      "Bash(git clean:*)",
+      "Bash(git restore)",
+      "Bash(git restore:*)",
+      "Bash(git rebase)",
+      "Bash(git rebase:*)",
+      "Bash(git push)",
+      "Bash(git push:*)",
+      "Bash(git branch)",
+      "Bash(git branch:*)"
+    ],
+    "defaultMode": "acceptEdits"
+  },
+  "model": "opus",
+  "worktree": {
+    "baseRef": "fresh"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "node ~/.claude/statusline-context.js"
+  },
+  "enabledPlugins": {
+    "vtsls@claude-code-lsps": true,
+    "pyright-lsp@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-code-lsps": {
+      "source": {
+        "source": "github",
+        "repo": "Piebald-AI/claude-code-lsps"
+      }
+    }
+  },
+  "spinnerVerbs": {
+    "mode": "replace",
+    "verbs": [
+      " "
+    ]
+  },
+  "promptSuggestionEnabled": false,
+  "awaySummaryEnabled": false,
+  "autoUpdatesChannel": "stable",
+  "minimumVersion": "2.1.181",
+  "autoMemoryEnabled": false,
+  "editorMode": "normal"
+}

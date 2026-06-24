@@ -7,6 +7,65 @@
             "complex_modifications": {
                 "rules": [
                     {
+                        "description": "Readline word delete: Ctrl+W backward, Alt+D forward (except Alacritty)",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "w",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "delete_or_backspace",
+                                        "modifiers": [
+                                            "option"
+                                        ]
+                                    }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "frontmost_application_unless",
+                                        "bundle_identifiers": [
+                                            "^org\\.alacritty$"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "d",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "option"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "delete_forward",
+                                        "modifiers": [
+                                            "option"
+                                        ]
+                                    }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "frontmost_application_unless",
+                                        "bundle_identifiers": [
+                                            "^org\\.alacritty$"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "description": "Option+F/B move by word (like Option+Arrow)",
                         "manipulators": [
                             {
@@ -17,7 +76,10 @@
                                             "option"
                                         ],
                                         "optional": [
-                                            "any"
+                                            "shift",
+                                            "command",
+                                            "fn",
+                                            "caps_lock"
                                         ]
                                     }
                                 },
@@ -39,7 +101,10 @@
                                             "option"
                                         ],
                                         "optional": [
-                                            "any"
+                                            "shift",
+                                            "command",
+                                            "fn",
+                                            "caps_lock"
                                         ]
                                     }
                                 },
@@ -96,7 +161,7 @@
                                 },
                                 "to": [
                                     {
-                                        "consumer_key_code": "fast_forward"
+                                        "shell_command": "/opt/homebrew/bin/nowplaying-cli next"
                                     }
                                 ],
                                 "type": "basic"
@@ -239,7 +304,47 @@
                                 },
                                 "to": [
                                     {
-                                        "consumer_key_code": "play_or_pause"
+                                        "shell_command": "/opt/homebrew/bin/nowplaying-cli togglePlayPause"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "manipulators": [
+                            {
+                                "description": "f7 to previous track",
+                                "from": {
+                                    "key_code": "f7"
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/opt/homebrew/bin/nowplaying-cli previous"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "f8 to play/pause",
+                                "from": {
+                                    "key_code": "f8"
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/opt/homebrew/bin/nowplaying-cli togglePlayPause"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "f9 to next track",
+                                "from": {
+                                    "key_code": "f9"
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/opt/homebrew/bin/nowplaying-cli next"
                                     }
                                 ],
                                 "type": "basic"
@@ -377,10 +482,7 @@
                                         ]
                                     },
                                     {
-                                        "key_code": "quote",
-                                        "modifiers": [
-                                            "left_shift"
-                                        ]
+                                        "key_code": "quote"
                                     }
                                 ],
                                 "type": "basic"
@@ -843,7 +945,7 @@
             "fn_function_keys": [
                 {
                     "from": {
-                        "key_code": "f5"
+                        "key_code": "f3"
                     },
                     "to": [
                         {
@@ -853,7 +955,7 @@
                 },
                 {
                     "from": {
-                        "key_code": "f6"
+                        "key_code": "f4"
                     },
                     "to": [
                         {

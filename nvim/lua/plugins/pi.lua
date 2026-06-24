@@ -39,16 +39,18 @@ return {
 
     local function open_prompt(title, on_send)
       local width = math.min(72, math.floor(vim.o.columns * 0.5))
+      local min_height = 4
       local max_height = 6
       local buf = vim.api.nvim_create_buf(false, true)
 
       vim.bo[buf].buftype = "nofile"
+      vim.b[buf].completion = false
       vim.api.nvim_buf_set_lines(buf, 0, -1, false, { "" })
 
       local win = vim.api.nvim_open_win(buf, true, {
         relative = "editor",
         width = width,
-        height = 1,
+        height = min_height,
         row = math.floor(vim.o.lines / 3),
         col = math.floor((vim.o.columns - width - 2) / 2),
         style = "minimal",
@@ -57,6 +59,7 @@ return {
         title_pos = "center",
       })
       vim.wo[win].wrap = true
+      vim.wo[win].linebreak = true
 
       local function resize()
         if not vim.api.nvim_win_is_valid(win) then return end
@@ -66,7 +69,7 @@ return {
         for _, text in ipairs(lines) do
           rows = rows + math.max(1, math.ceil(math.max(#text, 1) / width))
         end
-        vim.api.nvim_win_set_height(win, math.min(max_height, rows))
+        vim.api.nvim_win_set_height(win, math.max(min_height, math.min(max_height, rows)))
       end
 
       local function close()

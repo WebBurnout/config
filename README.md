@@ -47,7 +47,18 @@ ln -s ~/code/config/firefox-user-chrome.css ~/Library/Application\ Support/Firef
 ln -s ~/code/config/weechat-irc.conf ~/.config/weechat/irc.conf
 ```
 
-For pi agent configuration, first backup your existing directory, then create a symlink:
+For Claude Code, symlink the individual config files back into `~/.claude` (the
+rest of that directory is runtime data and secrets, so don't symlink the whole
+thing):
+
+```bash
+mkdir -p ~/.claude
+ln -s ~/code/config/claude/settings.json ~/.claude/settings.json
+ln -s ~/code/config/claude/statusline-context.js ~/.claude/statusline-context.js
+ln -s ~/code/config/claude/CLAUDE.md ~/.claude/CLAUDE.md
+```
+
+For pi configuration, create a symlink of the whole directory:
 
 ```bash
 # Create parent directory and symlink the entire agent directory
@@ -81,6 +92,32 @@ Install SwitchAudioSource
 ```
 brew install switchaudio-osx
 ```
+
+### Voice dictation (whisper.cpp)
+
+`hyper+f` toggles dictation in Hammerspoon: press once to start recording, press
+again to stop, transcribe, and paste at the cursor. Audio is captured with
+ffmpeg and transcribed locally with whisper.cpp via `bin/whisper-transcribe.sh`.
+
+Install the tools and download a model:
+```
+brew install whisper-cpp ffmpeg
+mkdir -p ~/.local/share/whisper-models
+curl -L -o ~/.local/share/whisper-models/ggml-base.en.bin \
+  https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.en.bin
+```
+
+Grant Hammerspoon Microphone access in System Settings > Privacy & Security >
+Microphone (you are prompted on first use).
+
+For better accuracy on technical terms, download a larger model (e.g.
+`ggml-small.en.bin` from the same URL path) and point the `MODEL` default in
+`bin/whisper-transcribe.sh` (or the `WHISPER_MODEL` env var) at it.
+
+Note: the built-in mic is disabled when the lid is closed (clamshell). The
+recorder uses the `:default` input device, so connect/select an external mic
+(System Settings > Sound, or cycle with SwitchAudioSource) to dictate with the
+lid shut.
 
 Install some GUI programs by downloading them and adding the license files if
 needed: Transmit, Litle Snitch, iStat Menus, Witch, Karibiner Elements,
@@ -118,6 +155,11 @@ To reload `init.vim` without exiting Neovim run
 :source $MYVIMRC
 ```
 
+To reload `tmux.conf`
+```
+tmux source-file ~/.tmux.conf
+```
+
 
 ## Vimium handiness
 
@@ -133,6 +175,9 @@ Find and replace in a directory:
 ```
 
 ## custom key mappings
+
+delete by workd ctrl-w
+forward delete by word alt-d
 
 not custom but dont forget: readline by word in macos is ctrl-option-f/b
 
@@ -153,9 +198,9 @@ f5 -- keyboard brightness down
 f6 -- keyboard brightness up
 
 hyper-a -- play/pause
-hyper-s -- next track
-hyper-d -- volume down
-hyper-f -- volume up
+hyper-s -- volume down
+hyper-d -- volume up
+hyper-f -- voice dictation (whisper.cpp toggle)
 
 
 ### tmux
@@ -172,7 +217,10 @@ hyper-c -- create window
 
 ## Tmux handiness
 
+ctrl-u/d for half page scroll
+
 c-space for escape
+
 tmux a # -- attach to last created session 
 
 tmux new -s [name of session]

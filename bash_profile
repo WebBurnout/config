@@ -84,6 +84,7 @@ alias cdb='cd /Users/tim/code/axes/bower'
 alias cdc='cd /Users/tim/code/axes/chat-plot'
 alias cdd='cd /Users/tim/code/axes/data-catalog'
 alias cdf='cd /Users/tim/code/axes/infra'
+alias cl='claude'
 
 
 # Bash Completion for Homebrew
