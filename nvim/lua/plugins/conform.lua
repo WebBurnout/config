@@ -52,7 +52,16 @@ return {
 
     -- Optional keymap for manual formatting
     vim.keymap.set({ "n", "v" }, "<leader>l", function()
-      conform.format({ async = true, lsp_fallback = false })
+      local lsp_clients = vim.lsp.get_clients({ bufnr = 0 })
+      local has_valid_lsp = false
+      for _, client in ipairs(lsp_clients) do
+        if client.server_capabilities.documentFormattingProvider then
+          has_valid_lsp = true
+          break
+        end
+      end
+
+      conform.format({ async = false, timeout_ms = 500, lsp_fallback = has_valid_lsp })
     end, { desc = "Format buffer" })
   end
 }

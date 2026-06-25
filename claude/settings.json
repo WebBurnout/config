@@ -27,7 +27,7 @@
       "Bash(git branch)",
       "Bash(git branch:*)"
     ],
-    "defaultMode": "acceptEdits"
+    "defaultMode": "auto"
   },
   "model": "opus",
   "worktree": {
@@ -52,7 +52,7 @@
   "spinnerVerbs": {
     "mode": "replace",
     "verbs": [
-      " "
+      "Working"
     ]
   },
   "promptSuggestionEnabled": false,
