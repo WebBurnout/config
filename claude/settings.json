@@ -3,7 +3,7 @@
     "allow": [
       "Bash(git diff:*)"
     ],
-    "deny": [
+    "ask": [
       "Bash(tofu)",
       "Bash(tofu:*)",
       "Bash(gcloud)",

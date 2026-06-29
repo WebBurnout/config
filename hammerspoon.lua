@@ -186,4 +186,31 @@ hs.hotkey.bind(hyper, "f", function()
   whisperToggle()
 end)
 
+-- Cycle the audio output device (hyper + z), showing the one we switched to.
+-- Requires: `brew install switchaudio-osx`.
+local switchAudio = "/opt/homebrew/bin/SwitchAudioSource"
+local audioAlert
+
+local function showAudioAlert(text)
+  if audioAlert then
+    hs.alert.closeSpecific(audioAlert, 0)
+  end
+  audioAlert = hs.alert.show(text, 1)
+end
+
+hs.hotkey.bind(hyper, "z", function()
+  log("hotkey: hyper + z (audio source)")
+  hs.task.new(switchAudio, function(code, _stdout, _stderr)
+    if code ~= 0 then
+      showAudioAlert("🔈 audio switch failed")
+      return
+    end
+    -- Report the device we landed on.
+    hs.task.new(switchAudio, function(_c, current)
+      local name = (current or ""):gsub("%s+$", "")
+      showAudioAlert("🔈 " .. name)
+    end, { "-c" }):start()
+  end, { "-n" }):start()
+end)
+
 hs.alert.show("Hammerspoon config loaded")
