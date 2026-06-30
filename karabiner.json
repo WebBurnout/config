@@ -344,7 +344,11 @@
                                 },
                                 "to": [
                                     {
-                                        "consumer_key_code": "volume_decrement"
+                                        "consumer_key_code": "volume_decrement",
+                                        "modifiers": [
+                                            "left_shift",
+                                            "left_option"
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -368,37 +372,11 @@
                                 },
                                 "to": [
                                     {
-                                        "consumer_key_code": "volume_increment"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "manipulators": [
-                            {
-                                "description": "hyper + x to ctrl+space, x",
-                                "from": {
-                                    "key_code": "x",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "command",
-                                            "control",
-                                            "option",
-                                            "shift"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "spacebar",
+                                        "consumer_key_code": "volume_increment",
                                         "modifiers": [
-                                            "left_control"
+                                            "left_shift",
+                                            "left_option"
                                         ]
-                                    },
-                                    {
-                                        "key_code": "x"
                                     }
                                 ],
                                 "type": "basic"
