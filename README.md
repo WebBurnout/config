@@ -28,11 +28,20 @@ And the minimal-status-line:
 git clone git@github.com:niksingh710/minimal-tmux-status.git ~/.config/tmux/plugins/minimal-status-line
 ```
 
+There are two bash config files: `bashrc_mac` and `bashrc_linux`. Both are the
+interactive shell config (aliases, functions, prompt) and both get symlinked to
+`~/.bashrc` on their respective platform — they're just kept separate because
+the machines differ. On macOS, `~/.bash_profile` additionally sources
+`~/.bashrc` (see below).
+
 To use the config files, create symbolic links to the correct location (you
 may need to remove the ones that are there).
 
 ```bash
-ln -s ~/code/config/bash_profile ~/.bash_profile
+ln -s ~/code/config/bashrc_mac ~/.bashrc
+# macOS terminals open *login* shells, which read ~/.bash_profile, not
+# ~/.bashrc. So point .bash_profile at .bashrc to get the interactive config.
+echo 'source ~/.bashrc' > ~/.bash_profile
 ln -s ~/code/config/tmux.conf ~/.tmux.conf
 ln -s ~/code/config/witch.plist ~/Library/Application\ Support/Witch/Settings.plist
 ln -s ~/code/config/gitconfig ~/.gitconfig
@@ -144,7 +153,7 @@ brew services start colima
 mkdir ~/.config
 ln -s ~/config/nvim ~/.config/nvim
 rm ~/.bashrc
-ln -s ~/config/bashrc ~/.bashrc
+ln -s ~/config/bashrc_linux ~/.bashrc
 
 
 

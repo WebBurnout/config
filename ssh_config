@@ -19,6 +19,10 @@ host lb
   HostName load-balancer.hotpage.dev
   User ubuntu
 
+host ch
+  HostName clickhouse.hotpage.dev
+  User ubuntu
+
 host redis
   HostName redis.hotpage.dev
   User ubuntu

@@ -21,15 +21,27 @@ local function focusedWindow()
   return win
 end
 
-local layouts = {
-  { title = "Maximize",  unit = hs.layout.maximized },
-  { title = "Left 1/2",  unit = { x = 0,       y = 0, w = 1 / 2, h = 1 } },
-  { title = "Left 2/3",  unit = { x = 0,       y = 0, w = 2 / 3, h = 1 } },
-  { title = "Wide Left",  unit = { x = 0,        y = 0, w = 14 / 15, h = 1 } },
-  { title = "Wide Right", unit = { x = 1 / 15,   y = 0, w = 14 / 15, h = 1 } },
-  { title = "Right 2/3", unit = { x = 1 / 3,   y = 0, w = 2 / 3, h = 1 } },
-  { title = "Right 1/2", unit = { x = 1 / 2,   y = 0, w = 1 / 2, h = 1 } },
+-- Each width key toggles: first press puts the window on the left at that
+-- width, pressing again flips it to the right.
+local widths = {
+  { key = "q", name = "1/4",  w = 1 / 4 },
+  { key = "w", name = "1/3",  w = 1 / 3 },
+  { key = "e", name = "1/2",  w = 1 / 2 },
+  { key = "r", name = "2/3",  w = 2 / 3 },
+  { key = "t", name = "3/4",  w = 3 / 4 },
+  { key = "y", name = "Wide", w = 14 / 15 },
 }
+
+local layouts = {
+  { title = "Maximize", unit = hs.layout.maximized },
+}
+
+for _, spec in ipairs(widths) do
+  spec.left  = { title = spec.name .. " Left",  unit = { x = 0,          y = 0, w = spec.w, h = 1 } }
+  spec.right = { title = spec.name .. " Right", unit = { x = 1 - spec.w, y = 0, w = spec.w, h = 1 } }
+  table.insert(layouts, spec.left)
+  table.insert(layouts, spec.right)
+end
 
 local layoutsBySlug = {}
 for _, layout in ipairs(layouts) do
@@ -73,22 +85,34 @@ local function applyCentered()
   end
 end
 
-local keyBindings = {
-  q = "left-1-2",
-  w = "left-2-3",
-  e = "wide-left",
-  r = "wide-right",
-  t = "right-2-3",
-  y = "right-1-2",
-  m = "maximize",
-}
+-- A window "is" a layout if its frame matches within a few pixels.
+local function frameMatchesUnit(win, unit)
+  local sf = win:screen():frame()
+  local f = win:frame()
+  local eps = 5
+  return math.abs(f.x - (sf.x + unit.x * sf.w)) < eps
+    and math.abs(f.y - (sf.y + unit.y * sf.h)) < eps
+    and math.abs(f.w - unit.w * sf.w) < eps
+    and math.abs(f.h - unit.h * sf.h) < eps
+end
 
-for key, slug in pairs(keyBindings) do
-  hs.hotkey.bind(hyper, key, function()
-    log("hotkey: hyper + " .. key)
-    applyLayout(layoutsBySlug[slug])
+for _, spec in ipairs(widths) do
+  hs.hotkey.bind(hyper, spec.key, function()
+    log("hotkey: hyper + " .. spec.key .. " (" .. spec.name .. ")")
+    local win = focusedWindow()
+    if not win then return end
+    if frameMatchesUnit(win, spec.left.unit) then
+      applyLayout(spec.right)
+    else
+      applyLayout(spec.left)
+    end
   end)
 end
+
+hs.hotkey.bind(hyper, "m", function()
+  log("hotkey: hyper + m")
+  applyLayout(layoutsBySlug["maximize"])
+end)
 
 hs.hotkey.bind(hyper, "b", function()
   log("hotkey: hyper + b")

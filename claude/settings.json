@@ -29,7 +29,8 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "opus",
+  "model": "claude-fable-5[1m]",
+  "disableClaudeAiConnectors": true,
   "worktree": {
     "baseRef": "fresh"
   },
@@ -49,6 +50,7 @@
       }
     }
   },
+  "spinnerTipsEnabled": false,
   "spinnerVerbs": {
     "mode": "replace",
     "verbs": [
@@ -59,6 +61,8 @@
   "awaySummaryEnabled": false,
   "autoUpdatesChannel": "stable",
   "minimumVersion": "2.1.181",
+  "tui": "default",
   "autoMemoryEnabled": false,
-  "editorMode": "normal"
+  "editorMode": "normal",
+  "leftArrowOpensAgents": false
 }

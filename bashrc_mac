@@ -86,6 +86,10 @@ alias cdd='cd /Users/tim/code/axes/data-catalog'
 alias cdf='cd /Users/tim/code/axes/infra'
 alias cl='claude'
 
+cdr() { local root; root=$(git rev-parse --show-toplevel 2>/dev/null) && cd "$root" || echo "not in a git repo"; }
+
+tunnel() { autossh -M 0 -N -R 3001:localhost:"${1:-3000}" -o "ServerAliveInterval 30" ubuntu@load-balancer.hotpage.dev; }
+
 
 # Bash Completion for Homebrew
 [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
