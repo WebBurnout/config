@@ -16,11 +16,36 @@ return {
       stdin = true,
     }
 
+    -- Only format JS/TS when the project opts in with an oxfmt/oxlint config.
+    -- Otherwise oxfmt's defaults mangle random files we just happen to open.
+    local oxfmt_config_files = {
+      ".oxfmtrc.json",
+      ".oxfmtrc.jsonc",
+      "oxfmt.json",
+      "oxfmt.jsonc",
+      ".oxlintrc.json",
+      ".oxlintrc.jsonc",
+      "oxlint.json",
+      "oxlintrc.json",
+    }
+
+    local function has_oxfmt_config(ctx)
+      local dir = vim.fs.dirname(ctx.filename)
+      if not dir or dir == "" then
+        return false
+      end
+      local found = vim.fs.find(oxfmt_config_files, { path = dir, upward = true, type = "file" })
+      return #found > 0
+    end
+
     -- Define oxfmt formatter
     conform.formatters.oxfmt = {
       command = "oxfmt",
       args = { "--write", "$FILENAME" },
       stdin = false,
+      condition = function(_, ctx)
+        return has_oxfmt_config(ctx)
+      end,
     }
 
     -- Setup Conform
@@ -32,36 +57,20 @@ return {
         typescript = { "oxfmt" },
         typescriptreact = { "oxfmt" },
       },
-      format_on_save = function(bufnr)
-        -- Only use LSP fallback if the LSP client is actually attached and running
-        local lsp_clients = vim.lsp.get_clients({ bufnr = bufnr })
-        local has_valid_lsp = false
-        for _, client in ipairs(lsp_clients) do
-          if client.server_capabilities.documentFormattingProvider then
-            has_valid_lsp = true
-            break
-          end
-        end
-        
-        return {
-          timeout_ms = 500,
-          lsp_fallback = has_valid_lsp,
-        }
-      end,
+      -- No LSP fallback: otherwise the TS language server formats with its own
+      -- defaults whenever oxfmt opts out, which is the thing we're avoiding.
+      -- quiet: no-config JS/TS buffers legitimately have nothing to run,
+      -- don't warn about it on every write.
+      format_on_save = {
+        timeout_ms = 500,
+        lsp_format = "never",
+        quiet = true,
+      },
     })
 
     -- Optional keymap for manual formatting
     vim.keymap.set({ "n", "v" }, "<leader>l", function()
-      local lsp_clients = vim.lsp.get_clients({ bufnr = 0 })
-      local has_valid_lsp = false
-      for _, client in ipairs(lsp_clients) do
-        if client.server_capabilities.documentFormattingProvider then
-          has_valid_lsp = true
-          break
-        end
-      end
-
-      conform.format({ async = false, timeout_ms = 500, lsp_fallback = has_valid_lsp })
+      conform.format({ async = false, timeout_ms = 500, lsp_format = "never" })
     end, { desc = "Format buffer" })
   end
 }

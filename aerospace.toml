@@ -153,6 +153,41 @@ run = 'layout floating'
     alt-shift-8 = 'move-node-to-workspace 8'
     alt-shift-9 = 'move-node-to-workspace 9'
 
+    # AeroSpace has no real create/delete for workspaces (1-9 are fixed), so
+    # these emulate it by shifting windows between the numbered workspaces.
+
+    # "New desktop": insert an empty workspace at the current position by
+    # shifting the current and all later workspaces one to the right.
+    # Anything already in workspace 9 gets merged with workspace 8's windows.
+    cmd-ctrl-alt-shift-equal = '''exec-and-forget
+    a=/opt/homebrew/bin/aerospace
+    f=$($a list-workspaces --focused)
+    for i in $(seq 8 -1 "$f"); do
+        for id in $($a list-windows --workspace "$i" --format '%{window-id}'); do
+            $a move-node-to-workspace --window-id "$id" $((i + 1))
+        done
+    done
+    $a workspace "$f"
+    '''
+
+    # "Delete desktop": merge the current workspace's windows into the previous
+    # one, then shift all later workspaces one to the left.
+    cmd-ctrl-alt-shift-minus = '''exec-and-forget
+    a=/opt/homebrew/bin/aerospace
+    f=$($a list-workspaces --focused)
+    if [ "$f" -gt 1 ]; then
+        for id in $($a list-windows --workspace "$f" --format '%{window-id}'); do
+            $a move-node-to-workspace --window-id "$id" $((f - 1))
+        done
+    fi
+    for i in $(seq $((f + 1)) 9); do
+        for id in $($a list-windows --workspace "$i" --format '%{window-id}'); do
+            $a move-node-to-workspace --window-id "$id" $((i - 1))
+        done
+    done
+    if [ "$f" -gt 1 ]; then $a workspace $((f - 1)); fi
+    '''
+
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     alt-tab = 'workspace-back-and-forth'
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor

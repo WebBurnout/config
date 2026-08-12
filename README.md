@@ -65,6 +65,7 @@ mkdir -p ~/.claude
 ln -s ~/code/config/claude/settings.json ~/.claude/settings.json
 ln -s ~/code/config/claude/statusline-context.js ~/.claude/statusline-context.js
 ln -s ~/code/config/claude/CLAUDE.md ~/.claude/CLAUDE.md
+ln -s ~/code/config/claude/notify.sh ~/.claude/notify.sh
 ```
 
 For pi configuration, create a symlink of the whole directory:
@@ -76,6 +77,19 @@ ln -s ~/code/config/pi ~/.pi/agent
 ```
 
 **Note:** The `bin/`, `git/`, and `sessions/` directories exist in the repo directory but are excluded from version control via `.gitignore`. They contain binaries, cloned repositories, and runtime data respectively.
+
+### Claude bridge
+
+Install `pi-claude-bridge` to use Claude through the official Claude Agent SDK
+and the subscription authenticated by the Claude Code CLI:
+
+```bash
+claude
+pi install npm:pi-claude-bridge
+```
+
+The bridge configuration is stored in `~/.pi/agent/claude-bridge.json`. Select
+a `claude-bridge/*` model from Pi's model picker after installation.
 
 Karabiner was not working with a symlink so just copy it when you make changes
 ```

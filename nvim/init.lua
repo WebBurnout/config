@@ -1,5 +1,5 @@
 -- disable mouse
-vim.opt.mouse = 'a'
+vim.opt.mouse = ''
 
 -- tab is two spaces
 vim.opt.tabstop = 2

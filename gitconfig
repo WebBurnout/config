@@ -6,6 +6,7 @@
 	excludesfile = /Users/tim/.gitignore
 
 [alias]
+    l = log
     a = add
     c = commit
     ca = commit -a
