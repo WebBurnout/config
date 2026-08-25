@@ -16,6 +16,12 @@
       "gcloud *": "ask",
       "tofu *": "ask"
     },
-    "external_directory": "ask"
+    "external_directory": {
+      "*": "ask",
+      "/tmp": "allow",
+      "/tmp/*": "allow",
+      "/private/tmp": "allow",
+      "/private/tmp/*": "allow"
+    }
   }
 }

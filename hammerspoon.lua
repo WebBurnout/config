@@ -75,11 +75,13 @@ local function applyCentered()
   local win = focusedWindow()
   if win then
     local sf = win:screen():frame()
+    local w = math.min(centered.w, sf.w)
+    local h = math.min(centered.h, sf.h)
     win:setFrame({
-      x = sf.x + (sf.w - centered.w) / 2,
-      y = sf.y + (sf.h - centered.h) / 2,
-      w = centered.w,
-      h = centered.h,
+      x = sf.x + (sf.w - w) / 2,
+      y = sf.y + (sf.h - h) / 2,
+      w = w,
+      h = h,
     }, 0)
     showLayoutAlert("Centered")
   end

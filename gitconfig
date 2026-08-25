@@ -20,3 +20,5 @@
     s = status
     co = checkout
     cob = checkout -b
+[init]
+	defaultBranch = main
