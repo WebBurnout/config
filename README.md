@@ -116,6 +116,23 @@ Install SwitchAudioSource
 brew install switchaudio-osx
 ```
 
+### Keeping USB speakers awake
+
+The USB bookshelf speakers power themselves down when idle.
+`bin/keep-speakers-awake.sh` plays a two second 30 Hz tone at -50 dB to keep
+them on. It exits immediately unless the machine is on AC power and the
+speakers are the selected output device (`afplay` can only play to whatever
+output is selected). launchd re-runs it every 60 seconds:
+
+```
+ln -s ~/code/config/launchd/com.tim.keep-speakers-awake.plist ~/Library/LaunchAgents/
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.tim.keep-speakers-awake.plist
+```
+
+Stop it with `launchctl bootout gui/$(id -u)/com.tim.keep-speakers-awake`.
+The device name defaults to `USB2.0 Device` (as reported by
+`SwitchAudioSource -a`) and can be overridden with `KEEP_AWAKE_DEVICE`.
+
 ### Voice dictation (whisper.cpp)
 
 `hyper+f` toggles dictation in Hammerspoon: press once to start recording, press
