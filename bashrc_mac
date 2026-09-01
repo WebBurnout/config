@@ -53,8 +53,6 @@ export LESS_TERMCAP_me=$'\e[0m'        # reset bold/blink
 export LESS_TERMCAP_se=$'\e[0m'        # reset reverse video
 export LESS_TERMCAP_ue=$'\e[0m'        # reset underline
 
-export AXES_ENDPOINT=http://localhost:8000
-
 shopt -s expand_aliases
 alias vi='nvim'
 alias hc='npm run console'
@@ -85,6 +83,7 @@ alias cdc='cd /Users/tim/code/axes/chat-plot'
 alias cdd='cd /Users/tim/code/axes/data-catalog'
 alias cdf='cd /Users/tim/code/axes/infra'
 alias cl='claude'
+alias piu='pi update; pi update --extensions'
 
 cdr() { local root; root=$(git rev-parse --show-toplevel 2>/dev/null) && cd "$root" || echo "not in a git repo"; }
 

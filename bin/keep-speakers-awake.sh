@@ -16,7 +16,7 @@ pmset -g batt | grep -q "AC Power" || exit 0
 if [ ! -f "$TONE" ]; then
   mkdir -p "$(dirname "$TONE")"
   ffmpeg -nostdin -loglevel error -f lavfi -i "sine=frequency=30:duration=2" \
-    -af "volume=-50dB" -ac 2 -ar 48000 -y "$TONE"
+    -af "volume=-12dB" -ac 2 -ar 48000 -y "$TONE"
 fi
 
 afplay "$TONE"

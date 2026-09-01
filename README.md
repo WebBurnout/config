@@ -119,7 +119,7 @@ brew install switchaudio-osx
 ### Keeping USB speakers awake
 
 The USB bookshelf speakers power themselves down when idle.
-`bin/keep-speakers-awake.sh` plays a two second 30 Hz tone at -50 dB to keep
+`bin/keep-speakers-awake.sh` plays a two second 30 Hz tone at -12 dB to keep
 them on. It exits immediately unless the machine is on AC power and the
 speakers are the selected output device (`afplay` can only play to whatever
 output is selected). launchd re-runs it every 60 seconds:
