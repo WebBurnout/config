@@ -239,4 +239,132 @@ hs.hotkey.bind(hyper, "z", function()
   end, { "-n" }):start()
 end)
 
+-- Seat change reminder. The clock runs only while an external monitor is
+-- connected and the machine is being used; after an hour of that, a pill
+-- appears in the corner and stays until clicked, which starts the next hour.
+local seat = {
+  goal = 60 * 60,
+  poll = 10,
+  idleCutoff = 60, -- no keyboard/mouse for this long and the clock pauses
+  active = 0,
+  connected = false,
+  canvas = nil,
+  timer = nil,
+}
+
+local function seatMonitorConnected()
+  for _, screen in ipairs(hs.screen.allScreens()) do
+    if not screen:name():match("Built%-in") then return true end
+  end
+  return false
+end
+
+local function seatDismiss()
+  if seat.canvas then
+    seat.canvas:delete(0.2)
+    seat.canvas = nil
+  end
+  seat.active = 0
+end
+
+local function seatShow()
+  if seat.canvas then return end
+  log("seat: nagging")
+
+  local w, h = 340, 64
+  local margin = 20
+  local sf = hs.screen.mainScreen():frame()
+  local canvas = hs.canvas.new({ x = sf.x + sf.w - w - margin, y = sf.y + margin, w = w, h = h })
+
+  canvas:appendElements({
+    type = "rectangle",
+    action = "fill",
+    frame = { x = 0, y = 0, w = w, h = h },
+    roundedRectRadii = { xRadius = h / 2, yRadius = h / 2 },
+    fillGradient = "linear",
+    fillGradientAngle = 90,
+    fillGradientColors = {
+      { hex = "#ff5a5a", alpha = 0.97 },
+      { hex = "#a1001a", alpha = 0.97 },
+    },
+    withShadow = true,
+    shadow = { blurRadius = 24, offset = { h = -6, w = 0 }, color = { alpha = 0.45 } },
+  }, {
+    type = "rectangle",
+    action = "stroke",
+    frame = { x = 0.5, y = 0.5, w = w - 1, h = h - 1 },
+    roundedRectRadii = { xRadius = h / 2, yRadius = h / 2 },
+    strokeColor = { white = 1, alpha = 0.3 },
+    strokeWidth = 1,
+  }, {
+    type = "text",
+    text = "Change your seat",
+    textFont = "Helvetica Neue Bold",
+    textSize = 22,
+    textColor = { white = 1 },
+    textAlignment = "center",
+    frame = { x = 0, y = (h - 27) / 2, w = w, h = 30 },
+  })
+
+  canvas:level(hs.canvas.windowLevels.overlay)
+  canvas:behavior(hs.canvas.windowBehaviors.canJoinAllSpaces)
+  canvas:clickActivating(false)
+  canvas:canvasMouseEvents(true, true)
+  canvas:mouseCallback(function(_canvas, message)
+    if message == "mouseUp" then
+      log("seat: dismissed")
+      seatDismiss()
+    end
+  end)
+  canvas:show(0.25)
+
+  seat.canvas = canvas
+end
+
+local function seatTick()
+  -- While the pill is up the clock is stopped; clearing it starts the next hour.
+  if seat.canvas or not seat.connected then return end
+  if hs.host.idleTime() > seat.idleCutoff then return end
+
+  seat.active = seat.active + seat.poll
+  if seat.active >= seat.goal then
+    seatShow()
+  end
+end
+
+local function seatScreensChanged()
+  local connected = seatMonitorConnected()
+  if connected == seat.connected then return end
+  seat.connected = connected
+  if connected then
+    log("seat: monitor connected, timing")
+    seat.active = 0
+  else
+    log("seat: monitor disconnected, paused")
+    seatDismiss()
+  end
+end
+
+seat.connected = seatMonitorConnected()
+hs.screen.watcher.new(seatScreensChanged):start()
+seat.timer = hs.timer.doEvery(seat.poll, seatTick)
+
+-- Manual testing, e.g. open -g 'hammerspoon://seat?action=show'
+hs.urlevent.bind("seat", function(_eventName, params)
+  local action = params.action or params[1]
+  if action == "show" then
+    seatShow()
+  elseif action == "dismiss" then
+    seatDismiss()
+  else
+    local status = string.format(
+      "seat: %s, %d/%d min active",
+      seat.connected and "connected" or "disconnected",
+      math.floor(seat.active / 60),
+      math.floor(seat.goal / 60))
+    log(status)
+    hs.alert.show(status)
+  end
+end)
+
 hs.alert.show("Hammerspoon config loaded")

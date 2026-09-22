@@ -2,15 +2,8 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 source ~/.secret_env
 
-export PATH=/opt/homebrew/opt/openjdk/bin:/Users/tim/.cargo/bin:/opt/homebrew/opt/gnu-sed/libexec/gnubin/:/Users/tim/.local/bin:/Users/tim/code/flutter/bin:$PATH:
-
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export DOCKER_HOST="unix://$HOME/.colima/default/docker.sock"
-
-# pyenv
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-pyenv global 3.13
 
 # ruby
 source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh
@@ -34,12 +27,16 @@ ssh-add --apple-use-keychain
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-nvm use 26
+
+# unconditional: it is what makes NVM_BIN agree with PATH, and nvm strips its
+# own previous entry, so re-sourcing this file cannot duplicate it
+nvm use 26 > /dev/null
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 export EDITOR=nvim
 export PAGER=less
+export PI_SKIP_VERSION_CHECK=1
 
 export LESS='--mouse -RFX'
 
@@ -93,3 +90,24 @@ tunnel() { autossh -M 0 -N -R 3001:localhost:"${1:-3000}" -o "ServerAliveInterva
 # Bash Completion for Homebrew
 [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
+# Runs last because brew shellenv, chruby, and nvm each prepend to PATH.
+# Every entry is dropped then re-prepended, so re-sourcing this file restores
+# this precedence instead of appending a duplicate.
+# Listed low-to-high priority: the last one prepended ends up first.
+for path_entry in \
+  /Users/tim/code/flutter/bin \
+  /opt/homebrew/opt/gnu-sed/libexec/gnubin/ \
+  /opt/homebrew/opt/openjdk/bin \
+  /Users/tim/.cargo/bin \
+  /Users/tim/.local/bin \
+  "$NVM_BIN"
+do
+  [ -n "$path_entry" ] || continue
+  PATH=":$PATH:"
+  PATH="${PATH//:$path_entry:/:}"
+  PATH="${PATH#:}"
+  PATH="${PATH%:}"
+  PATH="$path_entry:$PATH"
+done
+unset path_entry
+export PATH
