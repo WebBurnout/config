@@ -67,7 +67,7 @@ vim.api.nvim_create_autocmd("FileChangedShellPost", {
 vim.opt.updatetime = 1000
 
 
-vim.opt.undodir = '/Users/tim/.vim-undo-dir'
+vim.opt.undodir = vim.fn.expand('~/.vim-undo-dir')
 vim.opt.undofile = true
 
 -- ignore case in search unless there is a capital letter

@@ -9,7 +9,7 @@ return {
     { '<Leader>y', ':LocalHistoryToggle<CR>', { desc = 'Toggle local history' } },
   },
   config = function()
-    vim.g.local_history_path = '/Users/tim/tmp'
+    vim.g.local_history_path = vim.fn.expand('~/tmp')
     vim.g.local_history_max_changes = 100
   end,
 }

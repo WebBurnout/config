@@ -3,7 +3,7 @@
   email = twfarnam@gmail.com
 
 [core]
-	excludesfile = /Users/tim/.gitignore
+	excludesfile = ~/.gitignore
 
 [alias]
     l = log
