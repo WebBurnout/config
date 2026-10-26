@@ -239,6 +239,31 @@ hs.hotkey.bind(hyper, "z", function()
   end, { "-n" }):start()
 end)
 
+-- Drop Bluetooth audio when the machine sleeps so a closed lid doesn't hold on to
+-- the headphones. The work happens in bin/bt-disconnect-audio.sh, run through
+-- the com.tim.bt-disconnect-audio launchd job (see README). Nothing reconnects
+-- on wake.
+local btJob = "gui/" .. hs.execute("id -u"):gsub("%s+", "") .. "/com.tim.bt-disconnect-audio"
+
+local function btDisconnectAudio()
+  log("bluetooth: disconnecting audio")
+  hs.execute("launchctl kickstart " .. btJob)
+  -- Sleep is held until this callback returns, so wait (briefly) for the job
+  -- to finish before letting the machine go.
+  for _ = 1, 50 do
+    local status = hs.execute("launchctl print " .. btJob)
+    if not status:find("state = running", 1, true) then return end
+    hs.timer.usleep(100000)
+  end
+  log("bluetooth: disconnect job still running, sleeping anyway")
+end
+
+btSleepWatcher = hs.caffeinate.watcher.new(function(event)
+  if event == hs.caffeinate.watcher.systemWillSleep then
+    btDisconnectAudio()
+  end
+end):start()
+
 -- Seat change reminder. The clock runs only while an external monitor is
 -- connected and the machine is being used; after an hour of that, a pill
 -- appears in the corner and stays until clicked, which starts the next hour.

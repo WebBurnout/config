@@ -133,6 +133,25 @@ Stop it with `launchctl bootout gui/$(id -u)/com.tim.keep-speakers-awake`.
 The device name defaults to `USB2.0 Device` (as reported by
 `SwitchAudioSource -a`) and can be overridden with `KEEP_AWAKE_DEVICE`.
 
+### Disconnecting Bluetooth audio on sleep
+
+When the machine sleeps, Hammerspoon runs `bin/bt-disconnect-audio.sh`. The
+script disconnects every Bluetooth device except the keyboard and trackpad, so
+a closed lid doesn't hold on to the headphones, and the keyboard and trackpad
+can still wake it. Nothing reconnects on wake. The script runs through a
+launchd job because blueutil crashes when Hammerspoon starts it directly
+(Hammerspoon's Info.plist has no Bluetooth usage description):
+
+```
+brew install blueutil
+ln -s ~/code/config/launchd/com.tim.bt-disconnect-audio.plist ~/Library/LaunchAgents/
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.tim.bt-disconnect-audio.plist
+```
+
+The job has no schedule; it only runs when Hammerspoon kickstarts it. Output
+goes to `/tmp/bt-disconnect-audio.log`. Devices to keep connected are listed by
+address in the script (`blueutil --paired` shows them).
+
 ### Voice dictation (whisper.cpp)
 
 `hyper+f` toggles dictation in Hammerspoon: press once to start recording, press

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.tim.bt-disconnect-audio</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Users/tim/code/config/bin/bt-disconnect-audio.sh</string>
+	</array>
+	<key>StandardOutPath</key>
+	<string>/tmp/bt-disconnect-audio.log</string>
+	<key>StandardErrorPath</key>
+	<string>/tmp/bt-disconnect-audio.log</string>
+</dict>
+</plist>
