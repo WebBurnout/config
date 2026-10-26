@@ -5,3 +5,6 @@ GNU sed is on PATH (shadows BSD sed). Use `sed -i 's/…/…/g' file`, never the
 Don't prefix commands with `time` unless I ask for timing — it triggers a permission prompt.
 
 If we're workshopping a solution, do not suggest writing the changes to the spec.
+
+Never edit TODO.md. That file is for the operators notes and not for you
+
