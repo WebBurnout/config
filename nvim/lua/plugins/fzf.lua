@@ -38,7 +38,7 @@ return {
 
     }
 
-    -- it will use this for copilot chat with this setting
+    -- route vim.ui.select through fzf-lua
     require('fzf-lua').register_ui_select()
 
     function files_root_dir()

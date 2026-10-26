@@ -4,7 +4,6 @@ return {
 
   dependencies = {
     { 'L3MON4D3/LuaSnip', version = 'v2.*' },
-    { 'giuxtaposition/blink-cmp-copilot' },
     'saghen/blink.compat',
   },
 
@@ -13,12 +12,6 @@ return {
       '<leader>w', 
       function()
         vim.b.completion = not (vim.b.completion ~= false)
-              
-        if not vim.b.completion then
-          vim.cmd('Copilot disable')
-        else
-          vim.cmd('Copilot enable')
-        end
       end, 
       desc = 'Toggle Completion' 
     },
@@ -74,26 +67,12 @@ return {
         'path',
         'snippets',
         'buffer',
-        'copilot',
         'avante_commands',
         'avante_mentions',
         'avante_shortcuts',
         'avante_files',
       },
       providers = {
-        copilot = {
-          name = "copilot",
-          module = "blink-cmp-copilot",
-          score_offset = 100,
-          async = true,
-          transform_items = function(ctx, items)
-            for _, item in ipairs(items) do
-              item.kind_icon = ''
-              item.kind_name = 'Copilot'
-            end
-            return items
-          end
-        },
         avante_commands = {
           name = "avante_commands",
           module = "blink.compat.source",

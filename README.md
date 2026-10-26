@@ -179,12 +179,155 @@ brew services start colima
 ```
 
 
-## Install on Debian
+## Linux setup
 
-mkdir ~/.config
-ln -s ~/config/nvim ~/.config/nvim
-rm ~/.bashrc
+For Debian and Raspberry Pi OS. Run as your normal user; the checkout lives at
+`~/config`. On a new Pi, first flash Raspberry Pi OS Lite (64-bit), configure the
+user and SSH public key in Raspberry Pi Imager, boot, and connect over SSH.
+The first boot can take several minutes.
+
+### Base tools and GitHub access
+
+```sh
+sudo apt update
+sudo apt install -y git curl ca-certificates jq fzf
+ssh-keygen -t ed25519 -C "$(hostname)"
+```
+
+Add `~/.ssh/id_ed25519.pub` to your GitHub account, then clone the configuration:
+
+```sh
+cd ~
+git clone git@github.com:WebBurnout/config.git
+```
+
+### Passwordless sudo
+
+```sh
+echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/010-$USER-nopasswd
+sudo chmod 440 /etc/sudoers.d/010-$USER-nopasswd
+sudo visudo -c
+```
+
+Expect `parsed OK`. This gives your user unrestricted sudo without a password.
+
+### SSH key authentication
+
+Confirm you can log in with your SSH key before disabling password authentication.
+Keep the current session open while testing a second login.
+
+```sh
+echo "PasswordAuthentication no" | sudo tee /etc/ssh/sshd_config.d/no-passwords.conf
+sudo /usr/sbin/sshd -t
+sudo systemctl restart ssh
+```
+
+The validation command should print nothing and exit successfully before you
+restart SSH.
+
+### Locale
+
+If login reports locale errors:
+
+```sh
+sudo sed -i 's/^# *en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
+sudo locale-gen
+sudo update-locale LANG=en_US.UTF-8
+```
+
+Log out and reconnect for the new locale.
+
+### Neovim
+
+The config needs Neovim 0.11+, which is newer than Debian's `neovim` package, so
+install the official release build. Set `NVIM_VERSION` to the latest tag from
+https://github.com/neovim/neovim/releases. `uname -m` picks the arm64 build on a
+Pi and the x86_64 build on a PC.
+
+```sh
+NVIM_VERSION=v0.12.6
+NVIM_PKG=nvim-linux-$(uname -m | sed 's/aarch64/arm64/')
+cd "$(mktemp -d)"
+curl -fsSLO https://github.com/neovim/neovim/releases/download/$NVIM_VERSION/$NVIM_PKG.tar.gz
+curl -fsSL https://api.github.com/repos/neovim/neovim/releases/tags/$NVIM_VERSION \
+  | jq -r --arg f $NVIM_PKG.tar.gz '.assets[] | select(.name == $f) | "\(.digest | ltrimstr("sha256:"))  \($f)"' \
+  | sha256sum -c
+tar xzf $NVIM_PKG.tar.gz
+sudo rm -rf /opt/nvim
+sudo mv $NVIM_PKG /opt/nvim
+sudo ln -sf /opt/nvim/bin/nvim /usr/local/bin/nvim
+cd ~
+hash -r
+nvim --version | head -1
+```
+
+The checksum line must print `OK`; if it doesn't, stop and don't install that
+tarball. To upgrade, rerun with a new `NVIM_VERSION`. `/usr/local/bin` comes
+before `/usr/bin` on `PATH`, so this wins over an apt-installed `neovim` (remove
+that with `sudo apt remove neovim`).
+
+### Shell, Git, and Neovim configuration
+
+Move any existing files out of the way before creating these symlinks.
+
+```sh
+mkdir -p ~/.config
 ln -s ~/config/bashrc_linux ~/.bashrc
+ln -s ~/config/gitconfig ~/.gitconfig
+ln -s ~/config/nvim ~/.config/nvim
+```
+
+Start a new shell to load the Bash configuration.
+
+### Node.js and pi
+
+Install Node.js LTS, then the pi coding agent:
+
+```sh
+curl -fsSL https://deb.nodesource.com/setup_lts.x -o /tmp/setup-node-lts.sh
+sudo -E bash /tmp/setup-node-lts.sh
+sudo apt install -y nodejs
+node --version
+```
+
+The system Node.js installation normally uses `/usr` as npm's global prefix.
+Keep global npm packages in your home directory instead, so installs and updates
+don't need sudo:
+
+```sh
+npm config set prefix ~/.local
+```
+
+Add this to `~/.bashrc` (symlinked to `~/config/bashrc_linux`) and run it in the
+current shell too:
+
+```sh
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+This only affects future installs; existing global packages under `/usr` stay
+there. Install pi without sudo:
+
+```sh
+npm install -g --ignore-scripts @earendil-works/pi-coding-agent
+mkdir -p ~/.pi
+ln -s ~/config/pi ~/.pi/agent
+pi --version
+```
+
+Expect Node.js and pi version numbers. Move an existing `~/.pi/agent` directory
+out of the way before creating the symlink.
+
+### Tailscale
+
+```sh
+curl -fsSL https://tailscale.com/install.sh -o /tmp/install-tailscale.sh
+sh /tmp/install-tailscale.sh
+sudo tailscale up
+```
+
+Follow the authentication URL, then disable key expiry for this device in the
+Tailscale admin console.
 
 
 

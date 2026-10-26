@@ -8,6 +8,9 @@ case $- in
       *) return;;
 esac
 
+# User-installed commands, including global npm packages with prefix ~/.local.
+export PATH="$HOME/.local/bin:$PATH"
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -90,6 +93,9 @@ fi
 # some more ls aliases
 alias ll='ls -al'
 alias l='ls -CF'
+alias vi='nvim'
+
+export EDITOR=nvim
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
