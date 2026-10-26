@@ -281,42 +281,44 @@ Start a new shell to load the Bash configuration.
 
 ### Node.js and pi
 
-Install Node.js LTS, then the pi coding agent:
+Install Node.js with nvm, matching the Mac and the homelab. Set `NVM_VERSION`
+to the latest tag from https://github.com/nvm-sh/nvm/releases. `PROFILE=/dev/null`
+stops the installer from appending to `~/.bashrc`; `bashrc_linux` already loads
+nvm and runs `nvm use 26`.
 
 ```sh
-curl -fsSL https://deb.nodesource.com/setup_lts.x -o /tmp/setup-node-lts.sh
-sudo -E bash /tmp/setup-node-lts.sh
-sudo apt install -y nodejs
+NVM_VERSION=v0.40.8
+curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/$NVM_VERSION/install.sh -o /tmp/nvm-install.sh
+PROFILE=/dev/null bash /tmp/nvm-install.sh
+source ~/.bashrc
+nvm install 26
+nvm alias default 26
+hash -r
 node --version
 ```
 
-The system Node.js installation normally uses `/usr` as npm's global prefix.
-Keep global npm packages in your home directory instead, so installs and updates
-don't need sudo:
+nvm refuses to work if npm has a global `prefix` set, so if an old `~/.npmrc`
+sets one, remove it with `npm config delete prefix`.
 
-```sh
-npm config set prefix ~/.local
-```
-
-Add this to `~/.bashrc` (symlinked to `~/config/bashrc_linux`) and run it in the
-current shell too:
-
-```sh
-export PATH="$HOME/.local/bin:$PATH"
-```
-
-This only affects future installs; existing global packages under `/usr` stay
-there. Install pi without sudo:
+Install pi and Claude Code. Global packages go under `~/.nvm`, so no sudo:
 
 ```sh
 npm install -g --ignore-scripts @earendil-works/pi-coding-agent
+npm install -g @anthropic-ai/claude-code
 mkdir -p ~/.pi
 ln -s ~/config/pi ~/.pi/agent
 pi --version
+claude --version
 ```
 
-Expect Node.js and pi version numbers. Move an existing `~/.pi/agent` directory
-out of the way before creating the symlink.
+Expect Node.js, pi, and Claude Code version numbers. Move an existing
+`~/.pi/agent` directory out of the way before creating the symlink. After
+switching to a new major Node version with `nvm install`, reinstall these global
+packages; each Node version has its own.
+
+`node`, `pi`, and `claude` are only on `PATH` in shells that load `~/.bashrc`.
+Cron jobs and systemd units need the full path, e.g.
+`~/.nvm/versions/node/v26.x.y/bin/pi`.
 
 ### Tailscale
 
