@@ -22,3 +22,20 @@
     cob = checkout -b
 [init]
 	defaultBranch = main
+
+# Catppuccin Mocha
+[color "diff"]
+    meta = "#cba6f7" bold
+    frag = "#89b4fa" bold
+    func = "#7f849c" italic
+    old = "#f38ba8"
+    new = "#a6e3a1"
+    # default fg so tmux's window-style dims it in inactive panes
+    context = normal
+    commit = "#f9e2af" bold
+    whitespace = "#f38ba8" reverse
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

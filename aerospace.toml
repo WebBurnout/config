@@ -55,6 +55,7 @@ on-mode-changed = []
 # Keep AeroSpace windows floating by default. This lets AeroSpace manage
 # workspaces/desktops without taking over window sizing/tiling.
 [[on-window-detected]]
+if = 'true'
 run = 'layout floating'
 
 # Possible values: (qwerty|dvorak|colemak)

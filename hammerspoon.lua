@@ -246,6 +246,8 @@ local seat = {
   goal = 60 * 60,
   poll = 10,
   idleCutoff = 60, -- no keyboard/mouse for this long and the clock pauses
+  resetAfter = 2 * 60 * 60, -- a break this long counts as having changed seats
+  lastTick = os.time(),
   active = 0,
   connected = false,
   canvas = nil,
@@ -321,18 +323,7 @@ local function seatShow()
   seat.canvas = canvas
 end
 
-local function seatTick()
-  -- While the pill is up the clock is stopped; clearing it starts the next hour.
-  if seat.canvas or not seat.connected then return end
-  if hs.host.idleTime() > seat.idleCutoff then return end
-
-  seat.active = seat.active + seat.poll
-  if seat.active >= seat.goal then
-    seatShow()
-  end
-end
-
-local function seatScreensChanged()
+local function seatCheckMonitor()
   local connected = seatMonitorConnected()
   if connected == seat.connected then return end
   seat.connected = connected
@@ -345,8 +336,36 @@ local function seatScreensChanged()
   end
 end
 
+local function seatTick()
+  -- Timers don't fire while the machine is asleep, so a large gap between ticks
+  -- is itself evidence of a break that hs.host.idleTime() won't report on wake.
+  local now = os.time()
+  local gap = now - seat.lastTick
+  seat.lastTick = now
+
+  seatCheckMonitor()
+  local idle = hs.host.idleTime()
+
+  -- After a long enough break you've already moved, so start the hour over.
+  if gap > seat.resetAfter or idle > seat.resetAfter then
+    if seat.canvas or seat.active > 0 then
+      log("seat: long break, reset")
+      seatDismiss()
+    end
+    return
+  end
+
+  -- While the pill is up the clock is stopped; clearing it starts the next hour.
+  if seat.canvas or not seat.connected then return end
+  if idle > seat.idleCutoff then return end
+
+  seat.active = seat.active + seat.poll
+  if seat.active >= seat.goal then
+    seatShow()
+  end
+end
+
 seat.connected = seatMonitorConnected()
-hs.screen.watcher.new(seatScreensChanged):start()
 seat.timer = hs.timer.doEvery(seat.poll, seatTick)
 
 -- Manual testing, e.g. open -g 'hammerspoon://seat?action=show'

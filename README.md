@@ -4,7 +4,7 @@
 
 Install homebrew with instructions from the web page, then run:
 ```
-brew install bash alacritty tmux nvm weechat
+brew install bash alacritty tmux nvm weechat bluesnooze
 brew install --cask hammerspoon
 ```
 
@@ -199,6 +199,26 @@ To reload `tmux.conf`
 ```
 tmux source-file ~/.tmux.conf
 ```
+
+
+
+
+
+
+
+
+## Tmux handiness
+
+renumbers windows to remove gaps
+tmux move-window -r
+
+move window
+tmux move-window -t 1
+
+swap window
+tmux swap-window -t 1
+
+
 
 
 ## Vimium handiness

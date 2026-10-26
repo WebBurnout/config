@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "0.99.1",
   "defaultProvider": "claude-bridge",
-  "defaultModel": "claude-opus-5",
+  "defaultModel": "claude-opus-5-5",
   "defaultThinkingLevel": "medium",
   "packages": [
     "git:github.com/otahontas/pi-coding-agent-catppuccin",
@@ -17,8 +17,9 @@
   "quietStartup": false,
   "showHardwareCursor": true,
   "enabledModels": [
-    "claude-bridge/claude-fable-5",
-    "claude-bridge/claude-opus-5",
-    "openai-codex/gpt-6-astra"
+    "openai-codex/gpt-6-astra",
+    "claude-bridge/claude-opus-5-5",
+    "claude-bridge/claude-fable-5-1",
+    "claude-bridge/claude-opus-5"
   ]
 }
